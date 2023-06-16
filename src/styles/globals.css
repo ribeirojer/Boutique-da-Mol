@@ -25,3 +25,11 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+.banner-item,
+.banner-item-content {
+  display: none;
+}
+.banner-wrapper:hover .banner-item,
+.banner-item-wrapper:hover .banner-item-content {
+  display: flex;
+}

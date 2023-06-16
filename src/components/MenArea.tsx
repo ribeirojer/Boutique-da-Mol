@@ -1,11 +1,13 @@
 import React from "react";
 import ProductItem from "./ProductItem";
+import Card from "./Card";
+import { jeans } from "@/utils/data";
 
 type Props = {};
 
 const MenArea = (props: Props) => {
   return (
-    <section className="section" id="men">
+    <section className="container mx-auto" id="men">
       <div className="section-heading">
         <h2>Men's Latest</h2>
         <span>
@@ -14,26 +16,10 @@ const MenArea = (props: Props) => {
         </span>
       </div>
       <div className="flex flex-wrap mx-auto">
-        <ProductItem
-          title="Classic Spring"
-          price="$120.00"
-          imageUrl="/assets/images/men-01.jpg"
-        />
-        <ProductItem
-          title="Air Force 1 X"
-          price="$90.00"
-          imageUrl="/assets/images/men-02.jpg"
-        />
-        <ProductItem
-          title="Love Nana ‘20"
-          price="$150.00"
-          imageUrl="/assets/images/men-03.jpg"
-        />
-        <ProductItem
-          title="Classic Spring"
-          price="$120.00"
-          imageUrl="/assets/images/men-01.jpg"
-        />
+        <Card item={jeans} />
+        <Card item={jeans} />
+        <Card item={jeans} />
+        <Card item={jeans} />
       </div>
     </section>
   );

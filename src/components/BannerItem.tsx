@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 type BannerItemProps = {
@@ -9,26 +10,21 @@ type BannerItemProps = {
 
 const BannerItem = ({ title, subtitle, imageUrl }: BannerItemProps) => {
   return (
-    <div className="relative bg-white">
-      <div className="absolute bottom-0 left-0 p-4">
-        <h4 className="text-2xl font-bold">{title}</h4>
-        <span className="text-gray-600">{subtitle}</span>
-      </div>
-      <div className="absolute bottom-0 left-0 bg-gray-100 p-4 hover:bg-gray-200">
-        <h4 className="text-2xl font-bold">{title}</h4>
-        <p className="text-gray-600">{subtitle}</p>
-        <div className="mt-4">
-          <a
-            href="#"
-            className="inline-block px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
-            Ver produtos
-          </a>
-        </div>
+    <div className="banner-item-wrapper relative bg-white">
+      <div className="banner-item-content absolute bottom-0 left-0 p-4 flex flex-col items-center justify-center w-full h-full">
+        <h4 className="text-2xl font-bold text-white">{title}</h4>
+        <p className="text-white">{subtitle}</p>
+        <Link
+          href="/products"
+          aria-label="Ver produtos"
+          className="inline-block px-6 py-3 bg-[#00000000] text-[#ffffff]  hover:bg-white hover:text-black border border-white"
+        >
+          Ver produtos
+        </Link>
       </div>
       <Image
         src={imageUrl}
-        alt=""
+        alt="imagem banner item"
         className="w-full"
         width={500}
         height={300}

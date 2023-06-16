@@ -1,27 +1,26 @@
 import React from "react";
 import BannerItem from "./BannerItem";
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {};
 
 const MainBanner = (props: Props) => {
   return (
-    <div id="top" className="container mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div className="relative bg-white">
-          <div className="absolute p-4">
-            <h4 className="text-2xl font-bold">We Are Hexashop</h4>
-            <span className="text-gray-600">
+    <div id="top" className="container mx-auto pt-[166px]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="banner-wrapper relative">
+          <div className="banner-item absolute p-4 flex flex-col items-center justify-center w-full h-full gap-4">
+            <h4 className="text-3xl font-bold text-white">Boutique da Moh</h4>
+            <span className="text-white">
               Awesome, clean &amp; creative HTML5 Template
             </span>
-            <div className="mt-4">
-              <a
-                href="#"
-                className="inline-block px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600"
-              >
-                Purchase Now!
-              </a>
-            </div>
+            <Link
+              href="/products"
+              className="inline-block px-6 py-3 bg-[#00000000] text-[#ffffff]  hover:bg-white hover:text-black border border-white"
+            >
+              Ver Produtos
+            </Link>
           </div>
           <Image
             src="/assets/images/left-banner-image.jpg"
