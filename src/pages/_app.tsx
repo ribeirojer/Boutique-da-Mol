@@ -1,5 +1,5 @@
 //import { CartExtract, ProductExtract } from "@/interfaces/Product";
-import { IUser } from "@/interfaces/User";
+//import { IUser } from "@/interfaces/User";
 import "@/styles/globals.css";
 import {
   saveProductToCart,
@@ -14,7 +14,7 @@ import { createContext, useEffect, useState } from "react";
 export const UserContext = createContext<any>({});
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [user, setUser] = useState<IUser>();
+  const [user, setUser] = useState<any>();
   const [cartItems, setCartItems] = useState<any[]>([]);
   const [wishlist, setWishlist] = useState<any[]>([]);
   const [compare, setCompare] = useState<any[]>([]);
@@ -39,7 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   }, []);
 
-  const saveUserToContext = (user: IUser) => {
+  const saveUserToContext = (user: any) => {
     setUser(user);
   };
 
