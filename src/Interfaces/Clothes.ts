@@ -3,13 +3,14 @@ export interface ClothingItem {
   name: string;
   brand: string;
   price: number;
+  oldPrice: number;
   sizes: ClothingSize[];
   colors: string[];
   category: ClothingCategory;
   gender: Gender;
   inStock: boolean;
   description?: string;
-  imageUrl?: string;
+  image?: string;
   materials?: string[];
   careInstructions?: string[];
   reviews?: ClothingReview[];

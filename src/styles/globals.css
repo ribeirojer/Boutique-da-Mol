@@ -3,33 +3,69 @@
 @tailwind utilities;
 
 :root {
+  font-family: "Poppins", sans-serif;
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --vermelho: #ff5a5f;
+  --rosaClaro: #f7cac9;
+  --pessego: #ffa69e;
+  --dourado: #ffd700;
+  --roxoProfundo: #4b0082;
+  --verdeEsmeralda: #00a896;
+  --branco: #ffffff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+#slider {
+  width: 100%;
+  height: 35vw;
+  overflow-x: hidden;
+  position: relative;
 }
-.banner-item,
-.banner-item-content {
+#slider img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.slide-enter {
+  transform: translateX(100%);
+}
+
+.slide-enter-active {
+  transform: translateX(0%);
+  transition: transform 500ms ease;
+}
+
+.slide-exit {
+  transform: translateX(0%);
+}
+
+.slide-exit-active {
+  transform: translateX(-100%);
+  transition: transform 500ms ease;
+}
+.product-detais-link:hover .svg-icon-1,
+.product-detais-link .svg-icon-2 {
   display: none;
 }
-.banner-wrapper:hover .banner-item,
-.banner-item-wrapper:hover .banner-item-content {
-  display: flex;
+.product-detais-link:hover .svg-icon-2,
+.product-detais-link .svg-icon-1 {
+  display: block;
+}
+
+.product-cart-link:hover .svg-icon-3,
+.product-cart-link .svg-icon-4 {
+  display: none;
+}
+
+.product-cart-link:hover .svg-icon-4,
+.product-cart-link .svg-icon-3 {
+  display: block;
 }

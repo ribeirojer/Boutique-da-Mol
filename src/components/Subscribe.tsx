@@ -1,107 +1,68 @@
-import React from "react";
+import { AuthService } from "@/services/AuthService";
+import React, { useState } from "react";
+import Loading from "./Loading";
 
 type Props = {};
 
 const Subscribe = (props: Props) => {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!email) {
+      setError("Campo de email vazio.");
+      return;
+    }
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      setError("Formato de email inválido.");
+      return;
+    }
+
+    setLoading(true);
+    AuthService.newsletter(email)
+      .then((response) => {
+        setLoading(false);
+        console.log(response);
+        setEmail("");
+        setError("");
+        setSuccess("Inscrição realizada com sucesso!");
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+        setSuccess("");
+        setEmail("");
+        setError("Erro ao realizar inscrição.");
+      });
+  };
+
   return (
-    <div className="subscribe">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-8">
-            <div className="section-heading">
-              <h2>By Subscribing To Our Newsletter You Can Get 30% Off</h2>
-              <span>
-                Details to details is what makes Hexashop different from the
-                other themes.
-              </span>
-            </div>
-            <form id="subscribe" action="" method="get">
-              <div className="row">
-                <div className="col-lg-5">
-                  <fieldset>
-                    <input
-                      name="name"
-                      type="text"
-                      id="name"
-                      placeholder="Your Name"
-                      required
-                    />
-                  </fieldset>
-                </div>
-                <div className="col-lg-5">
-                  <fieldset>
-                    <input
-                      name="email"
-                      type="text"
-                      id="email"
-                      pattern="[^ @]*@[^ @]*"
-                      placeholder="Your Email Address"
-                      required
-                    />
-                  </fieldset>
-                </div>
-                <div className="col-lg-2">
-                  <fieldset>
-                    <button
-                      type="submit"
-                      id="form-submit"
-                      className="main-dark-button"
-                    >
-                      <i className="fa fa-paper-plane"></i>
-                    </button>
-                  </fieldset>
-                </div>
-              </div>
-            </form>
+    <section className="bg-gray-100 my-8 py-8">
+      <div className="container mx-auto flex flex-col items-center justify-center gap-4">
+        <h2 className="text-center text-2xl">Inscreva-se na NEWSLETTER</h2>
+        <p>te enviaremos as novidades da Moh Shopper e descontos exclusivos!</p>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div className="flex flex-col md:flex-row gap-4">
+            <input
+              type="text"
+              className=" border-white p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+              placeholder="Seu melhor e-mail"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
+            <button className="px-8 py-4 bg-pink-500 text-white rounded-lg">
+              Inscrever
+            </button>
           </div>
-          <div className="col-lg-4">
-            <div className="row">
-              <div className="col-6">
-                <ul>
-                  <li>
-                    Store Location:
-                    <br />
-                    <span>Sunny Isles Beach, FL 33160, United States</span>
-                  </li>
-                  <li>
-                    Phone:
-                    <br />
-                    <span>010-020-0340</span>
-                  </li>
-                  <li>
-                    Office Location:
-                    <br />
-                    <span>North Miami Beach</span>
-                  </li>
-                </ul>
-              </div>
-              <div className="col-6">
-                <ul>
-                  <li>
-                    Work Hours:
-                    <br />
-                    <span>07:30 AM - 9:30 PM Daily</span>
-                  </li>
-                  <li>
-                    Email:
-                    <br />
-                    <span>info@company.com</span>
-                  </li>
-                  <li>
-                    Social Media:
-                    <br />
-                    <span>
-                      <a href="#">Facebook</a>, <a href="#">Instagram</a>,
-                      <a href="#">Behance</a>, <a href="#">Linkedin</a>
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+          {loading && <Loading></Loading>}
+          {error && <span className="text-red-500">{error}</span>}
+          {success && <span className="text-green-500">{success}</span>}
+        </form>
       </div>
-    </div>
+    </section>
   );
 };
 
