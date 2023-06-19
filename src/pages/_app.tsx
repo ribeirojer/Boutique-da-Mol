@@ -1,4 +1,4 @@
-import { CartExtract, ProductExtract } from "@/interfaces/Product";
+//import { CartExtract, ProductExtract } from "@/interfaces/Product";
 import { IUser } from "@/interfaces/User";
 import "@/styles/globals.css";
 import {
@@ -15,26 +15,26 @@ export const UserContext = createContext<any>({});
 
 export default function App({ Component, pageProps }: AppProps) {
   const [user, setUser] = useState<IUser>();
-  const [cartItems, setCartItems] = useState<CartExtract[]>([]);
-  const [wishlist, setWishlist] = useState<ProductExtract[]>([]);
-  const [compare, setCompare] = useState<ProductExtract[]>([]);
+  const [cartItems, setCartItems] = useState<any[]>([]);
+  const [wishlist, setWishlist] = useState<any[]>([]);
+  const [compare, setCompare] = useState<any[]>([]);
 
   useEffect(() => {
     const existingCart = localStorage.getItem("cart");
     if (existingCart) {
-      const parsedCart: CartExtract[] = JSON.parse(existingCart);
+      const parsedCart: any[] = JSON.parse(existingCart);
       setCartItems(parsedCart);
     }
 
     const existingWishlist = localStorage.getItem("wishlist");
     if (existingWishlist) {
-      const parsedWishlist: ProductExtract[] = JSON.parse(existingWishlist);
+      const parsedWishlist: any[] = JSON.parse(existingWishlist);
       setWishlist(parsedWishlist);
     }
 
     const existingCompare = localStorage.getItem("compare");
     if (existingCompare) {
-      const parsedCompare: ProductExtract[] = JSON.parse(existingCompare);
+      const parsedCompare: any[] = JSON.parse(existingCompare);
       setCompare(parsedCompare);
     }
   }, []);
@@ -43,7 +43,7 @@ export default function App({ Component, pageProps }: AppProps) {
     setUser(user);
   };
 
-  const addToCart = (item: CartExtract) => {
+  const addToCart = (item: any) => {
     const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
     if (existingItem) {
       setCartItems(
@@ -71,7 +71,7 @@ export default function App({ Component, pageProps }: AppProps) {
     removeProductFromCart(itemId);
   };
 
-  const addToWishlist = (item: ProductExtract) => {
+  const addToWishlist = (item: any) => {
     const existingItem = wishlist.find(
       (wishlistItem) => wishlistItem.id === item.id
     );
@@ -81,12 +81,12 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   };
 
-  const removeFromWishlist = (product: ProductExtract) => {
+  const removeFromWishlist = (product: any) => {
     removeProductFromWishlist(product);
     setWishlist(wishlist.filter((item) => item.id !== product.id));
   };
 
-  const addToCompare = (item: ProductExtract) => {
+  const addToCompare = (item: any) => {
     const existingItem = compare.find(
       (compareItem) => compareItem.id === item.id
     );
