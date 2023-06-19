@@ -4,7 +4,7 @@ import {
   Credentials,
   IRegistration,
   IUser,
-} from "../interfaces/User";
+} from "@/interfaces/User";
 
 const BASE_URL = process.env.VITE_API_URL;
 
