@@ -1,4 +1,4 @@
-import { CheckoutData } from "../interfaces/Product";
+// import { CheckoutData } from "../interfaces/Product";
 
 export function countOccurrences(arr: number[]) {
   const counts: number[] = [];
@@ -39,7 +39,7 @@ export function maskPhone(value: string) {
   return value;
 }
 
-export function validateCheckoutData(data: CheckoutData): any {
+export function validateCheckoutData(data: any): any {
   const errors = {
     firstName: false,
     lastName: false,
