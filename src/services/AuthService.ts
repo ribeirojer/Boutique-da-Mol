@@ -1,17 +1,17 @@
 import axios from "axios";
-import {
-  AuthResponse,
-  Credentials,
-  IRegistration,
-  IUser,
-} from "@/interfaces/User";
+// import {
+//   any,
+//   any,
+//   any,
+//   any,
+// } from "@/interfaces/User";
 
 const BASE_URL = process.env.VITE_API_URL;
 
 export class AuthService {
-  static async register(registration: IRegistration): Promise<IUser> {
+  static async register(registration: any): Promise<any> {
     try {
-      const response = await axios.post<AuthResponse>(
+      const response = await axios.post<any>(
         `${BASE_URL}/auth/register`,
         registration
       );
@@ -24,10 +24,10 @@ export class AuthService {
     }
   }
 
-  static async login(credentials: Credentials): Promise<IUser> {
-    const response = await axios.post<AuthResponse>(
+  static async login(any: any): Promise<any> {
+    const response = await axios.post<any>(
       `${BASE_URL}/auth/login`,
-      credentials
+      any
     );
     const authData = response.data;
     AuthService.setAccessToken(authData.token);
@@ -66,13 +66,13 @@ export class AuthService {
     }
   }
 
-  static async update(data: IUser): Promise<IUser> {
+  static async update(data: any): Promise<any> {
     const accessToken = AuthService.getAccessToken();
     if (!accessToken) {
       throw new Error("Token not found");
     }
 
-    const response = await axios.put<AuthResponse>(
+    const response = await axios.put<any>(
       `${BASE_URL}/auth/update`,
       data,
       {
