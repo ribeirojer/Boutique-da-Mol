@@ -1,4 +1,3 @@
-import { CartExtract } from "@/interfaces/Product";
 import { UserContext } from "@/pages/_app";
 import { formatCurrency } from "@/utils";
 import { productsData } from "@/utils/cardsData";
