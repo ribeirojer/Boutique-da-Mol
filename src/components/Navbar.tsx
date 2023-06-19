@@ -7,10 +7,8 @@ type Props = {};
 const Navbar = (props: Props) => {
   const [open, setOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const items = [
-    { image: "/img/cat-1.jpg" },
-    { image: "/img/cat-2.jpg" },
-  ]
+  const items = [{ image: "/img/cat-1.jpg" }, { image: "/img/cat-2.jpg" }];
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
@@ -116,16 +114,16 @@ const Navbar = (props: Props) => {
           <Link href="/login">Entrar</Link>
           <Link href="/register">Registro</Link>
         </nav>
-        
-      <div id="slider">
-        {/*<button onClick={goToPrevSlide}>Anterior</button>*/}
-        <TransitionGroup>
-          <CSSTransition key={currentIndex} timeout={500} classNames="slide">
-            <img src={currentItem.image} alt="Image1" />
-          </CSSTransition>
-        </TransitionGroup>
-        {/*<button onClick={goToNextSlide}>Próximo</button>*/}
-      </div>
+
+        <div id="slider">
+          {/*<button onClick={goToPrevSlide}>Anterior</button>*/}
+          <TransitionGroup>
+            <CSSTransition key={currentIndex} timeout={500} classNames="slide">
+              <img src={currentItem.image} alt="Image1" />
+            </CSSTransition>
+          </TransitionGroup>
+          {/*<button onClick={goToNextSlide}>Próximo</button>*/}
+        </div>
         <div
           id="header-carousel"
           className="carousel slide"
