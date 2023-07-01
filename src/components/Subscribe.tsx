@@ -43,7 +43,7 @@ const Subscribe = (props: Props) => {
     <section className="bg-gray-100 my-8 py-8">
       <div className="container mx-auto flex flex-col items-center justify-center gap-4">
         <h2 className="text-center text-2xl">Inscreva-se na NEWSLETTER</h2>
-        <p>te enviaremos as novidades da Moh Shopper e descontos exclusivos!</p>
+        <p>Te enviaremos as novidades da Moh Shopper e descontos exclusivos!</p>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col md:flex-row gap-4">
             <input

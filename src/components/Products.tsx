@@ -1,7 +1,4 @@
-import { UserContext } from "@/pages/_app";
-import { formatCurrency } from "@/utils";
 import { productsData } from "@/utils/cardsData";
-import Link from "next/link";
 import React, { useContext } from "react";
 import CardProduct from "./CardProduct";
 

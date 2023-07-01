@@ -24,7 +24,7 @@ const CardProduct = ({ item }: Props) => {
       </div>
       <div className="flex justify-between gap-4">
         <Link
-          href={`/product/${item.id}`}
+          href={`/item/${item.id}`}
           className="group product-detais-link flex flex-col items-center justify-center bg-pink-200 hover:bg-pink-500 rounded-lg p-2 gap-2"
         >
           <svg

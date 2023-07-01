@@ -17,7 +17,7 @@ export const productsData: any[] = [
     gender: "Unisex",
     inStock: true,
     description: "A comfortable cotton t-shirt for everyday wear.",
-    image: "img/product-1.jpg",
+    image: "/img/product-1.jpg",
     materials: ["Cotton"],
     careInstructions: ["Machine wash cold", "Tumble dry low"],
     reviews: [
@@ -46,7 +46,7 @@ export const productsData: any[] = [
     brand: "XYZ Denim",
     price: 49.99,
     oldPrice: 123.0,
-    image: "img/product-2.jpg",
+    image: "/img/product-2.jpg",
     sizes: [
       { label: "28", value: "28" },
       { label: "30", value: "30" },
@@ -86,7 +86,7 @@ export const productsData: any[] = [
     brand: "DEF Footwear",
     price: 39.99,
     oldPrice: 123.0,
-    image: "img/product-3.jpg",
+    image: "/img/product-3.jpg",
     sizes: [
       { label: "US 6", value: "6" },
       { label: "US 7", value: "7" },
@@ -126,7 +126,7 @@ export const productsData: any[] = [
     brand: "DEF Footwear",
     price: 39.99,
     oldPrice: 123.0,
-    image: "img/product-4.jpg",
+    image: "/img/product-4.jpg",
     sizes: [
       { label: "US 6", value: "6" },
       { label: "US 7", value: "7" },
@@ -166,7 +166,7 @@ export const productsData: any[] = [
     brand: "XYZ Denim",
     price: 49.99,
     oldPrice: 123.0,
-    image: "img/product-2.jpg",
+    image: "/img/product-2.jpg",
     sizes: [
       { label: "28", value: "28" },
       { label: "30", value: "30" },
@@ -206,7 +206,7 @@ export const productsData: any[] = [
     brand: "DEF Footwear",
     price: 39.99,
     oldPrice: 123.0,
-    image: "img/product-3.jpg",
+    image: "/img/product-3.jpg",
     sizes: [
       { label: "US 6", value: "6" },
       { label: "US 7", value: "7" },
@@ -246,7 +246,7 @@ export const productsData: any[] = [
     brand: "DEF Footwear",
     price: 39.99,
     oldPrice: 123.0,
-    image: "img/product-4.jpg",
+    image: "/img/product-4.jpg",
     sizes: [
       { label: "US 6", value: "6" },
       { label: "US 7", value: "7" },
@@ -296,7 +296,7 @@ export const productsData: any[] = [
     gender: "Unisex",
     inStock: true,
     description: "A comfortable cotton t-shirt for everyday wear.",
-    image: "img/product-1.jpg",
+    image: "/img/product-1.jpg",
     materials: ["Cotton"],
     careInstructions: ["Machine wash cold", "Tumble dry low"],
     reviews: [

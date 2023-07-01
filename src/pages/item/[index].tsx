@@ -3,58 +3,39 @@ import CardProduct from "@/components/CardProduct";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ItemDescription from "@/components/ItemDescription";
+import { ClothingItem } from "@/interfaces/Clothes";
 import { productsData } from "@/utils/cardsData";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+// import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 type Props = {};
 
 const Item = (props: Props) => {
-  const itemToShow = productsData[0];
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const items = [
-    { image: "img/product-1.jpg" },
-    { image: "img/product-2.jpg" },
-    { image: "img/product-3.jpg" },
-    { image: "img/product-4.jpg" },
-  ];
-  const currentItem = items[currentIndex];
-
+  const router = useRouter();
+  const index = parseInt(router.query.index as string);
+  const itemToShow:ClothingItem = productsData[index - 1];
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
-  const router = useRouter();
-  const shareUrl = `${router.pathname}/produto?produtoId=${itemToShow.id}`;
+  const shareUrl = `${router.pathname}/produto?produtoId=${itemToShow}`;
 
-  const handleSizeChange = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setSelectedSize(event.target.value);
-  };
+  // useEffect(() => {
+  //    const intervalId = setInterval(() => {
+  //      setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
+  //    }, 4000);
+  //    return () => clearInterval(intervalId);
+  // }, [items]);
 
-  const handleColorChange = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setSelectedColor(event.target.value);
-  };
+  // const goToPrevSlide = () => {
+  //   setCurrentIndex(
+  //     (prevIndex) => (prevIndex - 1 + items.length) % items.length
+  //   );
+  // };
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
-    }, 4000);
-
-    return () => clearInterval(intervalId);
-  }, [items]);
-
-  const goToPrevSlide = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + items.length) % items.length
-    );
-  };
-
-  const goToNextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
-  };
+  // const goToNextSlide = () => {
+  //   setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
+  // };
 
   return (
     <>
@@ -63,17 +44,24 @@ const Item = (props: Props) => {
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="w-full md:w-1/2">
             <div id="slider" className="overflow-hidden">
-              <button onClick={goToPrevSlide}>Anterior</button>
-              <TransitionGroup>
+              {/* <button onClick={goToPrevSlide}>Anterior</button> */}
+              {/* <TransitionGroup>
                 <CSSTransition
                   key={currentIndex}
                   timeout={500}
                   classNames="slide"
-                >
-                  <img src={currentItem.image} alt="Image1" />
-                </CSSTransition>
-              </TransitionGroup>
-              <button onClick={goToNextSlide}>Próximo</button>
+                > */}
+              {itemToShow?.image && (
+                <Image
+                  src={itemToShow.image}
+                  alt="Image1"
+                  width={500}
+                  height={500}
+                />
+              )}
+              {/* </CSSTransition>
+              </TransitionGroup> */}
+              {/* <button onClick={goToNextSlide}>Próximo</button> */}
             </div>
           </div>
           <div className="pb-8 w-full md:w-1/2">
@@ -105,7 +93,7 @@ const Item = (props: Props) => {
                     name="size"
                     value="XS"
                     checked={selectedSize === "XS"}
-                    onChange={handleSizeChange}
+                    onChange={(event) => setSelectedSize(event.target.value)}
                   />
                   <label className="custom-control-label" htmlFor="size-1">
                     XS
@@ -119,7 +107,7 @@ const Item = (props: Props) => {
                     name="size"
                     value="S"
                     checked={selectedSize === "S"}
-                    onChange={handleSizeChange}
+                    onChange={(event) => setSelectedSize(event.target.value)}
                   />
                   <label className="custom-control-label" htmlFor="size-2">
                     S
@@ -133,7 +121,7 @@ const Item = (props: Props) => {
                     name="size"
                     value="M"
                     checked={selectedSize === "M"}
-                    onChange={handleSizeChange}
+                    onChange={(event) => setSelectedSize(event.target.value)}
                   />
                   <label className="custom-control-label" htmlFor="size-3">
                     M
@@ -147,7 +135,7 @@ const Item = (props: Props) => {
                     name="size"
                     value="G"
                     checked={selectedSize === "G"}
-                    onChange={handleSizeChange}
+                    onChange={(event) => setSelectedSize(event.target.value)}
                   />
                   <label className="custom-control-label" htmlFor="size-4">
                     G
@@ -161,7 +149,7 @@ const Item = (props: Props) => {
                     name="size"
                     value="GG"
                     checked={selectedSize === "GG"}
-                    onChange={handleSizeChange}
+                    onChange={(event) => setSelectedSize(event.target.value)}
                   />
                   <label className="custom-control-label" htmlFor="size-5">
                     GG
@@ -180,7 +168,7 @@ const Item = (props: Props) => {
                     name="color"
                     value="Preto"
                     checked={selectedColor === "Preto"}
-                    onChange={handleColorChange}
+                    onChange={(event) => setSelectedColor(event.target.value)}
                   />
                   <label className="custom-control-label" htmlFor="color-1">
                     Preto
@@ -194,7 +182,7 @@ const Item = (props: Props) => {
                     name="color"
                     value="Branco"
                     checked={selectedColor === "Branco"}
-                    onChange={handleColorChange}
+                    onChange={(event) => setSelectedColor(event.target.value)}
                   />
                   <label className="custom-control-label" htmlFor="color-2">
                     Branco
@@ -208,7 +196,7 @@ const Item = (props: Props) => {
                     name="color"
                     value="Vermelho"
                     checked={selectedColor === "Vermelho"}
-                    onChange={handleColorChange}
+                    onChange={(event) => setSelectedColor(event.target.value)}
                   />
                   <label className="custom-control-label" htmlFor="color-3">
                     Vermelho
@@ -222,7 +210,7 @@ const Item = (props: Props) => {
                     name="color"
                     value="Azul"
                     checked={selectedColor === "Azul"}
-                    onChange={handleColorChange}
+                    onChange={(event) => setSelectedColor(event.target.value)}
                   />
                   <label className="custom-control-label" htmlFor="color-4">
                     Azul
@@ -236,7 +224,7 @@ const Item = (props: Props) => {
                     name="color"
                     value="Verde"
                     checked={selectedColor === "Verde"}
-                    onChange={handleColorChange}
+                    onChange={(event) => setSelectedColor(event.target.value)}
                   />
                   <label className="custom-control-label" htmlFor="color-5">
                     Verde

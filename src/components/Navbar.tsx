@@ -7,7 +7,10 @@ type Props = {};
 const Navbar = (props: Props) => {
   const [open, setOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const items = [{ image: "/img/cat-1.jpg" }, { image: "/img/cat-2.jpg" }];
+  const items = [
+    { image: "/img/carousel-1.jpg", text: "10% de desconto" },
+    { image: "/img/carousel-2.jpg", text: "30% de desconto" },
+  ];
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -29,7 +32,7 @@ const Navbar = (props: Props) => {
 
   const currentItem = items[currentIndex];
   return (
-    <div className="container flex">
+    <div className="container flex mx-auto">
       <aside>
         <button
           className="flex items-center justify-between bg-pink-500 text-white rounded-md px-4 py-2 mb-4"
@@ -114,79 +117,14 @@ const Navbar = (props: Props) => {
           <Link href="/login">Entrar</Link>
           <Link href="/register">Registro</Link>
         </nav>
-
         <div id="slider">
-          {/*<button onClick={goToPrevSlide}>Anterior</button>*/}
+          <button onClick={goToPrevSlide}>Anterior</button>
           <TransitionGroup>
             <CSSTransition key={currentIndex} timeout={500} classNames="slide">
               <img src={currentItem.image} alt="Image1" />
             </CSSTransition>
           </TransitionGroup>
-          {/*<button onClick={goToNextSlide}>Próximo</button>*/}
-        </div>
-        <div
-          id="header-carousel"
-          className="carousel slide"
-          data-ride="carousel"
-        >
-          <div className="carousel-inner">
-            <div className="carousel-item active" style={{ height: "410px" }}>
-              <img className="img-fluid" src="img/carousel-1.jpg" alt="Image" />
-              <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                <div className="p-3" style={{ maxWidth: "700px" }}>
-                  <h4 className="text-light text-uppercase font-weight-medium mb-3">
-                    10% Off Your First Order
-                  </h4>
-                  <h3 className="display-4 text-white font-weight-semi-bold mb-4">
-                    Fashionable Dress
-                  </h3>
-                  <a href="" className="btn btn-light py-2 px-3">
-                    Shop Now
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="carousel-item" style={{ height: "410px" }}>
-              <img className="img-fluid" src="img/carousel-2.jpg" alt="Image" />
-              <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                <div className="p-3" style={{ maxWidth: "700px" }}>
-                  <h4 className="text-light text-uppercase font-weight-medium mb-3">
-                    10% Off Your First Order
-                  </h4>
-                  <h3 className="display-4 text-white font-weight-semi-bold mb-4">
-                    Reasonable Price
-                  </h3>
-                  <a href="" className="btn btn-light py-2 px-3">
-                    Shop Now
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <a
-            className="carousel-control-prev"
-            href="#header-carousel"
-            data-slide="prev"
-          >
-            <div
-              className="btn btn-dark"
-              style={{ width: "45px", height: "45px" }}
-            >
-              <span className="carousel-control-prev-icon mb-n2"></span>
-            </div>
-          </a>
-          <a
-            className="carousel-control-next"
-            href="#header-carousel"
-            data-slide="next"
-          >
-            <div
-              className="btn btn-dark"
-              style={{ width: "45px", height: "45px" }}
-            >
-              <span className="carousel-control-next-icon mb-n2"></span>
-            </div>
-          </a>
+          <button onClick={goToNextSlide}>Próximo</button>
         </div>
       </div>
     </div>
