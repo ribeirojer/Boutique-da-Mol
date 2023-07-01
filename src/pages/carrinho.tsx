@@ -2,7 +2,6 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import React, { useContext } from "react";
 import { UserContext } from "./_app";
-import { ClothingItem } from "@/interfaces/Clothes";
 import { productsData } from "@/utils/cardsData";
 import Image from "next/image";
 

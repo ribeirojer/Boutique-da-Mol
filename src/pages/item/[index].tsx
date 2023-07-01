@@ -3,7 +3,6 @@ import CardProduct from "@/components/CardProduct";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ItemDescription from "@/components/ItemDescription";
-import { ClothingItem } from "@/interfaces/Clothes";
 import { productsData } from "@/utils/cardsData";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -15,7 +14,7 @@ type Props = {};
 const Item = (props: Props) => {
   const router = useRouter();
   const index = parseInt(router.query.index as string);
-  const itemToShow:ClothingItem = productsData[index - 1];
+  const itemToShow = productsData[index - 1];
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const shareUrl = `${router.pathname}/produto?produtoId=${itemToShow}`;
