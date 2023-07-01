@@ -74,7 +74,7 @@ const Item = (props: Props) => {
                 <small className="far fa-star"></small>
               </div>
               <small className="pt-1">
-                ({itemToShow?.reviews?.length} Avaliaçães)
+                ({itemToShow?.reviews.length} Avaliaçães)
               </small>
             </div>
             <h3 className="font-weight-semi-bold mb-4">{itemToShow?.price}</h3>
