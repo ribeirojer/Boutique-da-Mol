@@ -64,7 +64,7 @@ const Item = (props: Props) => {
             </div>
           </div>
           <div className="pb-8 w-full md:w-1/2">
-            <h3 className="font-weight-semi-bold">{itemToShow.name}</h3>
+            <h3 className="font-weight-semi-bold">{itemToShow?.name}</h3>
             <div className="d-flex mb-3">
               <div className="text-primary mr-2">
                 <small className="fas fa-star"></small>
@@ -74,11 +74,11 @@ const Item = (props: Props) => {
                 <small className="far fa-star"></small>
               </div>
               <small className="pt-1">
-                ({itemToShow.reviews?.length} Avaliaçães)
+                ({itemToShow?.reviews?.length} Avaliaçães)
               </small>
             </div>
-            <h3 className="font-weight-semi-bold mb-4">{itemToShow.price}</h3>
-            <p className="mb-4">{itemToShow.description}</p>
+            <h3 className="font-weight-semi-bold mb-4">{itemToShow?.price}</h3>
+            <p className="mb-4">{itemToShow?.description}</p>
             <div className="d-flex mb-3">
               <p className="text-dark font-weight-medium mb-0 mr-3">
                 Tamanhos:
