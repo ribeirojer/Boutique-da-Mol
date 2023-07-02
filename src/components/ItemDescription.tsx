@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "./Button";
 
 type Props = {
-  itemToShow: any;
+  itemToShow?: any;
 };
 
 const ItemDescription = ({ itemToShow }: Props) => {
@@ -65,21 +65,21 @@ const ItemDescription = ({ itemToShow }: Props) => {
           }`}
           onClick={() => handleTabClick("tab-pane-3")}
         >
-          Avaliações ({itemToShow.reviews.length})
+          Avaliações ({itemToShow?.reviews?.length})
         </a>
       </div>
       <div className="tab-content">
         {activeTab === "tab-pane-1" && (
           <div className="tab-pane fade show active" id="tab-pane-1">
             <h4 className="mb-3">Descrição do Produto</h4>
-            <p>{itemToShow.description}</p>
+            <p>{itemToShow?.description}</p>
           </div>
         )}
 
         {activeTab === "tab-pane-2" && (
           <div className="tab-pane fade" id="tab-pane-2">
             <h4 className="mb-3">Additional Information</h4>
-            <p>{itemToShow.additionalInfo}</p>
+            <p>{itemToShow?.additionalInfo}</p>
           </div>
         )}
 
@@ -87,9 +87,10 @@ const ItemDescription = ({ itemToShow }: Props) => {
           <div className="flex" id="tab-pane-3">
             <div className="col-md-6">
               <h4 className="mb-4">
-                {itemToShow.reviews.length} Avaliações para "{itemToShow.name}"
+                {itemToShow?.reviews.length} Avaliações para "{itemToShow?.name}
+                "
               </h4>
-              {itemToShow.reviews.map((review: any) => (
+              {itemToShow?.reviews.map((review: any) => (
                 <div className="media mb-4">
                   <img
                     src="img/user.jpg"
