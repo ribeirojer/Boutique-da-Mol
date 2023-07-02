@@ -39,7 +39,7 @@ const Item = (props: Props) => {
   return (
     <>
       <Header></Header>
-      <div className="container py-8 mx-auto">
+      <div className="container px-4 md:px-0 py-8 mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="w-full md:w-1/2">
             <div id="slider" className="overflow-hidden">
@@ -318,8 +318,8 @@ const Item = (props: Props) => {
         </div>
         <ItemDescription itemToShow={itemToShow}></ItemDescription>
       </div>
-      <h2 className="py-8 text-2xl text-center">Você pode gostar</h2>
-      <div className="container py-8 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <h2 className="py-8 text-2xl text-center font-semibold">Você pode gostar</h2>
+      <div className="container px-4 md:px-0 py-8 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {productsData.slice(0, 4).map((product) => (
           <CardProduct key={product.id} item={product} />
         ))}

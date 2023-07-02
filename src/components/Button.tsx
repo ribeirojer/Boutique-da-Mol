@@ -27,7 +27,9 @@ const Button = (props: Props) => {
   const classes = [
     "px-4 py-2 rounded-md font-semibold text-white bg-pink-500 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-opacity-50",
     // props.outline ? "btn-outline-" + props.variant : "btn-" + props.variant,
-    // props.ghost ? "btn-ghost" : "",
+    props.ghost
+      ? "bg-transparent hover:bg-gray-100 focus:ring-2 focus:ring-gray-100 focus:ring-opacity-50 text-gray-800"
+      : "",
     // props.size ? "btn-" + props.size : "",
     // props.className,
   ]

@@ -55,8 +55,13 @@ const CardProduct = ({ item }: Props) => {
           </span>
         </Link>
         <button
-          onClick={() => addToCart(item)}
-          className=" group product-cart-link flex flex-col items-center justify-center bg-pink-200 hover:bg-pink-500 text-white rounded-lg p-2 gap-2"
+          onClick={() =>
+            addToCart({
+              id: item.id,
+              quantity: 1,
+            })
+          }
+          className="group product-cart-link flex flex-col items-center justify-center bg-pink-200 hover:bg-pink-500 text-white rounded-lg p-2 gap-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

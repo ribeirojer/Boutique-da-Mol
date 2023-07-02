@@ -69,3 +69,91 @@
 .product-cart-link .svg-icon-3 {
   display: block;
 }
+
+/* Estilização do checkbox */
+.checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox label {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: -8px;
+  cursor: pointer;
+}
+
+.checkbox label:before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+.checkbox input[type="checkbox"]:checked + label:before {
+  background-color: #ffa69e;
+  border-color: transparent;
+}
+
+.checkbox label:after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  width: 4px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+}
+
+.checkbox input[type="checkbox"]:checked + label:after {
+  opacity: 1;
+}
+
+/* Estilização do radio */
+.radio input[type="radio"] {
+  display: none;
+}
+
+.radio label {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+}
+
+.radio label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+}
+
+.radio input[type="radio"]:checked + label:before {
+  background-color: #ffa69e;
+  border-color: transparent;
+}
+
+.radio label:after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.radio input[type="radio"]:checked + label:after {
+  opacity: 1;
+}
