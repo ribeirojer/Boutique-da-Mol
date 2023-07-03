@@ -14,6 +14,8 @@ type Props = {
   autoComplete?: string;
   maxLength?: number;
   size?: string;
+  error?: boolean;
+  inputRef?: any;
 };
 
 const Input = (props: Props) => {
@@ -31,16 +33,25 @@ const Input = (props: Props) => {
     autoComplete,
     maxLength,
     size,
+    error,
+    inputRef,
   } = props;
 
   const defaultClassName =
-    "border-pink-300 border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-white "+size;
+    "border-pink-300 border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-white " +
+    size;
 
   return (
     <div className="flex flex-col w-full">
-      {label && <label htmlFor={id} className="mb-1 mt-4 font-semibold">{label}</label>}
+      {label && (
+        <label htmlFor={id} className="mb-1 mt-4 font-semibold">
+          {label}
+        </label>
+      )}
       <input
         type={type}
+        // ref={(element) => (inputRef.current.firstName = element)}
+        ref={inputRef}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
@@ -52,6 +63,9 @@ const Input = (props: Props) => {
         autoComplete={autoComplete}
         maxLength={maxLength}
       />
+      {error && (
+        <p className="text-red-500 mt-1">O campo {label} é obrigatório.</p>
+      )}
     </div>
   );
 };

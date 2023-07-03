@@ -3,47 +3,16 @@ import Header from "@/components/Header";
 import Input from "@/components/Input";
 import InputsCheckout from "@/components/InputsCheckout";
 import { productsData } from "@/utils/cardsData";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "./_app";
 import { formatCurrency, hasTrueFields, validateCheckoutData } from "@/utils";
 import Button from "@/components/Button";
+import { useRouter } from "next/router";
+import { CheckoutService } from "@/services/CheckoutService";
 
 type Props = {};
 
-interface FormState {
-  firstName: string;
-  lastName: string;
-  email: string;
-  mobileNo: string;
-  addressLine1: string;
-  addressLine2: string;
-  country: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  createAccount: boolean;
-  shipToDifferentAddress: boolean;
-}
-
 const Confirmacao = (props: Props) => {
-  const [formState, setFormState] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    terms: false,
-    address: "",
-    country: "",
-    city: "",
-    state: "",
-    zipCode: "",
-    mobileNo: "",
-    addressLine1: "",
-    addressLine2: "",
-    createAccount: false,
-    shipToDifferentAddress: false,
-  });
   const { cartItems } = useContext(UserContext);
   const [paymentInfo, setPaymentInfo] = useState({
     firstName: "",
@@ -58,6 +27,31 @@ const Confirmacao = (props: Props) => {
     state: "",
     tel: "",
   });
+  const paymentInfoRefFirstName = useRef<HTMLInputElement | null>(null);
+  const paymentInfoRefLastName = useRef<HTMLInputElement | null>(null);
+  const paymentInfoRefEmail = useRef<HTMLInputElement | null>(null);
+  const paymentInfoRefZipCode = useRef<HTMLInputElement | null>(null);
+  const paymentInfoRefLogradouro = useRef<HTMLInputElement | null>(null);
+  const paymentInfoRefNumberAddress = useRef<HTMLInputElement | null>(null);
+  const paymentInfoRefComplemento = useRef<HTMLInputElement | null>(null);
+  const paymentInfoRefBairro = useRef<HTMLInputElement | null>(null);
+  const paymentInfoRefCity = useRef<HTMLInputElement | null>(null);
+  const paymentInfoRefState = useRef<HTMLInputElement | null>(null);
+  const paymentInfoRefTel = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const confirmPasswordRef = useRef<HTMLInputElement | null>(null);
+  const shippingInfoRefFirstName = useRef<HTMLInputElement | null>(null);
+  const shippingInfoRefLastName = useRef<HTMLInputElement | null>(null);
+  const shippingInfoRefEmail = useRef<HTMLInputElement | null>(null);
+  const shippingInfoRefZipCode = useRef<HTMLInputElement | null>(null);
+  const shippingInfoRefLogradouro = useRef<HTMLInputElement | null>(null);
+  const shippingInfoRefNumberAddress = useRef<HTMLInputElement | null>(null);
+  const shippingInfoRefComplemento = useRef<HTMLInputElement | null>(null);
+  const shippingInfoRefBairro = useRef<HTMLInputElement | null>(null);
+  const shippingInfoRefCity = useRef<HTMLInputElement | null>(null);
+  const shippingInfoRefState = useRef<HTMLInputElement | null>(null);
+  const shippingInfoRefTel = useRef<HTMLInputElement | null>(null);
+  const router = useRouter();
   const [shippingInfo, setShippingInfo] = useState({
     firstName: "",
     lastName: "",
@@ -109,8 +103,6 @@ const Confirmacao = (props: Props) => {
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
   const [termsAgreed, setTermsAgreed] = useState(false);
-  const [shippingCost, setShippingCost] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
 
   async function handleSubmitCep(event: any) {
     event.preventDefault();
@@ -128,8 +120,263 @@ const Confirmacao = (props: Props) => {
     });
   }
 
-  function handleSubmit(event: any) {
+  async function handleSubmit(event: any) {
     event.preventDefault();
+    setErrorPaymentInfo((prev) => ({
+      firstName: false,
+      lastName: false,
+      email: false,
+      zipCode: false,
+      logradouro: false,
+      numberAddress: false,
+      complemento: false,
+      bairro: false,
+      city: false,
+      state: false,
+      tel: false,
+      paymentMethod: false,
+      termsAgreed: false,
+    }));
+    setErrorShippingInfo((prev) => ({
+      firstName: false,
+      lastName: false,
+      email: false,
+      zipCode: false,
+      logradouro: false,
+      numberAddress: false,
+      complemento: false,
+      bairro: false,
+      city: false,
+      state: false,
+      tel: false,
+      paymentMethod: false,
+      termsAgreed: false,
+    }));
+    setErrorEmailRegex(false);
+    setErrorPassword(false);
+    setErrorConfirmPassword(false);
+
+    if (paymentInfo.firstName === "") {
+      setErrorPaymentInfo((prev) => ({
+        ...prev,
+        firstName: true,
+      }));
+      paymentInfoRefFirstName.current?.focus();
+      return;
+    }
+    if (paymentInfo.lastName === "") {
+      setErrorPaymentInfo((prev) => ({
+        ...prev,
+        lastName: true,
+      }));
+      paymentInfoRefLastName.current?.focus();
+      return;
+    }
+    if (paymentInfo.email === "") {
+      setErrorPaymentInfo((prev) => ({
+        ...prev,
+        email: true,
+      }));
+      paymentInfoRefEmail.current?.focus();
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(paymentInfo.email)) {
+      setErrorEmailRegex(true);
+      paymentInfoRefEmail.current?.focus();
+      return;
+    }
+    if (paymentInfo.tel === "") {
+      setErrorPaymentInfo((prev) => ({
+        ...prev,
+        tel: true,
+      }));
+      paymentInfoRefTel.current?.focus();
+      return;
+    }
+    if (paymentInfo.zipCode === "") {
+      setErrorPaymentInfo((prev) => ({
+        ...prev,
+        zipCode: true,
+      }));
+      paymentInfoRefZipCode.current?.focus();
+      return;
+    }
+    if (paymentInfo.logradouro === "") {
+      setErrorPaymentInfo((prev) => ({
+        ...prev,
+        logradouro: true,
+      }));
+      paymentInfoRefLogradouro.current?.focus();
+      return;
+    }
+    if (paymentInfo.numberAddress === "") {
+      setErrorPaymentInfo((prev) => ({
+        ...prev,
+        numberAddress: true,
+      }));
+      paymentInfoRefNumberAddress.current?.focus();
+      return;
+    }
+    if (paymentInfo.complemento === "") {
+      setErrorPaymentInfo((prev) => ({
+        ...prev,
+        complemento: true,
+      }));
+      paymentInfoRefComplemento.current?.focus();
+      return;
+    }
+    if (paymentInfo.bairro === "") {
+      setErrorPaymentInfo((prev) => ({
+        ...prev,
+        bairro: true,
+      }));
+      paymentInfoRefBairro.current?.focus();
+      return;
+    }
+    if (paymentInfo.city === "") {
+      setErrorPaymentInfo((prev) => ({
+        ...prev,
+        city: true,
+      }));
+      paymentInfoRefCity.current?.focus();
+      return;
+    }
+    if (paymentInfo.state === "") {
+      setErrorPaymentInfo((prev) => ({
+        ...prev,
+        state: true,
+      }));
+      paymentInfoRefState.current?.focus();
+      return;
+    }
+    if (createAccount) {
+      if (password === "") {
+        setErrorPassword(true);
+        passwordRef.current?.focus();
+        return;
+      }
+      if (confirmPassword === "") {
+        setErrorConfirmPassword(true);
+        confirmPasswordRef.current?.focus();
+        return;
+      }
+      if (password !== confirmPassword) {
+        confirmPasswordRef.current?.focus();
+        return;
+      }
+    }
+    if (isShippingAddress) {
+      if (shippingInfo.firstName === "") {
+        setErrorShippingInfo((prev) => ({
+          ...prev,
+          firstName: true,
+        }));
+        shippingInfoRefFirstName.current?.focus();
+        return;
+      }
+      if (shippingInfo.lastName === "") {
+        setErrorShippingInfo((prev) => ({
+          ...prev,
+          lastName: true,
+        }));
+        shippingInfoRefLastName.current?.focus();
+        return;
+      }
+      if (shippingInfo.email === "") {
+        setErrorShippingInfo((prev) => ({
+          ...prev,
+          email: true,
+        }));
+        shippingInfoRefEmail.current?.focus();
+        return;
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(shippingInfo.email)) {
+        setErrorEmailRegex(true);
+        shippingInfoRefEmail.current?.focus();
+        return;
+      }
+      if (shippingInfo.tel === "") {
+        setErrorShippingInfo((prev) => ({
+          ...prev,
+          tel: true,
+        }));
+        shippingInfoRefTel.current?.focus();
+        return;
+      }
+      if (shippingInfo.zipCode === "") {
+        setErrorShippingInfo((prev) => ({
+          ...prev,
+          zipCode: true,
+        }));
+        shippingInfoRefZipCode.current?.focus();
+        return;
+      }
+      if (shippingInfo.logradouro === "") {
+        setErrorShippingInfo((prev) => ({
+          ...prev,
+          logradouro: true,
+        }));
+        shippingInfoRefLogradouro.current?.focus();
+        return;
+      }
+      if (shippingInfo.numberAddress === "") {
+        setErrorShippingInfo((prev) => ({
+          ...prev,
+          numberAddress: true,
+        }));
+        shippingInfoRefNumberAddress.current?.focus();
+        return;
+      }
+      if (shippingInfo.complemento === "") {
+        setErrorShippingInfo((prev) => ({
+          ...prev,
+          complemento: true,
+        }));
+        shippingInfoRefComplemento.current?.focus();
+        return;
+      }
+      if (shippingInfo.bairro === "") {
+        setErrorShippingInfo((prev) => ({
+          ...prev,
+          bairro: true,
+        }));
+        shippingInfoRefBairro.current?.focus();
+        return;
+      }
+      if (shippingInfo.city === "") {
+        setErrorShippingInfo((prev) => ({
+          ...prev,
+          city: true,
+        }));
+        shippingInfoRefCity.current?.focus();
+        return;
+      }
+      if (shippingInfo.state === "") {
+        setErrorShippingInfo((prev) => ({
+          ...prev,
+          state: true,
+        }));
+        shippingInfoRefState.current?.focus();
+        return;
+      }
+    }
+    if (paymentMethod === "") {
+      setErrorPaymentInfo((prev) => ({
+        ...prev,
+        paymentMethod: true,
+      }));
+      return;
+    }
+    if (!termsAgreed) {
+      setErrorPaymentInfo((prev) => ({
+        ...prev,
+        termsAgreed: true,
+      }));
+      return;
+    }
+
     const data = {
       paymentInfo,
       createAccount,
@@ -140,23 +387,25 @@ const Confirmacao = (props: Props) => {
       additionalInfo,
       paymentMethod,
       termsAgreed,
-      shippingCost,
-      totalPrice,
     };
-    const errors = validateCheckoutData({
-      ...data.paymentInfo,
-      paymentMethod,
-      termsAgreed,
-      createAccount,
-      password,
-      confirmPassword,
-    });
-    setErrorPaymentInfo(errors);
-    setErrorEmailRegex(errors.emailRegex);
-    setErrorPassword(errors.password);
-    setErrorConfirmPassword(errors.confirmPassword);
-    const isValid = hasTrueFields(errors);
-    console.log(isValid);
+    try {
+      const response = await CheckoutService.placeOrder(
+        paymentInfo,
+        shippingInfo,
+        additionalInfo,
+        createAccount,
+        password,
+        confirmPassword,
+        cartItems
+      );
+
+      if (response.link === "") {
+        router.push("/sucesso");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Erro ao finalizar pedido");
+    }
   }
 
   const sumCartItems = () => {
@@ -167,6 +416,32 @@ const Confirmacao = (props: Props) => {
     return sum;
   };
   const shipping = sumCartItems() > 100;
+  const paymentInfoRefs = {
+    firstName: paymentInfoRefFirstName,
+    lastName: paymentInfoRefLastName,
+    email: paymentInfoRefEmail,
+    zipCode: paymentInfoRefZipCode,
+    logradouro: paymentInfoRefLogradouro,
+    numberAddress: paymentInfoRefNumberAddress,
+    complemento: paymentInfoRefComplemento,
+    bairro: paymentInfoRefBairro,
+    city: paymentInfoRefCity,
+    state: paymentInfoRefState,
+    tel: paymentInfoRefTel,
+  };
+  const shippingInfoRefs = {
+    firstName: shippingInfoRefFirstName,
+    lastName: shippingInfoRefLastName,
+    email: shippingInfoRefEmail,
+    zipCode: shippingInfoRefZipCode,
+    logradouro: shippingInfoRefLogradouro,
+    numberAddress: shippingInfoRefNumberAddress,
+    complemento: shippingInfoRefComplemento,
+    bairro: shippingInfoRefBairro,
+    city: shippingInfoRefCity,
+    state: shippingInfoRefState,
+    tel: shippingInfoRefTel,
+  };
 
   return (
     <>
@@ -178,6 +453,7 @@ const Confirmacao = (props: Props) => {
             info={paymentInfo}
             setInfo={setPaymentInfo}
             errorInfo={errorPaymentInfo}
+            refsInfo={paymentInfoRefs}
             errorEmailRegex={errorEmailRegex}
             handleSubmitCep={handleSubmitCep}
           ></InputsCheckout>
@@ -188,29 +464,36 @@ const Confirmacao = (props: Props) => {
               checked={createAccount}
               onChange={(e: any) => setCreateAccount(e.target.checked)}
             />
-            <label htmlFor="create-account" className="drac-text">
-              Criar conta?
-            </label>
+            <label htmlFor="create-account">Criar conta?</label>
           </div>
           {createAccount && (
-            <div className="flex w-full flex-col md:flex-row gap-4">
-              <Input
-                id="password"
-                label="Senha"
-                type="password"
-                placeholder="Digite sua senha"
-                value={password}
-                onChange={(e: any) => setPassword(e.target.value)}
-              />
-              <Input
-                id="confirmpassword"
-                label="Confirme a senha"
-                type="password"
-                placeholder="Confirme sua senha"
-                value={confirmPassword}
-                onChange={(e: any) => setConfirmPassword(e.target.value)}
-              />
-            </div>
+            <>
+              <div className="flex w-full flex-col md:flex-row gap-4">
+                <Input
+                  id="password"
+                  label="Senha"
+                  type="password"
+                  placeholder="Digite sua senha"
+                  value={password}
+                  onChange={(e: any) => setPassword(e.target.value)}
+                  error={errorPassword}
+                  inputRef={passwordRef}
+                />
+                <Input
+                  id="confirmpassword"
+                  label="Confirme a senha"
+                  type="password"
+                  placeholder="Confirme sua senha"
+                  value={confirmPassword}
+                  onChange={(e: any) => setConfirmPassword(e.target.value)}
+                  error={errorConfirmPassword}
+                  inputRef={confirmPasswordRef}
+                />
+              </div>
+              {confirmPassword !== password && (
+                <p className="text-red-500 mt-2">As senhas não conferem</p>
+              )}
+            </>
           )}
           <div className="checkbox mt-4 flex items-center">
             <input
@@ -220,7 +503,7 @@ const Confirmacao = (props: Props) => {
               checked={isShippingAddress}
               onChange={(e: any) => setIsShippingAddress(e.target.checked)}
             />
-            <label htmlFor="shiping-address" className="drac-text">
+            <label htmlFor="shiping-address">
               Enviar para um endereço diferente?
             </label>
           </div>
@@ -231,6 +514,7 @@ const Confirmacao = (props: Props) => {
                 title="Endereço para envio"
                 info={shippingInfo}
                 setInfo={setShippingInfo}
+                refsInfo={shippingInfoRefs}
                 errorInfo={errorShippingInfo}
                 errorEmailRegex={errorEmailRegex}
                 handleSubmitCep={handleSubmitCep}
@@ -328,29 +612,32 @@ const Confirmacao = (props: Props) => {
               <label htmlFor="payment-3">Sistema Paypal</label>
             </div>
             {errorPaymentInfo.paymentMethod && (
-              <p className="text-red-500">
-                Selecione um método de pagamento.
-              </p>
+              <p className="text-red-500">Selecione um método de pagamento.</p>
             )}
           </div>
-          <div className="checkbox mt-4 flex items-center">
-            <input
-              id="terms"
-              color="purple"
-              type="checkbox"
-              checked={termsAgreed}
-              onChange={() => setTermsAgreed(!termsAgreed)}
-            />
-            <label htmlFor="terms">
-              Eu li e aceito os <a target={"_blank"}>termos e condições</a>
-            </label>
+          <div>
+            <div className="checkbox mt-4 flex items-center">
+              <input
+                id="terms"
+                color="purple"
+                type="checkbox"
+                checked={termsAgreed}
+                onChange={() => setTermsAgreed(!termsAgreed)}
+              />
+              <label htmlFor="terms">
+                Eu li e aceito os <a target={"_blank"}>termos e condições</a>
+              </label>
+            </div>
             {errorPaymentInfo.termsAgreed && (
-              <p className="text-red-500">
+              <p className="text-red-500 mt-2">
                 É preciso aceitar os termos e condições.
               </p>
             )}
           </div>
-          <form onSubmit={(e:any)=>handleSubmit(e)} className="my-4 flex w-full">
+          <form
+            onSubmit={(e: any) => handleSubmit(e)}
+            className="my-4 flex w-full"
+          >
             <Button type="submit" className="w-full">
               Finalizar Pedido
             </Button>

@@ -91,8 +91,8 @@ const Loja = (props: Props) => {
   return (
     <>
       <Header></Header>
-      <main className="container mx-auto pt-8 flex ">
-        <div className="w-full lg:w-1/4">
+      <main className="container mx-auto pt-8 flex px-4 md:px-0">
+        <div className="hidden md:block w-full lg:w-1/4">
           <div className="mb-4 pb-4">
             <h5 className="font-semibold mb-4">Filtrar pelo preço</h5>
             <form>

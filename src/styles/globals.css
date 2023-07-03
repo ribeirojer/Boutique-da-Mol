@@ -9,7 +9,7 @@
   --background-end-rgb: 255, 255, 255;
   --vermelho: #ff5a5f;
   --rosaClaro: #f7cac9;
-  --pessego: #ffa69e;
+  --pessego: rgb(236 72 153);
   --dourado: #ffd700;
   --roxoProfundo: #4b0082;
   --verdeEsmeralda: #00a896;
@@ -94,7 +94,7 @@
 }
 
 .checkbox input[type="checkbox"]:checked + label:before {
-  background-color: #ffa69e;
+  background-color: rgb(236 72 153);
   border-color: transparent;
 }
 
@@ -138,7 +138,7 @@
 }
 
 .radio input[type="radio"]:checked + label:before {
-  background-color: #ffa69e;
+  background-color: rgb(236 72 153);
   border-color: transparent;
 }
 

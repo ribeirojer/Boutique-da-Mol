@@ -5,6 +5,7 @@ type Props = {
   info: any;
   setInfo: any;
   errorInfo: any;
+  refsInfo: any;
   errorEmailRegex: boolean;
   handleSubmitCep: any;
 };
@@ -14,6 +15,7 @@ const InputsCheckout = ({
   info,
   setInfo,
   errorInfo,
+  refsInfo,
   errorEmailRegex,
   handleSubmitCep,
 }: Props) => {
@@ -28,6 +30,8 @@ const InputsCheckout = ({
           placeholder="Primeiro nome"
           value={info.firstName}
           onChange={(e: any) => setInfo({ ...info, firstName: e.target.value })}
+          error={errorInfo.firstName}
+          inputRef={refsInfo.firstName}
         />
         <Input
           id="last-name"
@@ -36,28 +40,38 @@ const InputsCheckout = ({
           placeholder="Último nome"
           value={info.lastName}
           onChange={(e: any) => setInfo({ ...info, lastName: e.target.value })}
+          error={errorInfo.lastName}
+          inputRef={refsInfo.lastName}
         />
       </div>
       <div className="flex flex-col md:flex-row w-full gap-4">
-        <Input
-          id="email"
-          type="email"
-          label="E-mail"
-          placeholder="exemplo@email.com"
-          value={info.email}
-          onChange={(e: any) => setInfo({ ...info, email: e.target.value })}
-        />
-        {errorEmailRegex && (
-          <p className="text-red-500">Digite um e-mail válido.</p>
-        )}
-        <Input
-          id="tel"
-          type="text"
-          label="Número do celular"
-          placeholder="(12) 98765-4321"
-          value={info.tel}
-          onChange={(e: any) => setInfo({ ...info, tel: e.target.value })}
-        />
+        <div className="flex flex-col w-full md:w-1/2">
+          <Input
+            id="email"
+            type="email"
+            label="E-mail"
+            placeholder="exemplo@email.com"
+            value={info.email}
+            onChange={(e: any) => setInfo({ ...info, email: e.target.value })}
+            error={errorInfo.email}
+            inputRef={refsInfo.email}
+          />
+          {errorEmailRegex && (
+            <p className="text-red-500 mt-1">Digite um e-mail válido.</p>
+          )}
+        </div>
+        <div className="flex flex-col w-full md:w-1/2">
+          <Input
+            id="tel"
+            type="text"
+            label="Número do celular"
+            placeholder="(12) 98765-4321"
+            value={info.tel}
+            onChange={(e: any) => setInfo({ ...info, tel: e.target.value })}
+            error={errorInfo.tel}
+            inputRef={refsInfo.tel}
+          />
+        </div>
       </div>
       <Input
         id="zip-code"
@@ -72,6 +86,8 @@ const InputsCheckout = ({
             handleSubmitCep(e);
           }
         }}
+        error={errorInfo.zipCode}
+        inputRef={refsInfo.zipCode}
       />
       <div className="flex flex-col md:flex-row w-full gap-4">
         <Input
@@ -83,6 +99,8 @@ const InputsCheckout = ({
           onChange={(e: any) =>
             setInfo({ ...info, logradouro: e.target.value })
           }
+          error={errorInfo.logradouro}
+          inputRef={refsInfo.logradouro}
         />
         <Input
           id="address-number"
@@ -96,6 +114,8 @@ const InputsCheckout = ({
               numberAddress: e.target.value,
             })
           }
+          error={errorInfo.numberAddress}
+          inputRef={refsInfo.numberAddress}
         />
         <Input
           id="complement"
@@ -106,6 +126,8 @@ const InputsCheckout = ({
           onChange={(e: any) =>
             setInfo({ ...info, complemento: e.target.value })
           }
+          error={errorInfo.complemento}
+          inputRef={refsInfo.complemento}
         />
       </div>
       <div className="flex flex-col md:flex-row w-full gap-4">
@@ -116,6 +138,8 @@ const InputsCheckout = ({
           placeholder="Bairro"
           value={info.bairro}
           onChange={(e: any) => setInfo({ ...info, bairro: e.target.value })}
+          error={errorInfo.bairro}
+          inputRef={refsInfo.bairro}
         />
         <Input
           id="city"
@@ -124,6 +148,8 @@ const InputsCheckout = ({
           placeholder="Cidade"
           value={info.city}
           onChange={(e: any) => setInfo({ ...info, city: e.target.value })}
+          error={errorInfo.city}
+          inputRef={refsInfo.city}
         />
         <Input
           id="state"
@@ -132,6 +158,8 @@ const InputsCheckout = ({
           placeholder="Estado"
           value={info.state}
           onChange={(e: any) => setInfo({ ...info, state: e.target.value })}
+          error={errorInfo.state}
+          inputRef={refsInfo.state}
         />
       </div>
     </div>
