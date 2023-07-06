@@ -8,6 +8,8 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useRouter } from "next/router";
+import Loading from "@/components/Loading";
 
 type Props = {};
 
@@ -19,6 +21,8 @@ const Cadastrar = (props: Props) => {
     email: "",
     password: "",
   });
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const firstNameRef = useRef<HTMLInputElement | null>(null);
   const lastNameRef = useRef<HTMLInputElement | null>(null);
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -34,7 +38,7 @@ const Cadastrar = (props: Props) => {
     confirmPassword: false,
     confirmPasswordMatch: false,
     terms: false,
-    generalError: false,
+    general: false,
   });
 
   const handleSubmit = (event: any) => {
@@ -49,7 +53,7 @@ const Cadastrar = (props: Props) => {
       confirmPassword: false,
       confirmPasswordMatch: false,
       terms: false,
-      generalError: false,
+      general: false,
     }));
 
     if (!formData.firstName) {
@@ -82,12 +86,19 @@ const Cadastrar = (props: Props) => {
       passwordRef.current?.focus();
       return;
     }
-
+    setIsLoading(true);
     AuthService.register(formData)
       .then((data) => {
         saveUserToContext(data);
+        setIsLoading(false);
+        router.push("/");
       })
       .catch((error) => {
+        setIsLoading(false);
+        setErrorData((prev) => ({
+          ...prev,
+          general: true,
+        }));
         console.log(error);
       });
   };
@@ -140,7 +151,9 @@ const Cadastrar = (props: Props) => {
             }}
             inputRef={emailRef}
           />
-          {errorData.emailRegex && <p className="text-red-500 mt-1">E-mail inválido</p>}
+          {errorData.emailRegex && (
+            <p className="text-red-500 mt-1">E-mail inválido</p>
+          )}
           <Input
             id="password"
             error={errorData.password}
@@ -160,15 +173,25 @@ const Cadastrar = (props: Props) => {
             </p>
           )}
           <Button type="submit">Cadastrar</Button>
+          {errorData.general && (
+            <p className="text-red-500 mt-1 text-center my-4">
+              Erro ao cadastrar. Tente novamente mais tarde.
+            </p>
+          )}
         </form>
         <p className="text-center text-gray-500 my-8">
           Já tem uma conta?{" "}
-          <Link href="/entrar" passHref className="text-pink-500 underline hover:text-pink-700">
+          <Link
+            href="/entrar"
+            passHref
+            className="text-pink-500 underline hover:text-pink-700"
+          >
             Faça login
           </Link>
         </p>
       </main>
       <Footer></Footer>
+      {isLoading && <Loading></Loading>}
     </>
   );
 };

@@ -9,6 +9,7 @@ import Input from "@/components/Input";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Loading from "@/components/Loading";
 
 type Props = {};
 
@@ -239,6 +240,11 @@ const Entrar = (props: Props) => {
             </Link>
           </div>
           <Button type="submit">Entrar</Button>
+          {loginError.general && (
+            <p className="text-red-500 text-center my-4">
+              Houve um problema, tente novamente mais tarde.
+            </p>
+          )}
         </form>
         <p className="text-center text-gray-500 my-4">
           Você não tem uma conta?{" "}
@@ -250,6 +256,7 @@ const Entrar = (props: Props) => {
           </Link>
         </p>
       </main>
+      {isLoading && <Loading></Loading>}
       <Footer></Footer>
     </>
   );
