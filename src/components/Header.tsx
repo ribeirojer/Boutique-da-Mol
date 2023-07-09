@@ -236,6 +236,9 @@ const Header = (props: Props) => {
                 {cartItems.length}
               </span>
             </Link>
+            {user && (
+              <span className="text-pink-500 font-bold">{user.firstName}</span>
+            )}
             <Link
               href="/usuario"
               className="flex gap-2 items-center py-2 px-3 border border-pink-500 rounded-lg bg-white group hover:bg-pink-500 transition-all"

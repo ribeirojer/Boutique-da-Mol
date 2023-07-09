@@ -2,6 +2,8 @@ import axios from "axios";
 // import { any } from "../interfaces/Product";
 // import { any } from "../interfaces/User";
 
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export class CheckoutService {
   static async placeOrder(
     paymentInfo: any,
@@ -10,12 +12,13 @@ export class CheckoutService {
     createAccount: boolean,
     password: string,
     confirmPassword: string,
+    paymentMethod: string,
     cartItems: any[]
-  ): Promise<{ link: string }> {
+  ): Promise<{ link: string; order: any }> {
     const accessToken = localStorage.getItem("accessToken") || null;
     try {
-      const response = await axios.post<{ link: string }>(
-        "http://localhost:3000/api/orders",
+      const response = await axios.post<{ link: string; order: any }>(
+        BASE_URL + "/api/orders",
         {
           paymentInfo,
           shippingInfo,
@@ -23,6 +26,7 @@ export class CheckoutService {
           createAccount,
           password,
           confirmPassword,
+          paymentMethod,
           cartItems,
         },
         {
@@ -34,7 +38,7 @@ export class CheckoutService {
       return response.data;
     } catch (error) {
       console.error(error);
-      return { link: "" + error };
+      return { link: "" + error, order: null };
     }
   }
 
@@ -64,14 +68,11 @@ export class CheckoutService {
       throw new Error("Token not found");
     }
 
-    const response = await axios.get<any[]>(
-      "http://localhost:3000/api/orders",
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
+    const response = await axios.get<any[]>(BASE_URL + "/api/orders", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
     return response.data;
   }

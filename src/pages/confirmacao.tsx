@@ -9,6 +9,7 @@ import { formatCurrency, hasTrueFields, validateCheckoutData } from "@/utils";
 import Button from "@/components/Button";
 import { useRouter } from "next/router";
 import { CheckoutService } from "@/services/CheckoutService";
+import Loading from "@/components/Loading";
 
 type Props = {};
 
@@ -27,6 +28,7 @@ const Confirmacao = (props: Props) => {
     state: "",
     tel: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
   const paymentInfoRefFirstName = useRef<HTMLInputElement | null>(null);
   const paymentInfoRefLastName = useRef<HTMLInputElement | null>(null);
   const paymentInfoRefEmail = useRef<HTMLInputElement | null>(null);
@@ -388,24 +390,31 @@ const Confirmacao = (props: Props) => {
       paymentMethod,
       termsAgreed,
     };
-    try {
-      const response = await CheckoutService.placeOrder(
-        paymentInfo,
-        shippingInfo,
-        additionalInfo,
-        createAccount,
-        password,
-        confirmPassword,
-        cartItems
-      );
-
-      if (response.link === "") {
-        router.push("/sucesso");
-      }
-    } catch (error) {
-      console.log(error);
-      alert("Erro ao finalizar pedido");
-    }
+    setIsLoading(true);
+    CheckoutService.placeOrder(
+      paymentInfo,
+      shippingInfo,
+      additionalInfo,
+      createAccount,
+      password,
+      confirmPassword,
+      paymentMethod,
+      cartItems
+    )
+      .then((response) => {
+        setIsLoading(false);
+        if (response.link) {
+          router.push("/sucesso", undefined, {
+            shallow: true,
+            locale: "pt-BR",
+          });
+        }
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.log(error);
+        alert("Erro ao finalizar pedido");
+      });
   }
 
   const sumCartItems = () => {
@@ -644,6 +653,7 @@ const Confirmacao = (props: Props) => {
           </form>
         </div>
       </main>
+      {isLoading && <Loading></Loading>}
       <Footer></Footer>
     </>
   );

@@ -4,15 +4,15 @@ import axios from "axios";
 //   any,
 //   any,
 //   any,
-// } from "@/interfaces/User";
+// } from "@/interfaces/User"
 
-const BASE_URL = process.env.VITE_API_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export class AuthService {
   static async register(registration: any): Promise<any> {
     try {
       const response = await axios.post<any>(
-        `${BASE_URL}/auth/register`,
+        `${BASE_URL}/api/auth/register`,
         registration
       );
       const authData = response.data;
@@ -25,10 +25,7 @@ export class AuthService {
   }
 
   static async login(any: any): Promise<any> {
-    const response = await axios.post<any>(
-      `${BASE_URL}/auth/login`,
-      any
-    );
+    const response = await axios.post<any>(`${BASE_URL}/api/auth/login`, any);
     const authData = response.data;
     AuthService.setAccessToken(authData.token);
     return authData.user;
@@ -72,15 +69,28 @@ export class AuthService {
       throw new Error("Token not found");
     }
 
-    const response = await axios.put<any>(
-      `${BASE_URL}/auth/update`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
+    const response = await axios.put<any>(`${BASE_URL}/api/auth/update`, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const authData = response.data;
+    AuthService.setAccessToken(authData.token);
+    return authData.user;
+  }
+
+  static async delete(data: any): Promise<any> {
+    const accessToken = AuthService.getAccessToken();
+    if (!accessToken) {
+      throw new Error("Token not found");
+    }
+
+    const response = await axios.delete<any>(`${BASE_URL}/api/auth/delete`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
     const authData = response.data;
     AuthService.setAccessToken(authData.token);

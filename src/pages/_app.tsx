@@ -42,6 +42,9 @@ export default function App({ Component, pageProps }: AppProps) {
   const saveUserToContext = (user: any) => {
     setUser(user);
   };
+  const removeUserFromContext = () => {
+    setUser(null);
+  }
 
   const addToCart = (item: any) => {
     const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
@@ -106,6 +109,7 @@ export default function App({ Component, pageProps }: AppProps) {
       value={{
         user,
         saveUserToContext,
+        removeUserFromContext,
         cartItems,
         setCartItems,
         addToCart,
