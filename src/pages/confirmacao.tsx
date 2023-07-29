@@ -456,7 +456,7 @@ const Confirmacao = (props: Props) => {
     <>
       <Header></Header>
       <main className="container mx-auto pt-8 flex flex-col md:flex-row gap-8 px-4 md:px-0">
-        <div className="w-full md:w-2/3">
+        <div className="relative w-full md:w-2/3">
           <InputsCheckout
             title="Endereço de Cobrança"
             info={paymentInfo}
@@ -466,7 +466,7 @@ const Confirmacao = (props: Props) => {
             errorEmailRegex={errorEmailRegex}
             handleSubmitCep={handleSubmitCep}
           ></InputsCheckout>
-          <div className="checkbox mt-4 flex items-center">
+          <div className="checkbox_confirmacao mt-4 flex items-center">
             <input
               id="create-account"
               type="checkbox"
@@ -504,7 +504,7 @@ const Confirmacao = (props: Props) => {
               )}
             </>
           )}
-          <div className="checkbox mt-4 flex items-center">
+          <div className="checkbox_confirmacao mt-4 flex items-center">
             <input
               id="shiping-address"
               color="purple"
@@ -624,8 +624,8 @@ const Confirmacao = (props: Props) => {
               <p className="text-red-500">Selecione um método de pagamento.</p>
             )}
           </div>
-          <div>
-            <div className="checkbox mt-4 flex items-center">
+          <div className="relative">
+            <div className="checkbox_confirmacao mt-4 flex items-center">
               <input
                 id="terms"
                 color="purple"

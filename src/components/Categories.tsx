@@ -50,7 +50,7 @@ const Categories = (props: Props) => {
   ];
 
   return (
-    <div className="container px-4 md:px-0 mx-auto grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <div className="container px-4 md:px-0 mx-auto grid gap-4 grid-cols-2 md:grid-cols-3">
       {data.map((item) => (
         <div key={item.id} className="flex flex-col justify-center items-center bg-white rounded-lg shadow-lg hover:shadow-pink-500 border p-4">
           <p className="text-right"> {item.quantity} Produtos</p>

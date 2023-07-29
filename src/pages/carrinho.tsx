@@ -113,35 +113,32 @@ const Carrinho = (props: Props) => {
                           {formatCurrency(productsData[item.id - 1].price)}
                         </td>
                         <td className="w-1/5 py-2 px-4 flex">
-                          <Button
-                            disabled={item.quantity === 0}
-                            onClick={() =>
-                              addToCart({ id: item.id, quantity: -1 })
-                            }
-                          >
-                            -
-                          </Button>
+                          <div className="hidden md:block">
+                            <Button
+                              disabled={item.quantity === 0}
+                              onClick={() =>
+                                addToCart({ id: item.id, quantity: -1 })
+                              }
+                            >
+                              -
+                            </Button>
+                          </div>
                           <input
                             className="w-12 text-center text-black bg-gray-200 rounded-md mx-2"
                             id="quantity"
                             type="number"
                             value={item.quantity}
-                            onChange={(e) => {
-                              const quantity = Number(e.target.value);
-                              if (quantity < 1) {
-                                removeFromCart(item.id);
-                              } else {
-                                addToCart({ id: item.id, quantity });
-                              }
-                            }}
+                            disabled
                           />
-                          <Button
-                            onClick={() =>
-                              addToCart({ id: item.id, quantity: 1 })
-                            }
-                          >
-                            +
-                          </Button>
+                          <div className="hidden md:block">
+                            <Button
+                              onClick={() =>
+                                addToCart({ id: item.id, quantity: 1 })
+                              }
+                            >
+                              +
+                            </Button>
+                          </div>
                         </td>
                         <td className="w-1/5 py-2 px-4 text-center">
                           {formatCurrency(
