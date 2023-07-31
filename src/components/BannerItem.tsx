@@ -15,7 +15,7 @@ const BannerItem = ({ title, imageUrl }: BannerItemProps) => {
         <Link
           href="/loja"
           aria-label="Ver produtos"
-          className="inline-block px-6 py-3 bg-[#00000000] text-pink-200  hover:bg-pink-200 hover:text-black border border-pink-200 rounded-lg"
+          className="hidden md:block px-6 py-3 bg-[#00000000] text-pink-200  hover:bg-pink-200 hover:text-black border border-pink-200 rounded-lg"
         >
           Ver produtos
         </Link>

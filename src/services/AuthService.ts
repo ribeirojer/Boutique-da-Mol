@@ -12,7 +12,7 @@ export class AuthService {
   static async register(registration: any): Promise<any> {
     try {
       const response = await axios.post<any>(
-        `${BASE_URL}/api/auth/register`,
+        `${BASE_URL}/auth/register`,
         registration
       );
       const authData = response.data;
@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   static async login(any: any): Promise<any> {
-    const response = await axios.post<any>(`${BASE_URL}/api/auth/login`, any);
+    const response = await axios.post<any>(`${BASE_URL}/auth/login`, any);
     const authData = response.data;
     AuthService.setAccessToken(authData.token);
     return authData.user;
@@ -39,7 +39,7 @@ export class AuthService {
 
     try {
       const response = await axios.post<{ token: string }>(
-        "http://localhost:3000/api/auth/refresh-token",
+        `${BASE_URL}/auth/refresh-token`,
         { refreshToken }
       );
       const newToken = response.data.token;
@@ -51,9 +51,18 @@ export class AuthService {
     }
   }
 
-  static async newsletter(email: string): Promise<string> {
+  static async newsletter({
+    email,
+    name,
+  }: {
+    email: string;
+    name: string;
+  }): Promise<string> {
     try {
-      const response = await axios.post(`${BASE_URL}/newsletter`, email);
+      const response = await axios.post(`${BASE_URL}/newsletter`, {
+        email,
+        name,
+      });
 
       console.log(response);
       return response.data;
@@ -69,7 +78,7 @@ export class AuthService {
       throw new Error("Token not found");
     }
 
-    const response = await axios.put<any>(`${BASE_URL}/api/auth/update`, data, {
+    const response = await axios.put<any>(`${BASE_URL}/auth/update`, data, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -86,7 +95,7 @@ export class AuthService {
       throw new Error("Token not found");
     }
 
-    const response = await axios.delete<any>(`${BASE_URL}/api/auth/delete`, {
+    const response = await axios.delete<any>(`${BASE_URL}/auth/delete`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
