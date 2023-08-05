@@ -96,14 +96,14 @@ const Carrinho = (props: Props) => {
         {cartItems.length > 0 ? (
           <>
             <div className="w-full md:w-2/3 mb-5">
-              <table className="table-fixed w-full bg-white border border-gray-200">
+              <table className="text-sm md:text-base table-fixed w-full bg-white border border-gray-200">
                 <thead className="bg-secondary text-dark">
                   <tr>
-                    <th className="w-1/5 py-2 px-4">Produto</th>
-                    <th className="w-1/5 py-2 px-4">Preço</th>
-                    <th className="w-1/5 py-2 px-4">Quantidade</th>
-                    <th className="w-1/5 py-2 px-4">Total</th>
-                    <th className="w-1/5 py-2 px-4">Excluir</th>
+                    <th className="w-1/4 md:w-1/5 py-2 px-4">Produto</th>
+                    <th className="w-1/4 md:w-1/5 py-2 px-4">Preço</th>
+                    <th className="w-1/4 md:w-1/5 py-2 px-4">Quantidade</th>
+                    <th className="hidden md:block w-1/5 py-2 px-4">Total</th>
+                    <th className="w-1/4 md:w-1/5 py-2 px-4">Excluir</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -151,7 +151,7 @@ const Carrinho = (props: Props) => {
                             </Button>
                           </div>
                         </td>
-                        <td className="w-1/5 py-2 px-4 text-center">
+                        <td className="hidden md:block w-1/5 py-2 px-4 text-center">
                           {formatCurrency(
                             productsData[item.id - 1].price * item.quantity
                           )}
@@ -184,7 +184,7 @@ const Carrinho = (props: Props) => {
             </div>
             <div className="w-full md:w-1/3">
               <form onSubmit={handleSubmit} className="mb-5 w-full" action="">
-                <div className="flex justify-between gap-4 w-full">
+                <div className="flex flex-col md:flex-row justify-between gap-4 w-full">
                   <div className="w-full md:w-3/5">
                     <Input
                       type="text"
@@ -199,10 +199,10 @@ const Carrinho = (props: Props) => {
                   </Button>
                 </div>
                 {errorMessage && (
-                  <p className="text-red-500 mt-1">{errorMessage}</p>
+                  <p className="text-center md:text-left text-red-500 mt-1">{errorMessage}</p>
                 )}
                 {successMessage && (
-                  <p className="text-green-500 mt-1">{successMessage}</p>
+                  <p className="text-center md:text-left text-green-500 mt-1">{successMessage}</p>
                 )}
               </form>
               <div className="border border-gray-200 p-4 rounded-lg my-8">
@@ -225,7 +225,9 @@ const Carrinho = (props: Props) => {
                   {cupomValue && (
                     <div className="flex justify-between">
                       <h6 className="font-semibold">Cupom</h6>
-                      <h6 className="font-semibold">-{formatCurrency(cupomValue)}</h6>
+                      <h6 className="font-semibold">
+                        -{formatCurrency(cupomValue)}
+                      </h6>
                     </div>
                   )}
                 </div>

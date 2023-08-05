@@ -277,7 +277,7 @@ const Usuario = (props: Props) => {
     <>
       <Header></Header>
       {user ? (
-        <main className="container mx-auto">
+        <main className="container px-4 mx-auto my-8 md:my-16">
           <InputsCheckout
             title={"Seus dados"}
             info={userData}
@@ -287,7 +287,7 @@ const Usuario = (props: Props) => {
             errorEmailRegex={false}
             handleSubmitCep={handleSubmitCep}
           ></InputsCheckout>
-          <div className="checkbox mt-4 flex items-center">
+          <div className="checkbox_confirmacao mt-4 flex items-center">
             <input
               id="edit-password"
               type="checkbox"
@@ -351,7 +351,6 @@ const Usuario = (props: Props) => {
             )}
             {success && (
               <p className="text-green-500 mt-2">
-                {" "}
                 Alteraçães salvas com sucesso!
               </p>
             )}

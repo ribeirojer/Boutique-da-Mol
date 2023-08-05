@@ -235,12 +235,12 @@
   flex-direction: column;
 }
 .menu-itens ul li a {
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   color: #222;
   text-transform: uppercase;
   letter-spacing: 4px;
-  font-size: 40px;
-  line-height: 4rem;
+  font-size: 2rem;
+  line-height: 3.2rem;
 }
 
 /* animação do menu */

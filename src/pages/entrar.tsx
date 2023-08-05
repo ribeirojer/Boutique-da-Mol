@@ -81,16 +81,23 @@ const Entrar = (props: Props) => {
       });
   };
 
+  const handleGoogleLogin = () => {
+    //
+  };
+
   return (
     <>
       <Header></Header>
-      <main className="container mx-auto px-4 md:px-0 my-16">
+      <main className="container mx-auto px-4 md:px-0 my-8 md:my-16">
         <h1 className="text-4xl text-center font-bold">Entrar</h1>
         <p className="text-center text-gray-500 my-4">
-          Faça login na sua conta para um checkout mais rápido.{" "}
+          Faça login na sua conta para um checkout mais rápido.
         </p>
         <div className="flex gap-4 justify-center items-center">
-          <Button outline={true}>
+          <button
+            onClick={handleGoogleLogin}
+            className="flex items-center gap-2 border border-pink-300 hover:bg-pink-300 rounded-md py-2 px-4"
+          >
             <svg
               width="21"
               height="21"
@@ -127,71 +134,20 @@ const Entrar = (props: Props) => {
                 </clipPath>
               </defs>
             </svg>
-          </Button>
-          <Button outline={true}>
-            <svg
-              width="10"
-              height="21"
-              viewBox="0 0 10 21"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g clipPath="url(#clip0_59_456)">
-                <path
-                  d="M6.32902 20.2481V11.3552H9.20362L9.63399 7.88957H6.32902V5.67683C6.32902 4.67346 6.59737 3.9896 7.98313 3.9896L9.75049 3.98875V0.889099C9.44469 0.847017 8.39564 0.752686 7.17516 0.752686C4.62703 0.752686 2.88252 2.36771 2.88252 5.33377V7.88966H0.000488281V11.3553H2.88243V20.2482L6.32902 20.2481Z"
-                  fill="#0080FF"
-                ></path>
-              </g>
-              <defs>
-                <clipPath id="clip0_59_456">
-                  <rect
-                    width="9.75"
-                    height="19.5"
-                    fill="white"
-                    transform="translate(0.000488281 0.749512)"
-                  ></rect>
-                </clipPath>
-              </defs>
-            </svg>
-          </Button>
-          <Button outline={true}>
-            <svg
-              width="26"
-              height="21"
-              viewBox="0 0 26 21"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g clipPath="url(#clip0_59_452)">
-                <path
-                  d="M25.249 3.05699C24.318 3.45078 23.3334 3.7125 22.3254 3.8341C23.3877 3.22292 24.1819 2.25512 24.5574 1.11408C23.5631 1.68596 22.4752 2.08873 21.3408 2.30497C20.6451 1.58418 19.7419 1.08302 18.7485 0.866664C17.7551 0.650309 16.7176 0.728762 15.7709 1.09182C14.8241 1.45488 14.0119 2.08576 13.4398 2.90242C12.8678 3.71908 12.5623 4.68375 12.5632 5.67101C12.5593 6.04774 12.5987 6.42372 12.6808 6.79197C10.6622 6.696 8.68727 6.188 6.88505 5.30117C5.08283 4.41435 3.49392 3.16866 2.22219 1.64556C1.56927 2.72792 1.36694 4.0111 1.65648 5.23321C1.94603 6.45531 2.70563 7.52418 3.78024 8.22167C2.97741 8.20064 2.19156 7.99278 1.48889 7.61563V7.66924C1.49021 8.80546 1.89517 9.90655 2.6356 10.7872C3.37603 11.6678 4.40671 12.2742 5.55417 12.5042C5.12007 12.6152 4.67269 12.6697 4.22379 12.6663C3.90145 12.6718 3.57943 12.6436 3.26332 12.5822C3.59125 13.5587 4.22327 14.4126 5.07236 15.0264C5.92145 15.6402 6.94586 15.9837 8.00459 16.0096C6.20857 17.3716 3.99357 18.1105 1.71355 18.1083C1.30763 18.1109 0.90196 18.0882 0.499023 18.0405C2.81914 19.4903 5.5227 20.2572 8.28278 20.2486C17.6196 20.2486 22.7245 12.7486 22.7245 6.24757C22.7245 6.02996 22.7167 5.82015 22.7059 5.61155C23.7067 4.91703 24.5685 4.05134 25.249 3.05699Z"
-                  fill="#03A9F4"
-                ></path>
-              </g>
-              <defs>
-                <clipPath id="clip0_59_452">
-                  <rect
-                    width="24.75"
-                    height="19.5"
-                    fill="white"
-                    transform="translate(0.499023 0.749512)"
-                  ></rect>
-                </clipPath>
-              </defs>
-            </svg>
-          </Button>
+            <span>Entrar com o Google</span>
+          </button>
         </div>
         <p className="text-center text-gray-500 my-4">
           Ou entre com seu e-mail
         </p>
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col mx-auto border border-pink-300 rounded-lg px-4 pb-4 max-w-[50%]"
+          className="flex flex-col mx-auto border border-pink-300 rounded-lg px-4 pb-4 lg:max-w-[50%]"
         >
           <Input
             id="email"
             error={loginError.email}
-            type="email"
+            type="text"
             label="E-mail"
             placeholder="Digite seu e-mail"
             value={loginInfo.email}
@@ -218,8 +174,8 @@ const Entrar = (props: Props) => {
           {loginError.passwordStrong && (
             <p className="text-red-500 mt-1">Digite uma senha forte</p>
           )}
-          <div className="flex justify-between items-center my-4">
-            <div className="checkbox">
+          <div className="flex flex-col md:flex-row justify-between md:items-center gap-2 my-4">
+            <div className="checkbox_confirmacao">
               <input
                 checked={loginInfo.remember}
                 onChange={(e) =>
@@ -233,7 +189,7 @@ const Entrar = (props: Props) => {
               </label>
             </div>
             <Link
-              href={"/esqueci-senha"}
+              href={"/esqueci-minha-senha"}
               className="text-pink-500 underline hover:text-pink-700"
             >
               Esqueceu sua senha?

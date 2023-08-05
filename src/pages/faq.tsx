@@ -16,7 +16,7 @@ const Faq = (props: Props) => {
       id: 1,
       question: "Como posso fazer uma compra na boutique?",
       answer:
-        "Fazer uma compra conosco é simples e rápido! Navegue pelo nosso site, selecione os itens que deseja e adicione-os ao seu carrinho de compras. Em seguida, siga as instruções para finalizar o pedido. Se preferir, também estamos disponíveis por telefone para ajudá-la durante o processo de compra.",
+        "Fazer uma compra conosco é simples e rápido! Navegue pelo nosso site, selecione os itens que deseja e adicione-os ao seu carrinho de compras. Em seguida, siga as instruções para finalizar o pedido. Se preferir, também estamos disponíveis por <a href='https://api.whatsapp.com/send?phone=554797868892&text=Ol%C3%A1,%20tudo%20bem?' target='_blanck'>telefone</a> para ajudá-la durante o processo de compra.",
     },
     {
       id: 2,
@@ -79,7 +79,7 @@ const Faq = (props: Props) => {
   return (
     <>
       <Header></Header>
-      <main className="container mx-auto my-8">
+      <main className="container px-4 mx-auto my-8">
         <h1 className="text-4xl font-bold text-center">Perguntas Frequentes</h1>
         <p className="text-center mt-4 mb-8 text-neutral-500">
           Aqui estão algumas perguntas mais frequentes sobre a empresa.
@@ -103,24 +103,27 @@ const Faq = (props: Props) => {
                 <span
                   className={`-mr-1 ml-auto h-5 w-5 shrink-0 rotate-${
                     activeQuestion === question.id ? "[-180deg]" : "0"
-                  } fill-[#336dec] transition-transform duration-200 ease-in-out group-[[data-te-collapse-collapsed]]:mr-0 group-[[data-te-collapse-collapsed]]:rotate-0 group-[[data-te-collapse-collapsed]]:fill-[#212529] motion-reduce:transition-none dark:fill-blue-300 dark:group-[[data-te-collapse-collapsed]]:fill-white`}
+                  } fill-neutral-500 transition-transform duration-200 ease-in-out group-[[data-te-collapse-collapsed]]:mr-0 group-[[data-te-collapse-collapsed]]:rotate-0 group-[[data-te-collapse-collapsed]]:fill-[#212529] motion-reduce:transition-none`}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    className={`h-6 w-6 ${
-                      activeQuestion === question.id ? "" : "transform rotate-0"
-                    }`}
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                    />
-                  </svg>
+                  {activeQuestion === question.id ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path>
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="m6.293 13.293 1.414 1.414L12 10.414l4.293 4.293 1.414-1.414L12 7.586z"></path>
+                    </svg>
+                  )}
                 </span>
               </button>
               <div
@@ -132,7 +135,10 @@ const Faq = (props: Props) => {
                 aria-labelledby={`heading-${question.id}`}
                 data-te-parent="#accordionExample"
               >
-                <div className="px-5 py-4">{question.answer}</div>
+                <div
+                  className="px-5 py-4"
+                  dangerouslySetInnerHTML={{ __html: question.answer }}
+                />
               </div>
             </div>
           ))}

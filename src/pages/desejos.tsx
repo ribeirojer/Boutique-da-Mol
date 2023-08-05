@@ -33,8 +33,12 @@ const desejos = (props: Props) => {
           </>
         ) : (
           <div className="my-8 flex flex-col items-center justify-center w-full h-full gap-8">
-            <h1 className="text-4xl font-bold">Lista de desejos vazia</h1>
-            <p>Selecione produtos para adicionar aos seus desejos</p>
+            <h1 className="text-4xl font-bold text-center">
+              Lista de desejos vazia
+            </h1>
+            <p className="text-center">
+              Você ainda não adicionou nenhum produto aos seus desejos.
+            </p>
             <Link href={"/loja"}>
               <Button>Voltar para a loja</Button>
             </Link>

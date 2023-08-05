@@ -78,11 +78,15 @@ export class AuthService {
       throw new Error("Token not found");
     }
 
-    const response = await axios.put<any>(`${BASE_URL}/auth/update`, data, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const response = await axios.put<any>(
+      `${BASE_URL}/users/${data.id}`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
 
     const authData = response.data;
     AuthService.setAccessToken(authData.token);

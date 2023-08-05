@@ -11,9 +11,10 @@ type Props = {};
 const Header = (props: Props) => {
   const { user, cartItems, wishlist } = useContext(UserContext);
   const [searchTerm, setSearchTerm] = useState("");
-  const searchTermRef = useRef<HTMLInputElement | null>(null);
   const [isFixed, setIsFixed] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const searchTermRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -55,7 +56,7 @@ const Header = (props: Props) => {
         <div className="container mx-auto flex justify-between items-center px-4 md:px-0 py-2">
           <div className="flex">
             <Link href="/faq" className="text-primary">
-              perguntas frequentes
+              Perguntas frequentes
             </Link>
             <span className="mx-2">|</span>
             <Link href="/contato" className="text-primary">
@@ -188,6 +189,19 @@ const Header = (props: Props) => {
                   </li>
                   <li onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     <Link
+                      href="/confirmacao"
+                      passHref
+                      className={
+                        router.pathname === "/confirmacao"
+                          ? "font-bold"
+                          : "font-light"
+                      }
+                    >
+                      Finalizar
+                    </Link>
+                  </li>
+                  <li onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                    <Link
                       href="/contato"
                       passHref
                       className={
@@ -201,137 +215,97 @@ const Header = (props: Props) => {
                   </li>
                   <li onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     <Link
-                      href="/confirmacao"
+                      href="/desejos"
                       passHref
                       className={
-                        router.pathname === "/confirmacao"
+                        router.pathname === "/desejos"
                           ? "font-bold"
                           : "font-light"
                       }
                     >
-                      Finalizar
+                      {wishlist.length ? (
+                        <span className="text-pink-500">
+                          ({wishlist.length}) Favoritos
+                        </span>
+                      ) : (
+                        <span>Favoritos</span>
+                      )}
                     </Link>
                   </li>
-                  <form
-                    onSubmit={handleSubmit}
-                    className="flex flex-col gap-2 my-4"
-                  >
-                    <div className="relative flex items-center">
-                      <Input
-                        id={"searchTerm"}
-                        type="text"
-                        inputRef={searchTermRef}
-                        placeholder="Pesquisar produtos"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                      />
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        className="absolute top-2 right-2"
-                      >
-                        <path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path>
-                      </svg>
-                    </div>
-                    <Button type="submit">Pesquisar</Button>
-                  </form>
-                  <div className="flex gap-2 items-center justify-between">
-                    <Link
-                      href="/desejos"
-                      className="flex gap-2 items-center py-2 px-3 border border-pink-500 rounded-lg bg-white group hover:bg-pink-500 transition-all"
-                    >
-                      {wishlist.length ? (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          className="fill-pink-500 group-hover:fill-white"
-                        >
-                          <path d="M20.205 4.791a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412L12 21.414l8.207-8.207c2.354-2.353 2.355-6.049-.002-8.416z"></path>
-                        </svg>
-                      ) : (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          className="fill-pink-500 group-hover:fill-white"
-                        >
-                          <path d="M12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412l7.332 7.332c.17.299.498.492.875.492a.99.99 0 0 0 .792-.409l7.415-7.415c2.354-2.354 2.354-6.049-.002-8.416a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595zm6.791 1.61c1.563 1.571 1.564 4.025.002 5.588L12 18.586l-6.793-6.793c-1.562-1.563-1.561-4.017-.002-5.584.76-.756 1.754-1.172 2.799-1.172s2.035.416 2.789 1.17l.5.5a.999.999 0 0 0 1.414 0l.5-.5c1.512-1.509 4.074-1.505 5.584-.002z"></path>
-                        </svg>
-                      )}
-                      <span className="text-pink-500 group-hover:text-white font-bold">
-                        {wishlist.length}
-                      </span>
-                    </Link>
+                  <li onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     <Link
                       href="/carrinho"
-                      className="flex gap-2 items-center py-2 px-3 border border-pink-500 rounded-lg bg-white group hover:bg-pink-500 transition-all"
+                      passHref
+                      className={
+                        router.pathname === "/carrinho"
+                          ? "font-bold"
+                          : "font-light"
+                      }
                     >
                       {cartItems.length ? (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          className="fill-pink-500 group-hover:fill-white"
-                        >
-                          <path d="M21.822 7.431A1 1 0 0 0 21 7H7.333L6.179 4.23A1.994 1.994 0 0 0 4.333 3H2v2h2.333l4.744 11.385A1 1 0 0 0 10 17h8c.417 0 .79-.259.937-.648l3-8a1 1 0 0 0-.115-.921z"></path>
-                          <circle cx="10.5" cy="19.5" r="1.5"></circle>
-                          <circle cx="17.5" cy="19.5" r="1.5"></circle>
-                        </svg>
+                        <span className="text-pink-500">
+                          Carrinho ({cartItems.length})
+                        </span>
                       ) : (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          className="fill-pink-500 group-hover:fill-white"
-                        >
-                          <path d="M21.822 7.431A1 1 0 0 0 21 7H7.333L6.179 4.23A1.994 1.994 0 0 0 4.333 3H2v2h2.333l4.744 11.385A1 1 0 0 0 10 17h8c.417 0 .79-.259.937-.648l3-8a1 1 0 0 0-.115-.921zM17.307 15h-6.64l-2.5-6h11.39l-2.25 6z"></path>
-                          <circle cx="10.5" cy="19.5" r="1.5"></circle>
-                          <circle cx="17.5" cy="19.5" r="1.5"></circle>
-                        </svg>
+                        <span>Carrinho</span>
                       )}
-                      <span className="text-pink-500 group-hover:text-white font-bold">
-                        {cartItems.length}
-                      </span>
                     </Link>
-                    {user && (
-                      <span className="text-pink-500 font-bold">
-                        {user.firstName}
-                      </span>
-                    )}
+                  </li>
+                  <li onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     <Link
                       href="/usuario"
-                      className="flex gap-2 items-center py-2 px-3 border border-pink-500 rounded-lg bg-white group hover:bg-pink-500 transition-all"
+                      passHref
+                      className={
+                        router.pathname === "/usuario"
+                          ? "font-bold"
+                          : "font-light"
+                      }
                     >
-                      {user ? (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          className="fill-pink-500 group-hover:fill-white"
-                        >
-                          <path d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z"></path>
-                        </svg>
-                      ) : (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          className="fill-pink-500 group-hover:fill-white"
-                        >
-                          <path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"></path>
-                        </svg>
-                      )}
+                      Entrar
                     </Link>
-                  </div>
+                  </li>
+                  <li
+                    className="my-2 text-black uppercase tracking-wide text-3xl leading-13 font-light"
+                    onClick={() => {
+                      if (!isSearchOpen) {
+                        setIsSearchOpen(true);
+                        setInterval(() => {
+                          searchTermRef.current?.focus();
+                        }, 100);
+                      } else {
+                        setIsSearchOpen(false);
+                      }
+                    }}
+                  >
+                    Pesquisar
+                  </li>
+                  {isSearchOpen && (
+                    <form
+                      onSubmit={handleSubmit}
+                      className="flex flex-col gap-2 my-4"
+                    >
+                      <div className="relative flex items-center">
+                        <Input
+                          id={"searchTerm"}
+                          type="text"
+                          inputRef={searchTermRef}
+                          placeholder="Pesquisar produtos"
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          className="absolute top-2 right-2"
+                        >
+                          <path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path>
+                        </svg>
+                      </div>
+                      <Button type="submit">Pesquisar</Button>
+                    </form>
+                  )}
                 </ul>
               </nav>
             </div>

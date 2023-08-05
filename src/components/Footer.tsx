@@ -75,8 +75,8 @@ const Footer = (props: Props) => {
 
   return (
     <footer className="bg-gray-100 mt-8 pt-8">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div className="mb-5 pr-3">
+      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex flex-col items-center mb-5 md:pr-3">
           <Link href="/" className="flex items-center">
             <Image
               src={"/logo-sem-bg.png"}
@@ -91,7 +91,7 @@ const Footer = (props: Props) => {
               </h2>
             </div>
           </Link>
-          <div className="flex flex-col justify-start gap-2 mt-2">
+          <div className="flex flex-col items-center md:items-start justify-start gap-2 mt-2">
             <a
               href="http://"
               target="_blank"
@@ -107,7 +107,9 @@ const Footer = (props: Props) => {
                 <path d="M12 14c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4 1.794 4 4 4zm0-6c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2 .897-2 2-2z"></path>
                 <path d="M11.42 21.814a.998.998 0 0 0 1.16 0C12.884 21.599 20.029 16.44 20 10c0-4.411-3.589-8-8-8S4 5.589 4 9.995c-.029 6.445 7.116 11.604 7.42 11.819zM12 4c3.309 0 6 2.691 6 6.005.021 4.438-4.388 8.423-6 9.73-1.611-1.308-6.021-5.294-6-9.735 0-3.309 2.691-6 6-6z"></path>
               </svg>
-              <span>XV de Novembro, nº 000, Glória, Joinville, SC</span>
+              <span className="w-[250px] md:w-auto">
+                XV de Novembro, nº 000, Glória, Joinville, SC
+              </span>
             </a>
             <a
               href="http://"
@@ -143,35 +145,38 @@ const Footer = (props: Props) => {
             </a>
           </div>
         </div>
-        <div className="flex justify-between gap-4">
-          <div className="mb-4 ml-4">
+        <div className="flex justify-between gap-4 px-4 md:px-0">
+          <div className="md:mb-4 md:ml-4">
             <h5 className="font-bold mb-4">Links Rápidos</h5>
             <div className="flex flex-col justify-start">
               <Link href="/loja">Roupas</Link>
               <Link href="/loja/calcados">Calçados</Link>
-              <Link href="/loja/banho">Roupas de Banho</Link>
-              <Link href="/loja/acessorios">Acessörios</Link>
+              <Link href="/loja/acessorios">Acessórios</Link>
               <Link href="/loja/masculino">Masculino</Link>
               <Link href="/loja/feminino">Feminino</Link>
               <Link href="/loja/infantil">Infantil</Link>
             </div>
           </div>
-          <div className="mb-4 ml-4">
-            <h5 className="font-bold mb-4">Links Rápidos</h5>
-            <div className="flex flex-col justify-start">
+          <div className="md:mb-4 md:ml-4">
+            <h5 className="font-bold mb-4">
+              <span className="hidden md:block">Links Rápidos</span>
+            </h5>
+            <div className="mt-10 md:mt-0 flex flex-col justify-start">
               <Link href="/">Início</Link>
               <Link href="/loja">Loja</Link>
               <Link href="/contato">Contato</Link>
               <Link href="/carrinho">Carrinho</Link>
-              <Link href="/checkout">Checkout</Link>
-              <Link href="/login">Login</Link>
-              <Link href="/cadastro">Cadastro</Link>
+              <Link href="/confirmacao">Finalizar Pedido</Link>
+              <Link href="/entrar">Entrar</Link>
             </div>
           </div>
         </div>
         <div className="mb-5">
           <h5 className="text-center font-bold mb-4">Newsletter</h5>
-          <form onSubmit={handleSubmit} className="flex flex-col w-4/5 items-end gap-4">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col w-full md:w-4/5 items-center md:items-end gap-4"
+          >
             <div className="flex flex-col justify-center gap-4">
               <div className="flex flex-col">
                 <input
