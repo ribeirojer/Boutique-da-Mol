@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-type Props = { sizes: any; onChange: any };
+type Props = { sizes: string[]; onChange: any };
 
 const SizeFilter = ({ sizes, onChange }: Props) => {
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
 
-  const handleSizeChange = (size: any) => {
+  const handleSizeChange = (size: string) => {
     const updatedSizes = selectedSizes.includes(size)
-      ? selectedSizes.filter((s: any) => s !== size)
+      ? selectedSizes.filter((s: string) => s !== size)
       : [...selectedSizes, size];
 
     setSelectedSizes(updatedSizes);
