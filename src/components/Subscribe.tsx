@@ -1,6 +1,8 @@
 import { AuthService } from "@/services/AuthService";
 import React, { useRef, useState } from "react";
 import Loading from "./Loading";
+import Input from "./Input";
+import Button from "./Button";
 
 type Props = {};
 
@@ -73,23 +75,23 @@ const Subscribe = (props: Props) => {
 
   return (
     <section className="bg-gray-100 my-8 py-8">
-      <div className="container mx-auto flex flex-col items-center justify-center gap-4">
+      <div className="container mx-auto px-4 flex flex-col items-center justify-center gap-4">
         <h2 className="text-center font-semibold text-2xl">
           Inscreva-se na NEWSLETTER
         </h2>
-        <p>
+        <p className="text-center text-gray-500">
           Te enviaremos as novidades da Boutique da Moh e descontos exclusivos!
         </p>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div className="flex flex-col items-start md:flex-row gap-4">
+          <div className="flex flex-col md:flex-row gap-4">
             <div className="flex flex-col">
-              <input
+              <Input
+                id="subscribe-name"
                 type="text"
-                className=" border-white p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
                 placeholder="Seu nome"
-                ref={nameRef}
+                inputRef={nameRef}
                 value={formData.name}
-                onChange={(e) => {
+                onChange={(e: any) => {
                   setFormData({ ...formData, name: e.target.value });
                   setError({ ...error, name: "" });
                 }}
@@ -99,12 +101,12 @@ const Subscribe = (props: Props) => {
               )}
             </div>
             <div className="flex flex-col">
-              <input
+              <Input
+                id="subscribe-email"
                 type="text"
-                className=" border-white p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
                 placeholder="Seu melhor e-mail"
                 value={formData.email}
-                ref={emailRef}
+                inputRef={emailRef}
                 onChange={(e) => {
                   setFormData({ ...formData, email: e.target.value });
                   setError({ ...error, email: "" });
@@ -117,9 +119,7 @@ const Subscribe = (props: Props) => {
                 <span className="text-red-500 mt-1">{error.emailRegex}</span>
               )}
             </div>
-            <button className="px-8 py-4 bg-pink-500 text-white rounded-lg">
-              Inscrever
-            </button>
+            <Button type="submit">Inscrever</Button>
           </div>
           {loading && <Loading></Loading>}
           {error.general && (

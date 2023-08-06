@@ -93,7 +93,7 @@ const Entrar = (props: Props) => {
         <p className="text-center text-gray-500 my-4">
           Faça login na sua conta para um checkout mais rápido.
         </p>
-        <div className="flex gap-4 justify-center items-center">
+        {/* <div className="flex gap-4 justify-center items-center">
           <button
             onClick={handleGoogleLogin}
             className="flex items-center gap-2 border border-pink-300 hover:bg-pink-300 rounded-md py-2 px-4"
@@ -139,7 +139,7 @@ const Entrar = (props: Props) => {
         </div>
         <p className="text-center text-gray-500 my-4">
           Ou entre com seu e-mail
-        </p>
+        </p> */}
         <form
           onSubmit={handleSubmit}
           className="flex flex-col mx-auto border border-pink-300 rounded-lg px-4 pb-4 lg:max-w-[50%]"

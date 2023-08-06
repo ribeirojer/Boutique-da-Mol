@@ -40,7 +40,7 @@ const desejos = (props: Props) => {
               Você ainda não adicionou nenhum produto aos seus desejos.
             </p>
             <Link href={"/loja"}>
-              <Button>Voltar para a loja</Button>
+              <Button>Ver produtos</Button>
             </Link>
           </div>
         )}

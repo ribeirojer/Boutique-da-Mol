@@ -2,41 +2,78 @@ import Button from "@/components/Button";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
-import React, { useState } from "react";
+import Loading from "@/components/Loading";
+import axios from "axios";
+import React, { useRef, useState } from "react";
 
 type Props = {};
 
 const EsqueciMinhaSenha = (props: Props) => {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState({
+    email: "",
+    general: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const emailRef = useRef<HTMLInputElement | null>(null);
+
+  const closeSuccess = () => {
+    setTimeout(() => {
+      setSuccess(false);
+    }, 5000);
+  };
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
+    setErrors((prev) => ({
+      email: "",
+      general: "",
+    }));
+
+    if (!email) {
+      setErrors((prev) => ({
+        ...prev,
+        email: "Por favor digite seu email...",
+      }));
+      emailRef.current?.focus();
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setErrors((prev) => ({
+        ...prev,
+        email: "O campo Email não possui um formato válido.",
+      }));
+      emailRef.current?.focus();
+      return;
+    }
+    setLoading(true);
+
     try {
-      // Aqui você deve fazer a requisição para a API para enviar o link de redefinição de senha ao email
-      // Por ser um exemplo, simulamos o envio e a resposta da API
-      const response = await fetch("/api/send-password-reset-link", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
+      const response = await axios.post("/api/send-password-reset-link", {
+        email,
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setMessage(data.message);
+      if (response.data) {
+        setSuccess(response.data.message);
+        closeSuccess();
       } else {
-        setMessage(data.error);
+        setErrors((prev) => ({
+          ...prev,
+          general: response.data.error,
+        }));
       }
     } catch (error) {
       console.error("Erro ao enviar o email de redefinição de senha:", error);
-      setMessage(
-        "Ocorreu um erro ao enviar o email. Tente novamente mais tarde."
-      );
+      setErrors((prev) => ({
+        ...prev,
+        general:
+          "Ocorreu um erro ao enviar o email. Tente novamente mais tarde.",
+      }));
     }
+    setLoading(false);
   };
 
   return (
@@ -49,21 +86,30 @@ const EsqueciMinhaSenha = (props: Props) => {
         <p className="text-center text-gray-600 mb-6">
           Insira seu email abaixo para receber um link de redefinição de senha.
         </p>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2 max-w-md mx-auto">
           <Input
             placeholder="Seu e-mail"
-            type="email"
+            type="text"
             id="email"
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:border-blue-500"
+            name="email"
+            inputRef={emailRef}
+            label="E-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <Button type="submit">Enviar</Button>
         </form>
-        {message && (
-          <p className="mt-4 text-blue-500 font-semibold">{message}</p>
+        {errors.email && (
+          <p className="text-center text-red-500 mt-2">{errors.email}</p>
+        )}
+        {errors.general && (
+          <p className="text-center text-red-500 mt-2">{errors.general}</p>
+        )}
+        {success && (
+          <p className="text-center text-green-500 mt-2">{success}</p>
         )}
       </main>
+      {loading && <Loading />}
       <Footer></Footer>
     </>
   );

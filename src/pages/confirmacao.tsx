@@ -14,7 +14,7 @@ import Loading from "@/components/Loading";
 type Props = {};
 
 const Confirmacao = (props: Props) => {
-  const { cartItems } = useContext(UserContext);
+  const { user, cartItems } = useContext(UserContext);
   const [paymentInfo, setPaymentInfo] = useState({
     firstName: "",
     lastName: "",
@@ -105,6 +105,24 @@ const Confirmacao = (props: Props) => {
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
   const [termsAgreed, setTermsAgreed] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setPaymentInfo({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        zipCode: user.zipCode,
+        logradouro: user.logradouro,
+        numberAddress: user.numberAddress,
+        complemento: user.complemento,
+        bairro: user.bairro,
+        city: user.city,
+        state: user.state,
+        tel: user.tel,
+      });
+    }
+  }, []);
 
   async function handleSubmitCep(event: any) {
     event.preventDefault();

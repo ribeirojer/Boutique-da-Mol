@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useContext, useState } from "react";
-import { emailRegex, hasTrueFields, passwordRegex } from "../utils";
+import { emailRegex, passwordRegex } from "../utils";
 import { AuthService } from "../services/AuthService";
 import { UserContext } from "./_app";
 import Input from "@/components/Input";
@@ -106,14 +106,14 @@ const Cadastrar = (props: Props) => {
   return (
     <>
       <Header></Header>
-      <main className="container my-16 mx-auto">
+      <main className="container px-4 my-8 md:my-16 mx-auto">
         <h1 className="text-center text-4xl font-bold">Cadastrar</h1>
         <p className="text-center text-gray-500 my-4">
           Preencha os dados abaixo para se cadastrar
         </p>
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col px-4 pb-4 gap-4 border border-pink-300 rounded-lg max-w-[50%] mx-auto"
+          className="flex flex-col px-4 pb-4 gap-4 border border-pink-300 rounded-lg max-w-md mx-auto"
         >
           <Input
             id="first-name"
@@ -186,7 +186,7 @@ const Cadastrar = (props: Props) => {
             passHref
             className="text-pink-500 underline hover:text-pink-700"
           >
-            Faça login
+            Entrar
           </Link>
         </p>
       </main>

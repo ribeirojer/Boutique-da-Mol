@@ -3,6 +3,8 @@ import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { AuthService } from "@/services/AuthService";
 import Loading from "./Loading";
+import Input from "./Input";
+import Button from "./Button";
 
 type Props = {};
 
@@ -145,7 +147,7 @@ const Footer = (props: Props) => {
             </a>
           </div>
         </div>
-        <div className="flex justify-between gap-4 px-4 md:px-0">
+        <div className="flex justify-around gap-4 px-4 md:px-0">
           <div className="md:mb-4 md:ml-4">
             <h5 className="font-bold mb-4">Links Rápidos</h5>
             <div className="flex flex-col justify-start">
@@ -166,7 +168,7 @@ const Footer = (props: Props) => {
               <Link href="/loja">Loja</Link>
               <Link href="/contato">Contato</Link>
               <Link href="/carrinho">Carrinho</Link>
-              <Link href="/confirmacao">Finalizar Pedido</Link>
+              <Link href="/confirmacao">Finalizar</Link>
               <Link href="/entrar">Entrar</Link>
             </div>
           </div>
@@ -179,11 +181,11 @@ const Footer = (props: Props) => {
           >
             <div className="flex flex-col justify-center gap-4">
               <div className="flex flex-col">
-                <input
+                <Input
+                  id="newsletter-name"
                   type="text"
-                  className=" border-white p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
                   placeholder="Seu nome"
-                  ref={nameRef}
+                  inputRef={nameRef}
                   value={formData.name}
                   onChange={(e) => {
                     setFormData({ ...formData, name: e.target.value });
@@ -195,12 +197,12 @@ const Footer = (props: Props) => {
                 )}
               </div>
               <div className="flex flex-col">
-                <input
+                <Input
+                  id="newsletter-email"
                   type="text"
-                  className=" border-white p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
                   placeholder="Seu melhor e-mail"
                   value={formData.email}
-                  ref={emailRef}
+                  inputRef={emailRef}
                   onChange={(e) => {
                     setFormData({ ...formData, email: e.target.value });
                     setError({ ...error, email: "" });
@@ -213,9 +215,9 @@ const Footer = (props: Props) => {
                   <span className="text-red-500 mt-1">{error.emailRegex}</span>
                 )}
               </div>
-              <button className="px-8 py-4 bg-pink-500 hover:bg-pink-400 text-white rounded-lg">
+              <Button type="submit" disabled={loading}>
                 Inscrever
-              </button>
+              </Button>
             </div>
             {loading && <Loading></Loading>}
             {error.general && (

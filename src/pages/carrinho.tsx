@@ -9,6 +9,7 @@ import Input from "@/components/Input";
 import Button from "@/components/Button";
 import Link from "next/link";
 import axios from "axios";
+import Loading from "@/components/Loading";
 
 type Props = {};
 
@@ -43,12 +44,6 @@ const Carrinho = (props: Props) => {
     setErrorMessage("");
     setSuccessMessage("");
 
-    if (cartItems.length === 0) {
-      setErrorMessage("O carrinho está vazio.");
-      cupomRef.current?.focus();
-      setIsApplying(false);
-      return;
-    }
     if (cupomCode.length === 0) {
       setErrorMessage("Informe o código do cupom.");
       cupomRef.current?.focus();
@@ -96,7 +91,7 @@ const Carrinho = (props: Props) => {
         {cartItems.length > 0 ? (
           <>
             <div className="w-full md:w-2/3 mb-5">
-              <table className="text-sm md:text-base table-fixed w-full bg-white border border-gray-200">
+              <table className="text-sm md:text-base table-fixed w-full bg-white border border-gray-200 rounded-lg">
                 <thead className="bg-secondary text-dark">
                   <tr>
                     <th className="w-1/4 md:w-1/5 py-2 px-4">Produto</th>
@@ -190,6 +185,7 @@ const Carrinho = (props: Props) => {
                       type="text"
                       placeholder="Código do cupom"
                       value={cupomCode}
+                      inputRef={cupomRef}
                       onChange={(e) => setCupomCode(e.target.value)}
                       id={"cupom"}
                     />
@@ -199,13 +195,17 @@ const Carrinho = (props: Props) => {
                   </Button>
                 </div>
                 {errorMessage && (
-                  <p className="text-center md:text-left text-red-500 mt-1">{errorMessage}</p>
+                  <p className="text-center md:text-left text-red-500 mt-1">
+                    {errorMessage}
+                  </p>
                 )}
                 {successMessage && (
-                  <p className="text-center md:text-left text-green-500 mt-1">{successMessage}</p>
+                  <p className="text-center md:text-left text-green-500 mt-1">
+                    {successMessage}
+                  </p>
                 )}
               </form>
-              <div className="border border-gray-200 p-4 rounded-lg my-8">
+              <div className="flex flex-col border border-gray-200 p-4 rounded-lg my-8">
                 <h4 className="text-xl text-center font-semibold mb-4">
                   Resumo do carrinho
                 </h4>
@@ -222,7 +222,7 @@ const Carrinho = (props: Props) => {
                       {shipping ? "Grátis" : formatCurrency(10)}
                     </h6>
                   </div>
-                  {cupomValue && (
+                  {cupomValue > 0 && (
                     <div className="flex justify-between">
                       <h6 className="font-semibold">Cupom</h6>
                       <h6 className="font-semibold">
@@ -242,7 +242,7 @@ const Carrinho = (props: Props) => {
                   </div>
                   <Link
                     href={"/confirmacao"}
-                    className="flex justify-center mt-4"
+                    className="flex justify-center my-4"
                   >
                     <Button>Prosseguir para o Checkout</Button>
                   </Link>
@@ -253,13 +253,16 @@ const Carrinho = (props: Props) => {
         ) : (
           <div className="my-8 flex flex-col items-center justify-center w-full h-full gap-8">
             <h1 className="text-4xl font-bold">Carrinho vazio</h1>
-            <p>Adicione itens ao seu carrinho para prosseguir.</p>
+            <p className="text-center">
+              Adicione itens ao seu carrinho para prosseguir.
+            </p>
             <Link href={"/loja"}>
-              <Button>Voltar para a loja</Button>
+              <Button>Ver produtos</Button>
             </Link>
           </div>
         )}
       </main>
+      {isApplying && <Loading></Loading>}
       <Footer></Footer>
     </>
   );

@@ -128,8 +128,8 @@ const Header = (props: Props) => {
       <div
         className={`${
           isFixed
-            ? "fixed top-0 left-0 w-full z-50"
-            : "fixed top-0 left-0 w-full z-50 md:static"
+            ? "fixed top-0 left-0 w-full z-40"
+            : "fixed top-0 left-0 w-full z-40 md:static"
         } bg-pink-200 shadow transition-all`}
       >
         <div className="container mx-auto px-4 md:px-0 flex flex-row items-center justify-between">
@@ -187,32 +187,21 @@ const Header = (props: Props) => {
                       Loja
                     </Link>
                   </li>
-                  <li onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                    <Link
-                      href="/confirmacao"
-                      passHref
-                      className={
-                        router.pathname === "/confirmacao"
-                          ? "font-bold"
-                          : "font-light"
-                      }
-                    >
-                      Finalizar
-                    </Link>
-                  </li>
-                  <li onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                    <Link
-                      href="/contato"
-                      passHref
-                      className={
-                        router.pathname === "/contato"
-                          ? "font-bold"
-                          : "font-light"
-                      }
-                    >
-                      Contato
-                    </Link>
-                  </li>
+                  {cartItems.length > 0 && (
+                    <li onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                      <Link
+                        href="/confirmacao"
+                        passHref
+                        className={
+                          router.pathname === "/confirmacao"
+                            ? "font-bold"
+                            : "font-light"
+                        }
+                      >
+                        Finalizar
+                      </Link>
+                    </li>
+                  )}
                   <li onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     <Link
                       href="/desejos"
@@ -252,16 +241,43 @@ const Header = (props: Props) => {
                     </Link>
                   </li>
                   <li onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                    {user ? (
+                      <Link
+                        href="/usuario"
+                        passHref
+                        className={
+                          router.pathname === "/usuario"
+                            ? "font-bold"
+                            : "font-light"
+                        }
+                      >
+                        <span className="text-pink-500">Meus dados</span>
+                      </Link>
+                    ) : (
+                      <Link
+                        href="/entrar"
+                        passHref
+                        className={
+                          router.pathname === "/entrar"
+                            ? "font-bold"
+                            : "font-light"
+                        }
+                      >
+                        Entrar
+                      </Link>
+                    )}
+                  </li>
+                  <li onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     <Link
-                      href="/usuario"
+                      href="/contato"
                       passHref
                       className={
-                        router.pathname === "/usuario"
+                        router.pathname === "/contato"
                           ? "font-bold"
                           : "font-light"
                       }
                     >
-                      Entrar
+                      Contato
                     </Link>
                   </li>
                   <li

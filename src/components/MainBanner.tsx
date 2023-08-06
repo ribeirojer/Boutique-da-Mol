@@ -11,7 +11,7 @@ const MainBanner = (props: Props) => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="banner-wrapper relative">
           <div className="banner-item absolute p-4 flex flex-col items-center justify-center w-full h-full gap-4">
-            <span className="text-pink-200">
+            <span className="text-pink-200 text-center">
               Exclusividade de boutique, precinho camarada
             </span>
             <Link
