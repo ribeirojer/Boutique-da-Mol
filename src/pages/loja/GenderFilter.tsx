@@ -5,7 +5,7 @@ type Props = { genders: any; onChange: any };
 const GenderFilter = ({ genders, onChange }: Props) => {
   const [selectedGender, setSelectedGender] = useState(null);
 
-  const handleGenderChange = (gender: null) => {
+  const handleGenderChange = (gender: any) => {
     setSelectedGender(gender);
     onChange(gender);
   };

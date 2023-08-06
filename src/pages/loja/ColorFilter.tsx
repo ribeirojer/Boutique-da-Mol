@@ -16,7 +16,7 @@ const ColorFilter = ({ colors, onChange }: Props) => {
 
   return (
     <div className="flex items-center space-x-4">
-      {colors.map((color) => (
+      {colors.map((color: any) => (
         <button
           key={color}
           onClick={() => handleColorChange(color)}
