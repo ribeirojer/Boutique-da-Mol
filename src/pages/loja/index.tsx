@@ -5,10 +5,10 @@ import Input from "@/components/Input";
 import Pagination from "@/components/Pagination";
 import { productsData } from "@/utils/cardsData";
 import React, { useEffect, useState } from "react";
-import PriceFilter from "./PriceFilter";
-import ColorFilter from "./ColorFilter";
-import SizeFilter from "./SizeFilter";
-import GenderFilter from "./GenderFilter";
+import GenderFilter from "@/components/GenderFilter";
+import PriceFilter from "@/components/PriceFilter";
+import SizeFilter from "@/components/SizeFilter";
+import ColorFilter from "@/components/ColorFilter";
 
 type Props = {};
 

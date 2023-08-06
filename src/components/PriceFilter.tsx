@@ -1,7 +1,11 @@
 import Button from "@/components/Button";
 import React, { useState } from "react";
 
-type Props = { minPrice: number; maxPrice: number; onChange: any };
+type Props = {
+  minPrice: number;
+  maxPrice: number;
+  onChange: any;
+};
 
 const PriceFilter = ({ minPrice, maxPrice, onChange }: Props) => {
   const [minValue, setMinValue] = useState(minPrice);

@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 
-type Props = { genders: string[]; onChange: any };
+type Props = {
+  genders: string[];
+  onChange: any;
+};
 
 const GenderFilter = ({ genders, onChange }: Props) => {
   const [selectedGender, setSelectedGender] = useState("");
 
-  const handleGenderChange = (gender: string) => {
+  function handleGenderChange(gender: string) {
     setSelectedGender(gender);
     onChange(gender);
-  };
+  }
 
   return (
     <div className="flex flex-wrap items-center space-x-4">

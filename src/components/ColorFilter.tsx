@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 
-type Props = { colors: string[]; onChange: any };
+type Props = {
+  colors: string[];
+  onChange: any;
+};
 
 const ColorFilter = ({ colors, onChange }: Props) => {
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
 
-  const handleColorChange = (color: string) => {
+  function handleColorChange(color: string) {
     const updatedColors = selectedColors.includes(color)
       ? selectedColors.filter((c) => c !== color)
       : [...selectedColors, color];
 
     setSelectedColors(updatedColors);
     onChange(updatedColors);
-  };
+  }
 
   return (
     <div className="flex items-center space-x-4">

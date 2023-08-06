@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 
-type Props = { sizes: string[]; onChange: any };
+type Props = {
+  sizes: string[];
+  onChange: any;
+};
 
 const SizeFilter = ({ sizes, onChange }: Props) => {
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
 
-  const handleSizeChange = (size: string) => {
+  function handleSizeChange(size: string) {
     const updatedSizes = selectedSizes.includes(size)
       ? selectedSizes.filter((s: string) => s !== size)
       : [...selectedSizes, size];
 
     setSelectedSizes(updatedSizes);
     onChange(updatedSizes);
-  };
+  }
 
   return (
     <div className="flex items-center space-x-4">
