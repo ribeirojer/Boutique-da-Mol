@@ -401,7 +401,7 @@ const Usuario = (props: Props) => {
           closeModal={setIsShowModal}
           functionToExecute={handleDeleteUser}
           title="Deletar"
-          description="Tem certeza que dese"
+          description="Tem certeza que deseja deletar sua conta?"
         ></Modal>
       )}
       {isLoading && <Loading></Loading>}

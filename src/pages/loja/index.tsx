@@ -38,14 +38,6 @@ const Loja = (props: Props) => {
     size4: false,
     size5: false,
   });
-  const [genderFilter, setGenderFilter] = useState({
-    genderAll: true,
-    gender1: false,
-    gender2: false,
-    gender3: false,
-    gender4: false,
-    gender5: false,
-  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
@@ -96,16 +88,6 @@ const Loja = (props: Props) => {
     setCurrentPage(pageNumber);
   };
 
-  useEffect(() => {
-    setProducts(
-      productsData.filter((product) => {
-        if (product.name.toLowerCase().includes(searchQuery.toLowerCase())) {
-          return product;
-        }
-      })
-    );
-  }, [searchQuery]);
-
   const handleFilterChange = ({ min, max }: any) => {
     const filtered = productsData.filter(
       (product) => product.price >= min && product.price <= max
@@ -135,6 +117,16 @@ const Loja = (props: Props) => {
         : products.filter((product) => product.gender === selectedGender);
     setProducts(filtered);
   };
+
+  useEffect(() => {
+    setProducts(
+      productsData.filter((product) => {
+        if (product.name.toLowerCase().includes(searchQuery.toLowerCase())) {
+          return product;
+        }
+      })
+    );
+  }, [searchQuery]);
 
   return (
     <>
@@ -482,27 +474,57 @@ const Loja = (props: Props) => {
                   className="w-full h-full fixed top-0 left-0 bg-black bg-opacity-75 z-40"
                   onClick={() => setIsModalOpen(false)}
                 ></div>
-                <div className="text-sm w-11/12 fixed top-4 flex flex-col gap-6 justify-center z-50 bg-white rounded-lg p-4">
-                  <select
-                    className="w- flex bg-gray-100 rounded-lg px-4 py-2 focus:ring-2 ring-pink-500"
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
+                <div className="text-sm w-11/12 fixed top-4 flex flex-col gap-5 justify-center z-50 bg-white rounded-lg p-4">
+                  <span
+                    className="absolute top-4 right-4"
+                    onClick={() => setIsModalOpen(false)}
                   >
-                    <option value="Latest">Mais recente</option>
-                    <option value="Popularity">Popularidade</option>
-                    <option value="BestRating">Melhor avaliação</option>
-                  </select>
-                  <PriceFilter
-                    minPrice={100}
-                    maxPrice={500}
-                    onChange={handleFilterChange}
-                  />
-                  <ColorFilter colors={colors} onChange={handleColorChange} />
-                  <SizeFilter sizes={sizes} onChange={handleSizeChange} />
-                  <GenderFilter
-                    genders={genders}
-                    onChange={handleGenderChange}
-                  />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      className="fill-gray-800"
+                    >
+                      <path d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"></path>
+                    </svg>
+                  </span>
+                  <h2 className="text-xl text-center font-bold">Filtros</h2>
+                  <div className="flex flex-col gap-2">
+                    <p>Ordenar por:</p>
+                    <select
+                      className="w- flex bg-gray-100 rounded-lg px-4 py-2 focus:ring-2 ring-pink-500"
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
+                    >
+                      <option value="Latest">Mais recente</option>
+                      <option value="Popularity">Popularidade</option>
+                      <option value="BestRating">Melhor avaliação</option>
+                    </select>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <p>Filtrar por preço:</p>
+                    <PriceFilter
+                      minPrice={100}
+                      maxPrice={500}
+                      onChange={handleFilterChange}
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <p>Filtrar por cor:</p>
+                    <ColorFilter colors={colors} onChange={handleColorChange} />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <p>Filtrar por tamanho:</p>
+                    <SizeFilter sizes={sizes} onChange={handleSizeChange} />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <p>Filtrar por genero:</p>
+                    <GenderFilter
+                      genders={genders}
+                      onChange={handleGenderChange}
+                    />
+                  </div>
                 </div>
               </>
             )}

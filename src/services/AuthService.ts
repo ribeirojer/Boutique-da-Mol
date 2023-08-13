@@ -93,13 +93,13 @@ export class AuthService {
     return authData.user;
   }
 
-  static async delete(data: any): Promise<any> {
+  static async delete(id: any): Promise<any> {
     const accessToken = AuthService.getAccessToken();
     if (!accessToken) {
       throw new Error("Token not found");
     }
 
-    const response = await axios.delete<any>(`${BASE_URL}/auth/delete`, {
+    const response = await axios.delete<any>(`${BASE_URL}/users:${id}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
