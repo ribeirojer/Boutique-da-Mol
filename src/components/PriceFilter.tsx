@@ -12,28 +12,30 @@ const PriceFilter = ({ minPrice, maxPrice, onChange }: Props) => {
   const [maxValue, setMaxValue] = useState(maxPrice);
 
   return (
-    <div className="flex items-center space-x-4">
-      <input
-        type="number"
-        min={minPrice}
-        max={maxPrice}
-        value={minValue}
-        onChange={(e) => setMinValue(parseFloat(e.target.value))}
-        className="w-16 px-4 py-2 rounded-md border focus:outline-none focus:border-pink-500"
-      />
-      <span className="text-gray-600">até</span>
-      <input
-        type="number"
-        min={minPrice}
-        max={maxPrice}
-        value={maxValue}
-        onChange={(e) => setMaxValue(parseFloat(e.target.value))}
-        className="w-16 px-4 py-2 rounded-md border focus:outline-none focus:border-pink-500"
-      />
+    <section className="flex md:flex-col gap-4 pr-4">
+      <div className="flex items-center space-x-4">
+        <input
+          type="number"
+          min={minPrice}
+          max={maxPrice}
+          value={minValue}
+          onChange={(e) => setMinValue(parseFloat(e.target.value))}
+          className="px-4 py-2 rounded-md border focus:outline-none focus:border-pink-500"
+        />
+        <span className="text-gray-600">até</span>
+        <input
+          type="number"
+          min={minPrice}
+          max={maxPrice}
+          value={maxValue}
+          onChange={(e) => setMaxValue(parseFloat(e.target.value))}
+          className="px-4 py-2 rounded-md border focus:outline-none focus:border-pink-500"
+        />
+      </div>
       <Button onClick={() => onChange({ min: minValue, max: maxValue })}>
         Filtrar
       </Button>
-    </div>
+    </section>
   );
 };
 
