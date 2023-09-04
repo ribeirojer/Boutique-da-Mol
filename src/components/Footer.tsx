@@ -1,14 +1,16 @@
 import Link from "next/link";
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import Image from "next/image";
 import { AuthService } from "@/services/AuthService";
 import Loading from "./Loading";
 import Input from "./Input";
 import Button from "./Button";
+import { UserContext } from "@/pages/_app";
 
 type Props = {};
 
 const Footer = (props: Props) => {
+  const { user, cartItems } = useContext(UserContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -152,11 +154,11 @@ const Footer = (props: Props) => {
             <h5 className="font-bold mb-4">Links Rápidos</h5>
             <div className="flex flex-col justify-start">
               <Link href="/loja">Roupas</Link>
-              <Link href="/loja/calcados">Calçados</Link>
-              <Link href="/loja/acessorios">Acessórios</Link>
-              <Link href="/loja/masculino">Masculino</Link>
-              <Link href="/loja/feminino">Feminino</Link>
-              <Link href="/loja/infantil">Infantil</Link>
+              <Link href="/loja?category=calcados">Calçados</Link>
+              <Link href="/loja?category=acessorios">Acessórios</Link>
+              <Link href="/loja?category=masculino">Masculino</Link>
+              <Link href="/loja?category=feminino">Feminino</Link>
+              <Link href="/loja?category=infantil">Infantil</Link>
             </div>
           </div>
           <div className="md:mb-4 md:ml-4">
@@ -168,8 +170,8 @@ const Footer = (props: Props) => {
               <Link href="/loja">Loja</Link>
               <Link href="/contato">Contato</Link>
               <Link href="/carrinho">Carrinho</Link>
-              <Link href="/confirmacao">Finalizar</Link>
-              <Link href="/entrar">Entrar</Link>
+              {cartItems.length > 0 && <Link href="/confirmacao">Finalizar</Link>}
+              {!user && <Link href="/entrar">Entrar</Link>}
             </div>
           </div>
         </div>

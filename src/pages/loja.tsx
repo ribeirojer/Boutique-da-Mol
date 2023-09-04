@@ -102,6 +102,8 @@ const Loja = (props: Props) => {
     );
   }, [searchQuery]);
 
+  const { category } = router.query;
+
   return (
     <>
       <Header></Header>

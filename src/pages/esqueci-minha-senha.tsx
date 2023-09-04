@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
 import Loading from "@/components/Loading";
+import { AuthService } from "../services/AuthService";
 import axios from "axios";
 import React, { useRef, useState } from "react";
 
@@ -52,17 +53,15 @@ const EsqueciMinhaSenha = (props: Props) => {
     setLoading(true);
 
     try {
-      const response = await axios.post("/api/send-password-reset-link", {
-        email,
-      });
-
-      if (response.data) {
-        setSuccess(response.data.message);
+      const response = await AuthService.forgotPassword(email);
+      if (response.status === 200) {
+        setSuccess(true);
+        setEmail("");
         closeSuccess();
       } else {
         setErrors((prev) => ({
           ...prev,
-          general: response.data.error,
+          general: "Ocorreu um erro ao enviar o email. Tente novamente mais tarde.",
         }));
       }
     } catch (error) {
@@ -106,7 +105,7 @@ const EsqueciMinhaSenha = (props: Props) => {
           <p className="text-center text-red-500 mt-2">{errors.general}</p>
         )}
         {success && (
-          <p className="text-center text-green-500 mt-2">{success}</p>
+          <p className="text-center text-green-500 mt-2">Verifique sua caixa de entrada!</p>
         )}
       </main>
       {loading && <Loading />}

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Button from "./Button";
+import Stars from "./Stars";
+import RatingBars from "./RatingBars"; 
 
 type Props = {
   itemToShow?: any;
@@ -38,30 +40,29 @@ const ItemDescription = ({ itemToShow }: Props) => {
     event.preventDefault();
     // Fazer algo com os dados do formulário de avaliação (rating, reviewText, name, email)
   };
-  console.log(itemToShow);
+
+const ratings = [
+    { stars: 1, count: 3 },
+    { stars: 2, count: 5 },
+    { stars: 3, count: 10 },
+    { stars: 4, count: 15 },
+    { stars: 5, count: 25 },
+  ];
 
   return (
     <div className="container mx-auto">
-      <div className="flex justify-center items-center mb-4 gap-4">
+      <div className="flex justify-center items-center mb-4 space-x-4">
         <a
-          className={`nav-item nav-link ${
-            activeTab === "tab-pane-1" ? "active" : ""
+          className={`cursor-pointer nav-item nav-link ${
+            activeTab === "tab-pane-1" ? "active font-bold" : ""
           }`}
           onClick={() => handleTabClick("tab-pane-1")}
         >
           Descrição
         </a>
         <a
-          className={`nav-item nav-link ${
-            activeTab === "tab-pane-2" ? "active" : ""
-          }`}
-          onClick={() => handleTabClick("tab-pane-2")}
-        >
-          Informações
-        </a>
-        <a
-          className={`nav-item nav-link ${
-            activeTab === "tab-pane-3" ? "active" : ""
+          className={`cursor-pointer nav-item nav-link ${
+            activeTab === "tab-pane-3" ? "active font-bold" : ""
           }`}
           onClick={() => handleTabClick("tab-pane-3")}
         >
@@ -71,27 +72,25 @@ const ItemDescription = ({ itemToShow }: Props) => {
       <div className="tab-content">
         {activeTab === "tab-pane-1" && (
           <div className="tab-pane fade show active" id="tab-pane-1">
-            <h4 className="mb-3">Descrição do Produto</h4>
-            <p>{itemToShow?.description}</p>
-          </div>
-        )}
-
-        {activeTab === "tab-pane-2" && (
-          <div className="tab-pane fade" id="tab-pane-2">
-            <h4 className="mb-3">Additional Information</h4>
+            <p className="mb-4 lg:max-w-4xl mx-auto">{itemToShow?.description}</p>
             <p>{itemToShow?.additionalInfo}</p>
           </div>
         )}
 
         {activeTab === "tab-pane-3" && (
-          <div className="flex" id="tab-pane-3">
-            <div className="col-md-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4" id="tab-pane-3">
+
+    <div className="">
+      <h2>Avaliações do Produto</h2>
+      <RatingBars ratings={ratings} />
+    </div>
+
+            <div className="">
               <h4 className="mb-4">
-                {itemToShow?.reviews.length} Avaliações para "{itemToShow?.name}
-                "
+                {itemToShow?.reviews.length} Avaliações para "{itemToShow?.name}"
               </h4>
               {itemToShow?.reviews.map((review: any) => (
-                <div className="media mb-4">
+                <div className="media mb-4" key={review.id}>
                   <img
                     src="img/user.jpg"
                     alt="Image"
@@ -107,63 +106,63 @@ const ItemDescription = ({ itemToShow }: Props) => {
                     </h6>
                     <div className="text-primary mb-2">
                       {review.rating}
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star-half-alt"></i>
-                      <i className="far fa-star"></i>
+                      <Stars rating={itemToShow?.review?.rating.toNumber()}></Stars>
                     </div>
                     <p>{review.comment}</p>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="col-md-6">
+            <div className="">
               <h4 className="mb-4">Deixe um comentário</h4>
               <small>
-                Seu endereço de e-mail não será publicado. Os campos
-                obrigatórios estão marcados *
+                Seu endereço de e-mail não será publicado. Os campos obrigatórios estão marcados *
               </small>
-              <div className="d-flex my-3">
+              <div className="flex my-3">
                 <p className="mb-0 mr-2">Sua avaliação *:</p>
                 <div className="text-primary">
-                  <i className="far fa-star"></i>
-                  <i className="far fa-star"></i>
-                  <i className="far fa-star"></i>
-                  <i className="far fa-star"></i>
-                  <i className="far fa-star"></i>
+                  <Stars rating={itemToShow?.rating}></Stars>
                 </div>
               </div>
-              <form>
-                <div className="form-group">
-                  <label htmlFor="message">Sua revisão *</label>
+              <form onSubmit={handleSubmitReview}>
+                <div className="mb-4">
+                  <label htmlFor="message" className="block text-gray-700 font-bold mb-2">
+                    Sua revisão *
+                  </label>
                   <textarea
                     id="message"
                     cols={30}
                     rows={5}
-                    className="form-control"
+                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     value={reviewText}
                     onChange={handleReviewTextChange}
+                    required
                   ></textarea>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="name">Seu nome *</label>
+                <div className="mb-4">
+                  <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
+                    Seu nome *
+                  </label>
                   <input
                     type="text"
-                    className="form-control"
                     id="name"
+                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     value={name}
                     onChange={handleNameChange}
+                    required
                   />
                 </div>
-                <div className="form-group">
-                  <label htmlFor="email">Seu email *</label>
+                <div className="mb-4">
+                  <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
+                    Seu email *
+                  </label>
                   <input
                     type="email"
-                    className="form-control"
                     id="email"
+                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     value={email}
                     onChange={handleEmailChange}
+                    required
                   />
                 </div>
                 <Button type="submit">Deixe seu comentário</Button>

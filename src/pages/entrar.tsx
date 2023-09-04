@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthService } from "../services/AuthService";
 import { emailRegex, hasTrueFields, passwordRegex } from "../utils";
 import { UserContext } from "./_app";
@@ -14,7 +14,8 @@ import Loading from "@/components/Loading";
 type Props = {};
 
 const Entrar = (props: Props) => {
-  const { saveUserToContext } = useContext(UserContext);
+  const { user, saveUserToContext } =
+    useContext(UserContext);
   const [loginInfo, setLoginInfo] = useState({
     password: "",
     email: "",
@@ -80,6 +81,12 @@ const Entrar = (props: Props) => {
         console.log(error);
       });
   };
+
+  useEffect(() => {
+    if (user) {
+      router.push("/usuario");
+    }
+  }, []);
 
   const handleGoogleLogin = () => {
     //

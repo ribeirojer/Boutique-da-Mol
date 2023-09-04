@@ -34,7 +34,7 @@ function Pagination(props: Props) {
 
   return (
     <div className="flex flex-col items-center justify-center mt-8">
-      <ul className="flex flex-row">
+      <ul className="flex flex-row md:gap-2">
         <Button
           disabled={currentPage === 1}
           onClick={() => handlePageChange(currentPage - 1)}

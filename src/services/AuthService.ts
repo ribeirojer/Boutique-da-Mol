@@ -24,6 +24,26 @@ export class AuthService {
     }
   }
 
+  static async forgotPassword(email: string): Promise<any> {
+    try {
+      const response = await axios.post<any>(`${BASE_URL}/auth/forgot-password`, { email });
+      return response;
+    } catch (error) {
+      console.error("Error send email: ", error);
+      throw new Error("Error send email");
+    }
+  }
+
+  static async changePassword(password: string, token: string): Promise<any> {
+    try {
+      const response = await axios.post<any>(`${BASE_URL}/auth/change-password`, { password, token });
+      return response;
+    } catch (error) {
+      console.error("Error change password: ", error);
+      throw new Error("Error change password");
+    }
+  }
+
   static async login(any: any): Promise<any> {
     const response = await axios.post<any>(`${BASE_URL}/auth/login`, any);
     const authData = response.data;

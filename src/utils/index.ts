@@ -137,6 +137,44 @@ export function formatCurrency(value: number): string {
   });
 }
 
+export function limitarDescricao(descricao: string, limite: number): string {
+  if (descricao.length > limite) {
+    // Se a descrição for maior que o limite, truncá-la e adicionar "..."
+    return descricao.substring(0, limite) + "...";
+  }
+  // Caso contrário, retornar a descrição original
+  return descricao;
+}
+
+export function traduzirCor(corEmIngles: string): string {
+  const cores = {
+    black: "preto",
+    white: "branco",
+    red: "vermelho",
+    blue: "azul",
+    green: "verde",
+    // Adicione outras traduções de cores conforme necessário
+  };
+
+  // Verifica se a cor em inglês está no objeto de tradução
+  if (corEmIngles.toLowerCase() in cores) {
+    return cores[corEmIngles.toLowerCase()];
+  } else {
+    // Se a cor não estiver no objeto de tradução, retorna a cor original
+    return corEmIngles;
+  }
+}
+
+export function primeiraLetraMaiuscula(texto: string): string {
+  // Verifica se a entrada é uma string válida
+  if (typeof texto !== "string" || texto.length === 0) {
+    return texto;
+  }
+
+  // Transforma a primeira letra em maiúscula e concatena com o restante da string
+  return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
 export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const passwordRegex =
   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{8,}$/;
