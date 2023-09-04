@@ -77,7 +77,7 @@ const AlterarSenha = (props: Props) => {
     setLoading(true);
 
     try {
-      const response = await AuthService.changePassword(password, token);
+      const response = await AuthService.changePassword(password, token as string);
 
       if (response.status === 200) {
         setSuccess(true);
