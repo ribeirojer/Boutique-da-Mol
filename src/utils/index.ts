@@ -147,7 +147,7 @@ export function limitarDescricao(descricao: string, limite: number): string {
 }
 
 export function traduzirCor(corEmIngles: string): string {
-  const cores = {
+  const cores: { [key: string]: string } = {
     black: "preto",
     white: "branco",
     red: "vermelho",
