@@ -51,7 +51,7 @@ const Item = (props: Props) => {
     Tamanhos:
   </p>
 <form className="flex gap-4">
-  {itemToShow?.sizes.map((size, index) => (
+  {itemToShow?.sizes.map((size: string, index: React.Key | null | undefined) => (
     <div key={index} className="">
       <input
         type="radio"
@@ -81,7 +81,7 @@ const Item = (props: Props) => {
 <div className="flex flex-col mb-4">
   <p className="font-semibold mb-2">Cores:</p>
   <form className="flex gap-4">
-    {itemToShow?.color.map((color, index) => (
+    {itemToShow?.color.map((color: string, index: any) => (
       <div key={index} className="flex items-center">
         <input
           type="radio"
