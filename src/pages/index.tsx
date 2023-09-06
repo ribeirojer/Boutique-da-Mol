@@ -22,7 +22,7 @@ export default function Home() {
         <Products></Products>
         <Subscribe></Subscribe>
         {/* <Products2></Products2> */}
-        <Vendor></Vendor>
+        {/*<Vendor></Vendor>*/}
         <BackToTop></BackToTop>
       </main>
       <Footer></Footer>

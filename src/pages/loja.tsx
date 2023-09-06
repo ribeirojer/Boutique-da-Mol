@@ -117,7 +117,7 @@ const Loja = (props: Props) => {
           />
         </div>
         <div className="w-full lg:w-3/4">
-          <div className="flex md:hidden items-center justify-between gap-4 mb-4">
+          <div className="flex w-full md:hidden items-center justify-between gap-4 mb-4">
             <form action="" className="relative flex">
               <Input
                 id="search"
@@ -207,7 +207,7 @@ const Loja = (props: Props) => {
                       onChange={handleFilterChange}
                     />
                   </div>
-                  <div className="flex flex-col gap-2">
+                  {/*<div className="flex flex-col gap-2">
                     <p>Filtrar por cor:</p>
                     <ColorFilter colors={colors} onChange={handleColorChange} />
                   </div>
@@ -221,7 +221,7 @@ const Loja = (props: Props) => {
                       genders={genders}
                       onChange={handleGenderChange}
                     />
-                  </div>
+                  </div>*/}
                 </div>
               </>
             )}
