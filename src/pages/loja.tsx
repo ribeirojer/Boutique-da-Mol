@@ -118,7 +118,7 @@ const Loja = (props: Props) => {
         </div>
         <div className="w-full lg:w-3/4">
           <div className="flex w-full md:hidden items-center justify-between gap-4 mb-4">
-            <form action="" className="relative flex">
+            <form action="" className="relative flex w-4/5">
               <Input
                 id="search"
                 type="text"

@@ -6,13 +6,15 @@ import Stars from "@/components/Stars";
 import ItemDescription from "@/components/ItemDescription";
 import { productsData } from "@/utils/cardsData";
 import Image from "next/image";
+import { UserContext } from "@/pages/_app";
 import { limitarDescricao, formatCurrency, traduzirCor, primeiraLetraMaiuscula } from "@/utils"
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 type Props = {};
 
 const Item = (props: Props) => {
+  const { addToCart, cartItems } = useContext(UserContext);
   const router = useRouter();
   const index = parseInt(router.query.index as string);
   const itemToShow = productsData[index - 1];
@@ -21,6 +23,7 @@ const Item = (props: Props) => {
   const [quantity, setQuantity] = useState(1);
   const shareUrl = `${router.pathname}/produto?produtoId=${itemToShow}`;
   const limiteDescricao = 150; // Limite de caracteres para a descrição
+  const isProductInCart = cartItems.some((item)=>item.id===itemToShow.id);
 
   return (
     <>
@@ -106,8 +109,6 @@ const Item = (props: Props) => {
     ))}
   </form>
 </div>
-
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 pt-2">
               <div className="flex items-center mr-3 gap-2">
                 <Button onClick={()=>setQuantity(quantity-1)} disabled={!quantity}>-</Button>
@@ -118,10 +119,25 @@ const Item = (props: Props) => {
                 />
                 <Button onClick={()=>setQuantity(quantity+1)}>+</Button>
               </div>
-              <Button><div className="flex gap-2 justify-center">
+              {!isProductInCart && (
+ <Button onClick={() =>
+            addToCart({
+              id: itemToShow.id,
+              quantity,
+            })
+          }><div className="flex gap-2 justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-white"><circle cx="10.5" cy="19.5" r="1.5"></circle><circle cx="17.5" cy="19.5" r="1.5"></circle><path d="M13 13h2v-2.99h2.99v-2H15V5.03h-2v2.98h-2.99v2H13V13z"></path><path d="M10 17h8a1 1 0 0 0 .93-.64L21.76 9h-2.14l-2.31 6h-6.64L6.18 4.23A2 2 0 0 0 4.33 3H2v2h2.33l4.75 11.38A1 1 0 0 0 10 17z"></path></svg>
 <span>Adicionar ao carrinho</span></div>
-              </Button>
+              </Button>)}
+              {isProductInCart && (
+ <Button onClick={() =>
+            router.push("/confirmacao")}
+          ><div className="flex gap-2 justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-white"><circle cx="10.5" cy="19.5" r="1.5"></circle><circle cx="17.5" cy="19.5" r="1.5"></circle><path d="M13 13h2v-2.99h2.99v-2H15V5.03h-2v2.98h-2.99v2H13V13z"></path><path d="M10 17h8a1 1 0 0 0 .93-.64L21.76 9h-2.14l-2.31 6h-6.64L6.18 4.23A2 2 0 0 0 4.33 3H2v2h2.33l4.75 11.38A1 1 0 0 0 10 17z"></path></svg>
+<span>Finalizar compra</span></div>
+              </Button>)}
+
+
             </div>
             <div className="flex items-center pt-2">
               <p className="font-semibold m-2">
@@ -172,7 +188,6 @@ const Item = (props: Props) => {
           <CardProduct key={product.id} item={product} />
         ))}
       </div>
-{JSON.stringify(itemToShow)}
       <Footer></Footer>
     </>
   );

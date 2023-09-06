@@ -19,8 +19,9 @@ export default function Home() {
         <Featured></Featured>
         <Categories></Categories>
         <Offer></Offer>
-        <Products></Products>
+        <Products start={0} title={"Produtos recentes"}></Products>
         <Subscribe></Subscribe>
+        <Products start={4} title={"Produtos da moda"}></Products>
         {/* <Products2></Products2> */}
         {/*<Vendor></Vendor>*/}
         <BackToTop></BackToTop>

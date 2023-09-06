@@ -12,7 +12,7 @@ const PriceFilter = ({ minPrice, maxPrice, onChange }: Props) => {
   const [maxValue, setMaxValue] = useState(maxPrice);
 
   return (
-    <section className="flex md:flex-col gap-4 pr-4">
+    <section className="flex flex-wrap flex-col gap-4 pr-4">
       <div className="flex items-center space-x-4">
         <input
           type="number"
