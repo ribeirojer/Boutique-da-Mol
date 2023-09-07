@@ -23,7 +23,7 @@ const Item = (props: Props) => {
   const [quantity, setQuantity] = useState(1);
   const shareUrl = `${router.pathname}/produto?produtoId=${itemToShow}`;
   const limiteDescricao = 150; // Limite de caracteres para a descrição
-  const isProductInCart = cartItems.some((item)=>item.id===itemToShow.id);
+  const isProductInCart = cartItems.some((item:number)=>item.id===itemToShow.id);
 
   return (
     <>
