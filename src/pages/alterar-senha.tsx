@@ -5,7 +5,6 @@ import Input from "@/components/Input";
 import Loading from "@/components/Loading";
 import { AuthService } from "../services/AuthService";
 import { passwordRegex } from "../utils";
-import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useRouter } from "next/router";
 
@@ -42,7 +41,7 @@ const AlterarSenha = (props: Props) => {
       passwordStrong: "",
       confirmPassword: "",
       general: "",
-  }));
+    }));
 
     if (!password) {
       setErrors((prev) => ({
@@ -53,7 +52,10 @@ const AlterarSenha = (props: Props) => {
       return;
     }
     if (!passwordRegex.test(password)) {
-      setErrors((prev) => ({ ...prev, passwordStrong: "Por favor digite uma senha forte..." }));
+      setErrors((prev) => ({
+        ...prev,
+        passwordStrong: "Por favor digite uma senha forte...",
+      }));
       passwordRef.current?.focus();
       return;
     }
@@ -77,7 +79,10 @@ const AlterarSenha = (props: Props) => {
     setLoading(true);
 
     try {
-      const response = await AuthService.changePassword(password, token as string);
+      const response = await AuthService.changePassword(
+        password,
+        token as string
+      );
 
       if (response.status === 200) {
         setSuccess(true);
@@ -109,7 +114,10 @@ const AlterarSenha = (props: Props) => {
         <p className="text-center text-gray-600 mb-6">
           Digite sua nova senha abaixo.
         </p>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-2 max-w-md mx-auto">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-2 max-w-md mx-auto"
+        >
           <Input
             placeholder="Sua senha"
             type="password"
@@ -136,16 +144,22 @@ const AlterarSenha = (props: Props) => {
           <p className="text-center text-red-500 mt-2">{errors.password}</p>
         )}
         {errors.passwordStrong && (
-          <p className="text-center text-red-500 mt-2">{errors.passwordStrong}</p>
+          <p className="text-center text-red-500 mt-2">
+            {errors.passwordStrong}
+          </p>
         )}
         {errors.confirmPassword && (
-          <p className="text-center text-red-500 mt-2">{errors.confirmPassword}</p>
+          <p className="text-center text-red-500 mt-2">
+            {errors.confirmPassword}
+          </p>
         )}
         {errors.general && (
           <p className="text-center text-red-500 mt-2">{errors.general}</p>
         )}
         {success && (
-          <p className="text-center text-green-500 mt-2">Senha alterada com sucesso!</p>
+          <p className="text-center text-green-500 mt-2">
+            Senha alterada com sucesso!
+          </p>
         )}
       </main>
       {loading && <Loading />}

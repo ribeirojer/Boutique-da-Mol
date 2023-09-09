@@ -14,8 +14,7 @@ import Loading from "@/components/Loading";
 type Props = {};
 
 const Entrar = (props: Props) => {
-  const { user, saveUserToContext } =
-    useContext(UserContext);
+  const { user, saveUserToContext } = useContext(UserContext);
   const [loginInfo, setLoginInfo] = useState({
     password: "",
     email: "",

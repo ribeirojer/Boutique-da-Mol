@@ -25,7 +25,7 @@ const Administrador = (props: Props) => {
           <div>
             <h2>Gerenciar Produtos</h2>
             <div>
-              <Button >Cadastrar</Button>
+              <Button>Cadastrar</Button>
               <Button>Ver</Button>
               <Button>Editar</Button>
               <Button>Excluir</Button>

@@ -8,11 +8,13 @@ type Props = {
 };
 
 const CardProduct = ({ item }: Props) => {
-  const { addToCart } = useContext(UserContext);
+  const { cartItems, addToCart } = useContext(UserContext);
 
   return (
     <div className="border border-pink-200 rounded-lg overflow-hidden shadow-lg mb-4 p-4">
-      <img className="w-100" src={item.image} alt={item.name} />
+      <Link href={`/item/${item.id}`}>
+        <img className="w-100" src={item.image} alt={item.name} />
+      </Link>
       <div className="text-center py-4">
         <h6 className="text-truncate mb-3">{item.name}</h6>
         <div className="flex justify-center">
@@ -54,6 +56,7 @@ const CardProduct = ({ item }: Props) => {
             Ver mais
           </span>
         </Link>
+        {cartItems ? "" : ""}
         <button
           onClick={() =>
             addToCart({

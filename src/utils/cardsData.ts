@@ -12,10 +12,14 @@ export const productsData: any[] = [
     category: "Tops",
     gender: "F",
     inStock: true,
-    description: "Descubra o conforto e a elegância em um vestido de algodão feito sob medida para seu dia a dia. Este vestido branco é perfeito para qualquer ocasião, seja um encontro casual ou um passeio no parque. Seu design versátil combina com seu estilo único e oferece a comodidade que você merece. Feito com materiais de alta qualidade, incluindo algodão macio, garantindo durabilidade e conforto. Cuide dele lavando à máquina em água fria e secando em temperatura baixa. Não perca a oportunidade de adicionar esta peça essencial ao seu guarda-roupa. Seja você mesma, com ABC Vestuário.",
+    description:
+      "Descubra o conforto e a elegância em um vestido de algodão feito sob medida para seu dia a dia. Este vestido branco é perfeito para qualquer ocasião, seja um encontro casual ou um passeio no parque. Seu design versátil combina com seu estilo único e oferece a comodidade que você merece. Feito com materiais de alta qualidade, incluindo algodão macio, garantindo durabilidade e conforto. Cuide dele lavando à máquina em água fria e secando em temperatura baixa. Não perca a oportunidade de adicionar esta peça essencial ao seu guarda-roupa. Seja você mesma, com ABC Vestuário.",
     image: "/img/product-1.jpg",
     materials: ["Algodão"],
-    careInstructions: ["Lavar à máquina em água fria", "Secar em temperatura baixa"],
+    careInstructions: [
+      "Lavar à máquina em água fria",
+      "Secar em temperatura baixa",
+    ],
     reviews: [
       {
         id: 1,

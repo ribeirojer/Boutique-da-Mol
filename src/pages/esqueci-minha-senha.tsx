@@ -61,7 +61,8 @@ const EsqueciMinhaSenha = (props: Props) => {
       } else {
         setErrors((prev) => ({
           ...prev,
-          general: "Ocorreu um erro ao enviar o email. Tente novamente mais tarde.",
+          general:
+            "Ocorreu um erro ao enviar o email. Tente novamente mais tarde.",
         }));
       }
     } catch (error) {
@@ -85,7 +86,10 @@ const EsqueciMinhaSenha = (props: Props) => {
         <p className="text-center text-gray-600 mb-6">
           Insira seu email abaixo para receber um link de redefinição de senha.
         </p>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-2 max-w-md mx-auto">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-2 max-w-md mx-auto"
+        >
           <Input
             placeholder="Seu e-mail"
             type="text"
@@ -105,7 +109,9 @@ const EsqueciMinhaSenha = (props: Props) => {
           <p className="text-center text-red-500 mt-2">{errors.general}</p>
         )}
         {success && (
-          <p className="text-center text-green-500 mt-2">Verifique sua caixa de entrada!</p>
+          <p className="text-center text-green-500 mt-2">
+            Verifique sua caixa de entrada!
+          </p>
         )}
       </main>
       {loading && <Loading />}

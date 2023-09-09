@@ -1,10 +1,29 @@
-import axios from "axios";
-// import { any } from "../interfaces/Product";
-// import { any } from "../interfaces/User";
+import axios, { AxiosRequestConfig } from "axios";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+interface OrderResponse {
+  link: string;
+  order: any;
+}
 
 export class CheckoutService {
+  private static BASE_URL = process.env.API_URL || "http://localhost:3001";
+
+  private static getAccessToken(): string | null {
+    return localStorage.getItem("accessToken");
+  }
+
+  private static getRequestConfig(): AxiosRequestConfig {
+    const accessToken = this.getAccessToken();
+    if (!accessToken) {
+      throw new Error("Token not found");
+    }
+    return {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+  }
+
   static async placeOrder(
     paymentInfo: any,
     shippingInfo: any,
@@ -14,11 +33,10 @@ export class CheckoutService {
     confirmPassword: string,
     paymentMethod: string,
     cartItems: any[]
-  ): Promise<{ link: string; order: any }> {
-    const accessToken = localStorage.getItem("accessToken") || null;
+  ): Promise<OrderResponse> {
     try {
-      const response = await axios.post<{ link: string; order: any }>(
-        BASE_URL + "/api/orders",
+      const response = await axios.post<OrderResponse>(
+        `${this.BASE_URL}/api/orders`,
         {
           paymentInfo,
           shippingInfo,
@@ -29,62 +47,49 @@ export class CheckoutService {
           paymentMethod,
           cartItems,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+        this.getRequestConfig()
       );
       return response.data;
     } catch (error) {
-      console.error(error);
-      return { link: "" + error, order: null };
+      console.error("Error placing order:", error);
+      throw new Error("Failed to place order");
     }
   }
 
   static async getOrderById(id: string): Promise<any> {
-    const accessToken = localStorage.getItem("accessToken");
-
-    if (!accessToken) {
-      throw new Error("Token not found");
+    try {
+      const response = await axios.get<any>(
+        `${this.BASE_URL}/api/orders/${id}`,
+        this.getRequestConfig()
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error getting order by ID:", error);
+      throw new Error("Failed to get order by ID");
     }
-
-    const response = await axios.get<any>(
-      `http://localhost:3000/api/orders/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-
-    return response.data;
   }
 
   static async getOrders(): Promise<any[]> {
-    const accessToken = localStorage.getItem("accessToken");
-
-    if (!accessToken) {
-      throw new Error("Token not found");
+    try {
+      const response = await axios.get<any[]>(
+        `${this.BASE_URL}/api/orders`,
+        this.getRequestConfig()
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error getting orders:", error);
+      throw new Error("Failed to get orders");
     }
-
-    const response = await axios.get<any[]>(BASE_URL + "/api/orders", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    return response.data;
   }
 
   static async trackOrder(orderId: string): Promise<string> {
     try {
       const response = await axios.get<string>(
-        `http://localhost:3000/api/orders/${orderId}/status`
+        `${this.BASE_URL}/api/orders/${orderId}/status`
       );
       return response.data;
     } catch (error) {
-      console.error(error);
+      console.error("Error tracking order:", error);
       throw new Error("Failed to track order");
     }
   }
@@ -92,11 +97,11 @@ export class CheckoutService {
   static async cancelOrder(orderId: string): Promise<boolean> {
     try {
       const response = await axios.delete<boolean>(
-        `http://localhost:3000/api/orders/${orderId}`
+        `${this.BASE_URL}/api/orders/${orderId}`
       );
       return response.data;
     } catch (error) {
-      console.error(error);
+      console.error("Error canceling order:", error);
       throw new Error("Failed to cancel order");
     }
   }
