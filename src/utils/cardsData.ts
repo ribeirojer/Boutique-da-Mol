@@ -14,7 +14,7 @@ export const productsData: any[] = [
     inStock: true,
     description:
       "Descubra o conforto e a elegância em um vestido de algodão feito sob medida para seu dia a dia. Este vestido branco é perfeito para qualquer ocasião, seja um encontro casual ou um passeio no parque. Seu design versátil combina com seu estilo único e oferece a comodidade que você merece. Feito com materiais de alta qualidade, incluindo algodão macio, garantindo durabilidade e conforto. Cuide dele lavando à máquina em água fria e secando em temperatura baixa. Não perca a oportunidade de adicionar esta peça essencial ao seu guarda-roupa. Seja você mesma, com ABC Vestuário.",
-    image: "/img/product-1.jpg",
+    image: "/images/product-01.jpg",
     materials: ["Algodão"],
     careInstructions: [
       "Lavar à máquina em água fria",
@@ -46,7 +46,7 @@ export const productsData: any[] = [
     brand: "XYZ Denim",
     price: 49.99,
     oldPrice: 123.0,
-    image: "/img/product-2.jpg",
+    image: "/images/product-02.jpg",
     sizes: ["28", "30", "32", "34"],
     color: ["blue"],
     category: "Bottoms",
@@ -81,7 +81,7 @@ export const productsData: any[] = [
     brand: "DEF Footwear",
     price: 39.99,
     oldPrice: 123.0,
-    image: "/img/product-3.jpg",
+    image: "/images/product-03.jpg",
     sizes: ["US 6", "US 7", "US 8", "US 9"],
     color: ["white"],
     category: "Shoes",
