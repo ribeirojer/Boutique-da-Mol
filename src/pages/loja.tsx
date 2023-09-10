@@ -94,7 +94,7 @@ const Loja = (props: Props) => {
 
   useEffect(() => {
     setProducts(
-      productsData.filter((product) => {
+      productsData.filter((product:any) => {
         if (product.name.toLowerCase().includes(searchQuery.toLowerCase())) {
           return product;
         }

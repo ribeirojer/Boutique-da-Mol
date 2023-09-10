@@ -66,7 +66,7 @@ const Item = (props: Props) => {
             <div className="flex flex-col mb-4">
               <p className="font-semibold mb-4">Tamanhos:</p>
               <form className="flex gap-4">
-                {itemToShow?.sizes.map(
+                {itemToShow?.sizes?.map(
                   (size: string, index: React.Key | null | undefined) => (
                     <div key={index} className="">
                       <input

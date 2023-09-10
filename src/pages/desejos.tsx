@@ -12,9 +12,9 @@ type Props = {};
 
 const desejos = (props: Props) => {
   const { cartItems, wishlist, addToCart, removeFromWishlist } = useContext(UserContext);
-  const selected = wishlist.map((objeto) => objeto.id);
+  const selected = wishlist.map((objeto: any) => objeto.id);
 
-  const wishListItems = productsData.filter((product)=>
+  const wishListItems = productsData.filter((product: any)=>
     selected.includes(product.id))
 
   return (
@@ -34,7 +34,7 @@ const desejos = (props: Props) => {
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-full object-cover mb-4 rounded-t-lg"
+                      className="w-full object-cover rounded-t-lg"
                     />
 					<div className="p-4 flex flex-col">
                     <h2 className="text-xl text-center font-semibold">{item.name}</h2>
