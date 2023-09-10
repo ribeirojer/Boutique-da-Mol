@@ -6,7 +6,7 @@ import axios from "axios";
 //   any,
 // } from "@/interfaces/User"
 
-const BASE_URL = process.env.API_URL;
+const BASE_URL = process.env.BACKEND_URL;
 console.log(BASE_URL)
 
 export class AuthService {

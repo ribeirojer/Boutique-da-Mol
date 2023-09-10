@@ -6,7 +6,7 @@ interface OrderResponse {
 }
 
 export class CheckoutService {
-  private static BASE_URL = process.env.API_URL;
+  private static BASE_URL = process.env.BACKEND_URL;
 
   private static getAccessToken(): string | null {
     return localStorage.getItem("accessToken");

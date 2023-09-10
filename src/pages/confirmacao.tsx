@@ -587,13 +587,14 @@ async function handleSubmitCep(event: any) {
               {cartItems.map((product: any) => (
                 <div className="flex justify-between">
                   <p>{productsData[product.id - 1].name}</p>
+				  <div className="flex gap-2">
                   <p>{product.quantity}</p>
                   <p>{formatCurrency(productsData[product.id - 1].price)}</p>
-                  <p>
+                  <p className="font-semibold">
                     {formatCurrency(
                       product.quantity * productsData[product.id - 1].price
                     )}
-                  </p>
+                  </p></div>
                 </div>
               ))}
               <hr className="mt-0" />
@@ -681,9 +682,9 @@ async function handleSubmitCep(event: any) {
             onSubmit={(e: any) => handleSubmit(e)}
             className="my-4 flex w-full"
           >
-            <Button type="submit" className="w-full">
+            <button type="submit" className="w-full bg-green-500 mt-4 flex justify-center hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
               Finalizar Pedido
-            </Button>
+            </button>
           </form>
         </div>
       </main>
