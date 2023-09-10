@@ -105,4 +105,23 @@ export class CheckoutService {
       throw new Error("Failed to cancel order");
     }
   }
+
+  static async applyCoupon(couponCode: string): Promise<{ success: boolean; data?: any; error?: string }> {
+    try {
+      const response = await axios.post(
+        `${this.BASE_URL}/cupom`,
+        { code: couponCode },
+        this.getRequestConfig()
+      );
+
+      if (response.status === 200) {
+        return { success: true, data: response.data };
+      } else {
+        return { success: false, error: response.data.error };
+      }
+    } catch (error) {
+      console.error("Error applying coupon:", error);
+      return { success: false, error: "Failed to apply coupon" };
+    }
+  }
 }

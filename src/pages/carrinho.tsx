@@ -7,7 +7,7 @@ import { formatCurrency } from "@/utils";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import Link from "next/link";
-import axios from "axios";
+import { CheckoutService } from "@/services/CheckoutService";
 import Loading from "@/components/Loading";
 import CartProductTable from "@/components/CartProductTable";
 
@@ -17,7 +17,7 @@ const Carrinho = (props: Props) => {
   const [cupomCode, setCupomCode] = useState("");
   const [cupomValue, setCupomValue] = useState(0);
   const cupomRef = useRef<HTMLInputElement | null>(null);
-  const [isApplying, setIsApplying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const { cartItems, addToCart, removeFromCart } = useContext(UserContext);
@@ -37,52 +37,46 @@ const Carrinho = (props: Props) => {
   };
 
   const shipping = sumCartItems() > 100;
+const handleSubmit = async (e: { preventDefault: () => void }) => {
+  e.preventDefault();
+  setErrorMessage("");
+  setSuccessMessage("");
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    setIsApplying(true);
-    setErrorMessage("");
-    setSuccessMessage("");
+  if (!validateCupomCode()) {
+    return;
+  }
 
-    if (cupomCode.length === 0) {
-      setErrorMessage("Informe o código do cupom.");
-      cupomRef.current?.focus();
-      setIsApplying(false);
-      return;
-    }
-    if (cupomCode.length > 10) {
-      setErrorMessage("O código do cupom deve ter até 10 caracteres.");
-      cupomRef.current?.focus();
-      setIsApplying(false);
-      return;
-    }
-    if (cupomCode.length < 10) {
-      setErrorMessage("O código do cupom deve ter 10 caracteres.");
-      cupomRef.current?.focus();
-      setIsApplying(false);
-      return;
-    }
+  setIsLoading(true);
 
-    try {
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_API_URL + "/cupom",
-        { code: cupomCode }
-      );
+  const couponResponse = await CheckoutService.applyCoupon(cupomCode);
 
-      if (response.status === 200) {
-        setSuccessMessage("Cupom aplicado!");
-        setCupomValue(response.data.discount);
-        closeSuccessMessage();
-      } else {
-        setErrorMessage(response.data.error);
-      }
-    } catch (error) {
-      setErrorMessage("Ocorreu um erro ao processar a requisição.");
-    }
+  if (couponResponse.success) {
+    // O cupom foi aplicado com sucesso
+    setSuccessMessage("Cupom aplicado!");
+    setCupomValue(couponResponse.data.discount);
+    closeSuccessMessage();
+  } else {
+    // Ocorreu um erro ao aplicar o cupom
+    setErrorMessage(couponResponse.error || "Ocorreu um erro ao processar a requisição.");
+  }
 
-    setIsApplying(false);
-    setCupomCode("");
-  };
+  setIsLoading(false);
+  setCupomCode("");
+};
+
+const validateCupomCode = () => {
+  if (cupomCode.length === 0) {
+    setErrorMessage("Informe o código do cupom.");
+    cupomRef.current?.focus();
+    return false;
+  }
+  if (cupomCode.length !== 10) {
+    setErrorMessage("O código do cupom deve ter 10 caracteres.");
+    cupomRef.current?.focus();
+    return false;
+  }
+  return true;
+};
 
   return (
     <>
@@ -104,8 +98,8 @@ const Carrinho = (props: Props) => {
                       id={"cupom"}
                     />
                   </div>
-                  <Button type="submit" disabled={isApplying}>
-                    {isApplying ? "Aplicando..." : "Aplicar Cupom"}
+                  <Button type="submit" disabled={isLoading}>
+                    {isLoading ? "Aplicando..." : "Aplicar Cupom"}
                   </Button>
                 </div>
                 {errorMessage && (
@@ -177,7 +171,7 @@ className="w-full bg-green-500 mt-4 flex justify-center hover:bg-green-600 text-
           </div>
         )}
       </main>
-      {isApplying && <Loading></Loading>}
+      {isLoading && <Loading></Loading>}
       <Footer></Footer>
     </>
   );
