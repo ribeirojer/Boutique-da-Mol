@@ -15,12 +15,11 @@ type Props = {};
 
 const Carrinho = (props: Props) => {
   const [cupomCode, setCupomCode] = useState("");
-  const [cupomValue, setCupomValue] = useState(0);
   const cupomRef = useRef<HTMLInputElement | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const { cartItems, addToCart, removeFromCart } = useContext(UserContext);
+  const { cartItems, addToCart, removeFromCart, cupomMain, setCupomMain } = useContext(UserContext);
 
   const sumCartItems = () => {
     let sum = 0;
@@ -53,7 +52,7 @@ const handleSubmit = async (e: { preventDefault: () => void }) => {
   if (couponResponse.success) {
     // O cupom foi aplicado com sucesso
     setSuccessMessage("Cupom aplicado!");
-    setCupomValue(couponResponse.data.discount);
+    setCupomMain(couponResponse.data.discount);
     closeSuccessMessage();
   } else {
     // Ocorreu um erro ao aplicar o cupom
@@ -130,11 +129,11 @@ const validateCupomCode = () => {
                       {shipping ? "Grátis" : formatCurrency(10)}
                     </h6>
                   </div>
-                  {cupomValue > 0 && (
+                  {cupomMain > 0 && (
                     <div className="flex justify-between">
                       <h6 className="font-semibold">Cupom</h6>
                       <h6 className="font-semibold">
-                        -{formatCurrency(cupomValue)}
+                        -{formatCurrency(cupomMain)}
                       </h6>
                     </div>
                   )}
@@ -144,8 +143,8 @@ const validateCupomCode = () => {
                     <h5 className="text-2xl text-pink-500 font-bold">Total</h5>
                     <h5 className="text-2xl text-pink-500 font-bold">
                       {shipping
-                        ? formatCurrency(sumCartItems() - cupomValue)
-                        : formatCurrency(sumCartItems() + 10 - cupomValue)}
+                        ? formatCurrency(sumCartItems() - cupomMain)
+                        : formatCurrency(sumCartItems() + 10 - cupomMain)}
                     </h5>
                   </div>
                 </div>

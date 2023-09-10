@@ -15,7 +15,7 @@ import axios from 'axios';
 type Props = {};
 
 const Confirmacao = (props: Props) => {
-  const { user, cartItems } = useContext(UserContext);
+  const { user, cartItems, cupomMain } = useContext(UserContext);
   const [paymentInfo, setPaymentInfo] = useState({
     firstName: "",
     lastName: "",
@@ -107,11 +107,9 @@ const Confirmacao = (props: Props) => {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [termsAgreed, setTermsAgreed] = useState(false);
 
-	console.log(user)
   useEffect(() => {
     if (user) {
-			console.log(user)
-
+      console.log(user)
       setPaymentInfo({
         firstName: user.firstName,
         lastName: user.lastName,
@@ -438,10 +436,7 @@ async function handleSubmitCep(event: any) {
       .then((response) => {
         setIsLoading(false);
         if (response.link) {
-          router.push("/sucesso", undefined, {
-            shallow: true,
-            locale: "pt-BR",
-          });
+          router.push("/sucesso");
         }
       })
       .catch((error) => {
@@ -577,8 +572,8 @@ async function handleSubmitCep(event: any) {
             ></textarea>
           </div>
         </div>
-        <div className="w-full md:w-1/3 border border-pink-300 rounded-lg p-4 shadow-sm shadow-pink-500 bg-pink-50">
-          <div className="mb-8">
+        <div className="w-full md:w-1/3">
+          <div className="flex flex-col justify-start  border border-pink-300 rounded-lg p-4 shadow-sm shadow-pink-500 bg-pink-50"><div className="mb-8">
             <h2 className="font-semibold text-2xl text-center mb-2">
               Seu Pedido
             </h2>
@@ -604,6 +599,12 @@ async function handleSubmitCep(event: any) {
                   {formatCurrency(sumCartItems())}
                 </h6>
               </div>
+              {!!cupomMain && (<div className="flex justify-between">
+                <h6 className="font-semibold">Cupom</h6>
+                <h6 className="font-semibold">
+                  {formatCurrency(cupomMain)}
+                </h6>
+              </div>)}
               <div className="flex justify-between">
                 <h6 className="font-semibold">Envio</h6>
                 <h6 className="font-semibold">
@@ -680,12 +681,13 @@ async function handleSubmitCep(event: any) {
           </div>
           <form
             onSubmit={(e: any) => handleSubmit(e)}
-            className="my-4 flex w-full"
+            className="mt-4 flex w-full"
           >
             <button type="submit" className="w-full bg-green-500 mt-4 flex justify-center hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
               Finalizar Pedido
             </button>
           </form>
+		  </div>
         </div>
       </main>
       {isLoading && <Loading></Loading>}

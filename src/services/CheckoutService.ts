@@ -6,7 +6,7 @@ interface OrderResponse {
 }
 
 export class CheckoutService {
-  private static BASE_URL = process.env.BACKEND_URL;
+  private static BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
   private static getAccessToken(): string | null {
     return localStorage.getItem("accessToken");
@@ -36,7 +36,7 @@ export class CheckoutService {
   ): Promise<OrderResponse> {
     try {
       const response = await axios.post<OrderResponse>(
-        `${this.BASE_URL}/api/orders`,
+        `${this.BASE_URL}/orders`,
         {
           paymentInfo,
           shippingInfo,
@@ -59,7 +59,7 @@ export class CheckoutService {
   static async getOrderById(id: string): Promise<any> {
     try {
       const response = await axios.get<any>(
-        `${this.BASE_URL}/api/orders/${id}`,
+        `${this.BASE_URL}/orders/${id}`,
         this.getRequestConfig()
       );
       return response.data;
@@ -72,7 +72,7 @@ export class CheckoutService {
   static async getOrders(): Promise<any[]> {
     try {
       const response = await axios.get<any[]>(
-        `${this.BASE_URL}/api/orders`,
+        `${this.BASE_URL}/orders`,
         this.getRequestConfig()
       );
       return response.data;
@@ -85,7 +85,7 @@ export class CheckoutService {
   static async trackOrder(orderId: string): Promise<string> {
     try {
       const response = await axios.get<string>(
-        `${this.BASE_URL}/api/orders/${orderId}/status`
+        `${this.BASE_URL}/orders/${orderId}/status`
       );
       return response.data;
     } catch (error) {
@@ -97,7 +97,7 @@ export class CheckoutService {
   static async cancelOrder(orderId: string): Promise<boolean> {
     try {
       const response = await axios.delete<boolean>(
-        `${this.BASE_URL}/api/orders/${orderId}`
+        `${this.BASE_URL}/orders/${orderId}`
       );
       return response.data;
     } catch (error) {
