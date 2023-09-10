@@ -41,7 +41,7 @@ const desejos = (props: Props) => {
                     <p className="text-lg text-gray-500 text-center mb-4">{formatCurrency(item.price)}</p>
                     <Button
                       onClick={() => {
-                        addToCart(item); // Adicione o item ao carrinho
+                        addToCart({id: item.id, quantity: 1}); // Adicione o item ao carrinho
                         removeFromWishlist({id: item.id}); // Remova da lista de desejos
                       }}
                     ><div className="flex justify-center gap-2">

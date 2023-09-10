@@ -106,13 +106,16 @@ const Confirmacao = (props: Props) => {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [termsAgreed, setTermsAgreed] = useState(false);
 
+	console.log(user)
   useEffect(() => {
     if (user) {
+			console.log(user)
+
       setPaymentInfo({
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        zipCode: user.zipCode,
+        zipCode: user.zipCode ,
         logradouro: user.logradouro,
         numberAddress: user.numberAddress,
         complemento: user.complemento,

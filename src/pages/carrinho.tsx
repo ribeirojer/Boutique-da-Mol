@@ -3,14 +3,13 @@ import Header from "@/components/Header";
 import React, { useContext, useRef, useState } from "react";
 import { UserContext } from "./_app";
 import { productsData } from "@/utils/cardsData";
-import Image from "next/image";
 import { formatCurrency } from "@/utils";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import Link from "next/link";
 import axios from "axios";
 import Loading from "@/components/Loading";
-import { TrashIcon } from "@/components/Icons"
+import CartProductTable from "@/components/CartProductTable";
 
 type Props = {};
 
@@ -91,84 +90,7 @@ const Carrinho = (props: Props) => {
       <main className="container mx-auto flex gap-8 px-4 md:px-0 flex-col md:flex-row mt-8">
         {cartItems.length > 0 ? (
           <>
-            <div className="w-full md:w-2/3 mb-5">
-              <table className="text-sm md:text-base table-fixed w-full bg-white border border-gray-200 rounded-lg">
-                <thead className="bg-secondary text-dark">
-                  <tr>
-                    <th className="w-1/4 md:w-1/5 py-2 px-4">Produto</th>
-                    <th className="w-1/4 md:w-1/5 py-2 px-4">Preço</th>
-                    <th className="w-1/4 md:w-1/5 py-2 px-4">Quantidade</th>
-                    <th className="hidden md:block w-1/5 py-2 px-4">Total</th>
-                    <th className="w-1/4 md:w-1/5 py-2 px-4">Excluir</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cartItems.map((item: any) => {
-                    return (
-                      <tr key={item.id} className="border-b border-gray-200">
-                        <td className="w-1/5 py-2 px-4 flex items-center">
-                          <Image
-                            src={productsData[item.id - 1].image}
-                            alt="imagem do produto"
-                            width={100}
-                            height={100}
-                            className="mr-2"
-                          />
-                          <span>{productsData[item.id - 1].name}</span>
-                        </td>
-                        <td className="w-1/5 py-2 px-4 text-center">
-                          {formatCurrency(productsData[item.id - 1].price)}
-                        </td>
-                        <td className="w-1/5 py-2 px-4 flex">
-                          <div className="hidden md:block">
-                            <Button
-                              disabled={item.quantity === 0}
-                              onClick={() =>
-                                addToCart({ id: item.id, quantity: -1 })
-                              }
-                            >
-                              -
-                            </Button>
-                          </div>
-                          <input
-                            className="w-12 text-center text-black bg-gray-200 rounded-md mx-2"
-                            id="quantity"
-                            type="number"
-                            value={item.quantity}
-                            disabled
-                          />
-                          <div className="hidden md:block">
-                            <Button
-                              onClick={() =>
-                                addToCart({ id: item.id, quantity: 1 })
-                              }
-                            >
-                              +
-                            </Button>
-                          </div>
-                        </td>
-                        <td className="hidden md:block w-1/5 py-2 px-4 text-center">
-                          {formatCurrency(
-                            productsData[item.id - 1].price * item.quantity
-                          )}
-                        </td>
-                        <td className="w-1/5 py-2 px-4">
-                          <Button
-                            onClick={() => removeFromCart(item.id)}
-                            disabled={isApplying}
-                            type="button"
-                            title="Excluir item do carrinho"
-                            aria-label="Excluir item do carrinho"
-                          >
-                            <TrashIcon className="fill-white"/>
-                          </Button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+            <CartProductTable />
             <div className="w-full md:w-1/3">
               <form onSubmit={handleSubmit} className="mb-5 w-full" action="">
                 <div className="flex flex-col md:flex-row justify-between gap-4 w-full">
@@ -232,13 +154,14 @@ const Carrinho = (props: Props) => {
                         : formatCurrency(sumCartItems() + 10 - cupomValue)}
                     </h5>
                   </div>
+                </div>
                   <Link
                     href={"/confirmacao"}
-                    className="flex justify-center my-4"
-                  >
-                    <Button>Prosseguir para o Checkout</Button>
+className="w-full bg-green-500 mt-4 flex justify-center hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out"
+
+>
+                    Fechar o Carrinho
                   </Link>
-                </div>
               </div>
             </div>
           </>
