@@ -10,6 +10,7 @@ import Button from "@/components/Button";
 import { useRouter } from "next/router";
 import { CheckoutService } from "@/services/CheckoutService";
 import Loading from "@/components/Loading";
+import axios from 'axios';
 
 type Props = {};
 
@@ -127,12 +128,16 @@ const Confirmacao = (props: Props) => {
     }
   }, []);
 
-  async function handleSubmitCep(event: any) {
-    event.preventDefault();
-    const response = await fetch(
+async function handleSubmitCep(event: any) {
+  event.preventDefault();
+  setIsLoading(true);
+
+  try {
+    const response = await axios.get(
       `https://brasilapi.com.br/api/cep/v1/${event.target.value}`
     );
-    const data = await response.json();
+
+    const data = response.data;
     setPaymentInfo({
       ...paymentInfo,
       zipCode: data.cep,
@@ -141,7 +146,15 @@ const Confirmacao = (props: Props) => {
       city: data.city,
       state: data.state,
     });
+  } catch (error) {
+    // Lidar com erros aqui, por exemplo, exibir uma mensagem de erro
+    console.error('Erro ao buscar CEP:', error);
+    // Você pode definir o estado de erro ou mostrar uma mensagem ao usuário
+  } finally {
+    setIsLoading(false);
   }
+}
+
 
   async function handleSubmit(event: any) {
     event.preventDefault();
