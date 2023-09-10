@@ -15,7 +15,7 @@ import axios from 'axios';
 type Props = {};
 
 const Confirmacao = (props: Props) => {
-  const { user, cartItems, cupomMain } = useContext(UserContext);
+  const { user, cartItems, cupomMain, setOrderLink } = useContext(UserContext);
   const [paymentInfo, setPaymentInfo] = useState({
     firstName: "",
     lastName: "",
@@ -144,6 +144,9 @@ async function handleSubmitCep(event: any) {
       city: data.city,
       state: data.state,
     });
+
+    paymentInfoRefNumberAddress.current?.focus();
+
   } catch (error) {
     // Lidar com erros aqui, por exemplo, exibir uma mensagem de erro
     console.error('Erro ao buscar CEP:', error);
@@ -250,14 +253,6 @@ async function handleSubmitCep(event: any) {
         numberAddress: true,
       }));
       paymentInfoRefNumberAddress.current?.focus();
-      return;
-    }
-    if (paymentInfo.complemento === "") {
-      setErrorPaymentInfo((prev) => ({
-        ...prev,
-        complemento: true,
-      }));
-      paymentInfoRefComplemento.current?.focus();
       return;
     }
     if (paymentInfo.bairro === "") {
@@ -422,8 +417,11 @@ async function handleSubmitCep(event: any) {
       paymentMethod,
       termsAgreed,
     };
-    setIsLoading(true);
-    CheckoutService.placeOrder(
+    
+  setIsLoading(true);
+
+  try {
+    const response = await CheckoutService.placeOrder(
       paymentInfo,
       shippingInfo,
       additionalInfo,
@@ -432,18 +430,20 @@ async function handleSubmitCep(event: any) {
       confirmPassword,
       paymentMethod,
       cartItems
-    )
-      .then((response) => {
-        setIsLoading(false);
-        if (response.link) {
-          router.push("/sucesso");
-        }
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        console.log(error);
-        alert("Erro ao finalizar pedido");
-      });
+    );
+
+    setIsLoading(false);
+
+    if (response.link) {
+	  setOrderLink(response.link)
+      router.push("/sucesso");
+    }
+  } catch (error) {
+    setIsLoading(false);
+    console.error(error);
+    alert("Erro ao finalizar pedido");
+  }
+
   }
 
   const sumCartItems = () => {

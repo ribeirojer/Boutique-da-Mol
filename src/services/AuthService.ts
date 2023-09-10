@@ -7,7 +7,6 @@ import axios from "axios";
 // } from "@/interfaces/User"
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-console.log(BASE_URL)
 
 export class AuthService {
   static async register(registration: any): Promise<any> {

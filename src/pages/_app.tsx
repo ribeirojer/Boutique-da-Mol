@@ -19,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const [wishlist, setWishlist] = useState<any[]>([]);
   const [compare, setCompare] = useState<any[]>([]);
   const [cupomMain, setCupomMain] = useState<number>(0);
+  const [orderLink, setOrderLink] = useState<string>("");
 
   useEffect(() => {
     const existingCart = localStorage.getItem("cart");
@@ -122,7 +123,9 @@ export default function App({ Component, pageProps }: AppProps) {
         addToCompare,
         removeFromCompare,
 		cupomMain,
-		setCupomMain
+		setCupomMain,
+		orderLink,
+		setOrderLink
       }}
     >
       <Component {...pageProps} />
