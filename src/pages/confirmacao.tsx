@@ -436,7 +436,7 @@ async function handleSubmitCep(event: any) {
 
     if (response.link) {
 	  setOrderLink(response.link)
-	  cartItems.forEach((item)=>{
+	  cartItems.forEach((item:any)=>{
 		  removeFromCart(item.id)
 	  })
       router.push("/sucesso");
