@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const SliderSectionMain = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
