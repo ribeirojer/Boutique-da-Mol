@@ -16,7 +16,7 @@ const BannerItemV2 = ({ imgSrc, title, info }: BannerItemProps) => {
         <div className="absolute top-0 translate-y-1/2 p-4">
             <h2 className="text-lg font-semibold mb-2">{title}</h2>
             <h3 className="text-[#ab6e78] font-semibold">{info}</h3>
-            <button className="mt-4 text-pink-500 border border-pink-500 hover:text-white hover:bg-pink-500 rounded-lg py-2 px-4 text-center transition-colors duration-300">
+            <button className="dontshowsmall mt-4 text-pink-500 border border-pink-500 hover:text-white hover:bg-pink-500 rounded-lg py-2 px-4 text-center transition-colors duration-300">
               Ver produtos
             </button>
         </div>

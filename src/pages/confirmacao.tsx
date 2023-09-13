@@ -15,7 +15,7 @@ import axios from 'axios';
 type Props = {};
 
 const Confirmacao = (props: Props) => {
-  const { user, cartItems, cupomMain, setOrderLink } = useContext(UserContext);
+  const { user, cartItems, removeFromCart, cupomMain, setOrderLink } = useContext(UserContext);
   const [paymentInfo, setPaymentInfo] = useState({
     firstName: "",
     lastName: "",
@@ -436,6 +436,9 @@ async function handleSubmitCep(event: any) {
 
     if (response.link) {
 	  setOrderLink(response.link)
+	  cartItems.forEach((item)=>{
+		  removeFromCart(item.id)
+	  })
       router.push("/sucesso");
     }
   } catch (error) {

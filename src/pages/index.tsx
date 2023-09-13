@@ -2,7 +2,7 @@ import BackToTop from "@/components/BackToTop";
 import Categories from "@/components/Categories";
 import Featured from "@/components/Featured";
 import Footer from "@/components/Footer";
-import Footer2 from "@/components/Footer2";
+import SliderSectionMain from "@/components/SliderSectionMain";
 import Header from "@/components/Header";
 import MainBanner from "@/components/MainBanner";
 import BannerItemV2 from "@/components/BannerItemV2";
@@ -31,8 +31,9 @@ const quickLinks = [
     <>
       <Header></Header>
       <main>
-        <MainBanner></MainBanner>
-  <section className="container flex mx-auto">
+	  {/*<MainBanner></MainBanner>*/}		
+	<SliderSectionMain />
+  <section className="container flex flex-col md:flex-row items-center justify-center md mx-auto">
       <BannerItemV2
         imgSrc="images/banner-01.jpg"
         title="Roupas Femininas"
@@ -55,13 +56,13 @@ const quickLinks = [
         <BackToTop></BackToTop>
       </main>
       <Footer></Footer>
-<Footer2
+	  {/*<Footer2
         logoSrc="/images/logo.png"
         description="Sed ut perspiciatis undmnis is iste natus error sit amet voluptatem totam rem aperiam."
         phoneNumber="+012 (345) 678 99"
         resourcesLinks={resourcesLinks}
         companyLinks={companyLinks}
         quickLinks={quickLinks}
-      />    </>
+      /> */}   </>
   );
 }
