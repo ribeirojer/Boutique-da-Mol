@@ -57,7 +57,7 @@ const SliderSectionMain = () => {
           }`}
         >
 		  <picture>
-		  <source media="(max-width: 600px)" srcset={slide.backgroundImageMobile} />
+		  <source media="(max-width: 600px)" srcSet={slide.backgroundImageMobile} />
           <img
             src={slide.backgroundImage}
             alt=""
