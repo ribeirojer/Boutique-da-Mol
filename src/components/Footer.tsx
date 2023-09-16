@@ -60,7 +60,6 @@ const Footer = (props: Props) => {
     AuthService.newsletter(formData)
       .then((response) => {
         setLoading(false);
-        console.log(response);
         setFormData({ name: "", email: "" });
         setError({ ...error, general: "" });
         setSuccess("Inscrição realizada com sucesso!");
@@ -68,7 +67,6 @@ const Footer = (props: Props) => {
       })
       .catch((error) => {
         setLoading(false);
-        console.log(error);
         setSuccess("");
         setError({
           ...error,
@@ -179,7 +177,7 @@ const Footer = (props: Props) => {
           <h5 className="text-center font-bold mb-4">Newsletter</h5>
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col w-full md:w-4/5 items-center md:items-end gap-4"
+            className="flex flex-col w-full md:w-4/5 md:items-end gap-4"
           >
             <div className="flex flex-col justify-center gap-4">
               <div className="flex flex-col">

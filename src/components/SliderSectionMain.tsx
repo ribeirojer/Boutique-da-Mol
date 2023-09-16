@@ -8,18 +8,21 @@ const SliderSectionMain = () => {
   const slides = [
     {
       backgroundImage: '/images/slide-01.jpg',
+      backgroundImageMobile: '/images/slide-01-mobile.jpg',
       title: "Coleção Feminina 2023",
       subtitle: "NOVA TEMPORADA",
       buttonLabel: "Ver produtos",
     },
     {
       backgroundImage: '/images/slide-02.jpg',
+      backgroundImageMobile: '/images/slide-02-mobile.jpg',
       title: "Nova temporada Masculina",
       subtitle: "Jaquetas e casacos",
       buttonLabel: "Ver produtos",
     },
     {
       backgroundImage: '/images/slide-03.jpg',
+      backgroundImageMobile: '/images/slide-03-mobile.jpg',
       title: "Coleção Masculina 2023",
       subtitle: "Pronta entrega",
       buttonLabel: "Ver produtos",
@@ -45,7 +48,7 @@ const SliderSectionMain = () => {
   }, []);
 
   return (
-    <section className="relative h-[40vh] md:h-[70vh] lg:h-[100vh] mx-auto overflow-hidden">
+    <section className="relative h-[90vh] md:h-[70vh] lg:h-[100vh] mx-auto overflow-hidden">
       {slides.map((slide, index) => (
         <div
           key={index}
@@ -53,21 +56,22 @@ const SliderSectionMain = () => {
             currentSlide === index ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
         >
-          <Image
+		  <picture>
+		  <source media="(max-width: 600px)" srcset={slide.backgroundImageMobile} />
+          <img
             src={slide.backgroundImage}
             alt=""
-            height={900}
-            width={900}
             className="w-full"
           />
-          <div className="absolute inset-0 bg-black opacity-70"></div>
+		</picture>
+          <div className="absolute inset-0 bg-black opacity-30"></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-white text-center px-4 sm:px-8 md:px-16">
-              <span className="text-2xl sm:text-3xl md:text-4xl block">{slide.title}</span>
-              <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4">{slide.subtitle}</h2>
+              <span className="text-2xl sm:text-3xl md:text-4xl block mb-2">{slide.title}</span>
+              <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-6">{slide.subtitle}</h2>
               <Link
                 href="/loja"
-                className="btn-primary text-2xl sm:text-3xl md:text-4xl py-2 px-6 rounded-full hover:bg-white hover:text-black transition duration-300"
+                className="text-xl sm:text-2xl md:text-3xl py-3 px-6 rounded-lg border hover:bg-white hover:text-black transition duration-300"
               >
                 {slide.buttonLabel}
               </Link>

@@ -56,7 +56,6 @@ const Subscribe = (props: Props) => {
     AuthService.newsletter(formData)
       .then((response) => {
         setLoading(false);
-        console.log(response);
         setFormData({ name: "", email: "" });
         setError({ ...error, general: "" });
         setSuccess("Inscrição realizada com sucesso!");
@@ -64,7 +63,6 @@ const Subscribe = (props: Props) => {
       })
       .catch((error) => {
         setLoading(false);
-        console.log(error);
         setSuccess("");
         setError({
           ...error,
@@ -74,8 +72,8 @@ const Subscribe = (props: Props) => {
   };
 
   return (
-    <section className="bg-gray-100 my-8 py-8">
-      <div className="container mx-auto px-4 flex flex-col items-center justify-center gap-4">
+    <section className="bg-gray-100 my-8 py-12">
+      <div className="container mx-auto px-4 flex flex-col gap-4">
         <h2 className="text-center font-semibold text-2xl">
           Inscreva-se na NEWSLETTER
         </h2>

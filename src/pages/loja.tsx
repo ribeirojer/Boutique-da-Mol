@@ -102,7 +102,7 @@ const Loja = (props: Props) => {
     );
   }, [searchQuery]);
 
-  const { category } = router.query;
+  const { category, search } = router.query;
 
   return (
     <>
@@ -173,7 +173,7 @@ const Loja = (props: Props) => {
                 ></div>
                 <div className="text-sm w-11/12 fixed top-4 flex flex-col gap-5 justify-center z-50 bg-white rounded-lg p-4">
                   <span
-                    className="absolute top-4 right-4"
+                    className="absolute top-4 right-4 cursor-pointer"
                     onClick={() => setIsModalOpen(false)}
                   >
                     <svg
@@ -226,16 +226,19 @@ const Loja = (props: Props) => {
               </>
             )}
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {currentProducts.map((item) => (
-              <CardProduct key={item.id} item={item} />
-            ))}
-          </div>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handleChangePage}
-          ></Pagination>
+		  <section>
+			{search && <p className="mb-4">Você pesquisou por: {search}</p>}
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+				{currentProducts.map((item) => (
+				  <CardProduct key={item.id} item={item} />
+				))}
+			  </div>
+			  <Pagination
+				currentPage={currentPage}
+				totalPages={totalPages}
+				onPageChange={handleChangePage}
+			  ></Pagination>
+		  </section>
         </div>
       </main>
       <Footer></Footer>
