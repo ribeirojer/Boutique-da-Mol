@@ -44,7 +44,7 @@ const Item = (props: Props) => {
                 alt="Image1"
                 width={500}
                 height={500}
-				className="border border-pink-200 rounded-lg"
+                className="border border-pink-200 rounded-lg"
               />
             )}
           </div>

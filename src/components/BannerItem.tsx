@@ -14,7 +14,9 @@ const BannerItem = ({ title, imageUrl }: BannerItemProps) => {
     <Link href="/loja" aria-label="Ver produtos">
       <div className="banner-item-wrapper relative bg-white">
         <div className="banner-item-content absolute bottom-0 left-0 p-4 flex flex-col items-center justify-center w-full h-full gap-2">
-          <h4 className="text-base md:text-2xl font-bold text-pink-200">{title}</h4>
+          <h4 className="text-base md:text-2xl font-bold text-pink-200">
+            {title}
+          </h4>
           <button
             onClick={() => {
               router.push("/loja");

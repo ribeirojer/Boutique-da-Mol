@@ -7,22 +7,22 @@ const SliderSectionMain = () => {
 
   const slides = [
     {
-      backgroundImage: '/images/slide-01.jpg',
-      backgroundImageMobile: '/images/slide-01-mobile.jpg',
+      backgroundImage: "/images/slide-01.jpg",
+      backgroundImageMobile: "/images/slide-01-mobile.jpg",
       title: "Coleção Feminina 2023",
       subtitle: "NOVA TEMPORADA",
       buttonLabel: "Ver produtos",
     },
     {
-      backgroundImage: '/images/slide-02.jpg',
-      backgroundImageMobile: '/images/slide-02-mobile.jpg',
+      backgroundImage: "/images/slide-02.jpg",
+      backgroundImageMobile: "/images/slide-02-mobile.jpg",
       title: "Nova temporada Masculina",
       subtitle: "Jaquetas e casacos",
       buttonLabel: "Ver produtos",
     },
     {
-      backgroundImage: '/images/slide-03.jpg',
-      backgroundImageMobile: '/images/slide-03-mobile.jpg',
+      backgroundImage: "/images/slide-03.jpg",
+      backgroundImageMobile: "/images/slide-03-mobile.jpg",
       title: "Coleção Masculina 2023",
       subtitle: "Pronta entrega",
       buttonLabel: "Ver produtos",
@@ -53,22 +53,27 @@ const SliderSectionMain = () => {
         <div
           key={index}
           className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${
-            currentSlide === index ? "opacity-100" : "opacity-0 pointer-events-none"
+            currentSlide === index
+              ? "opacity-100"
+              : "opacity-0 pointer-events-none"
           }`}
         >
-		  <picture>
-		  <source media="(max-width: 600px)" srcSet={slide.backgroundImageMobile} />
-          <img
-            src={slide.backgroundImage}
-            alt=""
-            className="w-full"
-          />
-		</picture>
-		  <div className="md:block hidden absolute inset-0 bg-black opacity-30"></div>
+          <picture>
+            <source
+              media="(max-width: 600px)"
+              srcSet={slide.backgroundImageMobile}
+            />
+            <img src={slide.backgroundImage} alt="" className="w-full" />
+          </picture>
+          <div className="md:block hidden absolute inset-0 bg-black opacity-30"></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-white text-center px-4 sm:px-8 md:px-16">
-              <span className="text-2xl sm:text-3xl md:text-4xl block mb-2">{slide.title}</span>
-              <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-6">{slide.subtitle}</h2>
+              <span className="text-2xl sm:text-3xl md:text-4xl block mb-2">
+                {slide.title}
+              </span>
+              <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-6">
+                {slide.subtitle}
+              </h2>
               <Link
                 href="/loja"
                 className="text-xl sm:text-2xl md:text-3xl py-3 px-6 rounded-lg border hover:bg-white hover:text-black transition duration-300"

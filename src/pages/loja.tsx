@@ -94,7 +94,7 @@ const Loja = (props: Props) => {
 
   useEffect(() => {
     setProducts(
-      productsData.filter((product:any) => {
+      productsData.filter((product: any) => {
         if (product.name.toLowerCase().includes(searchQuery.toLowerCase())) {
           return product;
         }
@@ -226,19 +226,19 @@ const Loja = (props: Props) => {
               </>
             )}
           </div>
-		  <section>
-			{search && <p className="mb-4">Você pesquisou por: {search}</p>}
-				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-				{currentProducts.map((item) => (
-				  <CardProduct key={item.id} item={item} />
-				))}
-			  </div>
-			  <Pagination
-				currentPage={currentPage}
-				totalPages={totalPages}
-				onPageChange={handleChangePage}
-			  ></Pagination>
-		  </section>
+          <section>
+            {search && <p className="mb-4">Você pesquisou por: {search}</p>}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {currentProducts.map((item) => (
+                <CardProduct key={item.id} item={item} />
+              ))}
+            </div>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handleChangePage}
+            ></Pagination>
+          </section>
         </div>
       </main>
       <Footer></Footer>

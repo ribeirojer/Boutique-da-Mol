@@ -10,12 +10,20 @@ import Button from "@/components/Button";
 import { useRouter } from "next/router";
 import { CheckoutService } from "@/services/CheckoutService";
 import Loading from "@/components/Loading";
-import axios from 'axios';
+import axios from "axios";
 
 type Props = {};
 
 const Confirmacao = (props: Props) => {
-  const { user, cartItems, removeFromCart, cupomMain, setCupomMain, setOrderLink, setLinkMeli } = useContext(UserContext);
+  const {
+    user,
+    cartItems,
+    removeFromCart,
+    cupomMain,
+    setCupomMain,
+    setOrderLink,
+    setLinkMeli,
+  } = useContext(UserContext);
   const [paymentInfo, setPaymentInfo] = useState({
     firstName: "",
     lastName: "",
@@ -109,12 +117,12 @@ const Confirmacao = (props: Props) => {
 
   useEffect(() => {
     if (user) {
-      console.log(user)
+      console.log(user);
       setPaymentInfo({
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        zipCode: user.zipCode ,
+        zipCode: user.zipCode,
         logradouro: user.logradouro,
         numberAddress: user.numberAddress,
         complemento: user.complemento,
@@ -126,36 +134,34 @@ const Confirmacao = (props: Props) => {
     }
   }, []);
 
-async function handleSubmitCep(event: any) {
-  event.preventDefault();
-  setIsLoading(true);
+  async function handleSubmitCep(event: any) {
+    event.preventDefault();
+    setIsLoading(true);
 
-  try {
-    const response = await axios.get(
-      `https://brasilapi.com.br/api/cep/v1/${event.target.value}`
-    );
+    try {
+      const response = await axios.get(
+        `https://brasilapi.com.br/api/cep/v1/${event.target.value}`
+      );
 
-    const data = response.data;
-    setPaymentInfo({
-      ...paymentInfo,
-      zipCode: data.cep,
-      logradouro: data.street,
-      bairro: data.neighborhood,
-      city: data.city,
-      state: data.state,
-    });
+      const data = response.data;
+      setPaymentInfo({
+        ...paymentInfo,
+        zipCode: data.cep,
+        logradouro: data.street,
+        bairro: data.neighborhood,
+        city: data.city,
+        state: data.state,
+      });
 
-    paymentInfoRefNumberAddress.current?.focus();
-
-  } catch (error) {
-    // Lidar com erros aqui, por exemplo, exibir uma mensagem de erro
-    console.error('Erro ao buscar CEP:', error);
-    // Você pode definir o estado de erro ou mostrar uma mensagem ao usuário
-  } finally {
-    setIsLoading(false);
+      paymentInfoRefNumberAddress.current?.focus();
+    } catch (error) {
+      // Lidar com erros aqui, por exemplo, exibir uma mensagem de erro
+      console.error("Erro ao buscar CEP:", error);
+      // Você pode definir o estado de erro ou mostrar uma mensagem ao usuário
+    } finally {
+      setIsLoading(false);
+    }
   }
-}
-
 
   async function handleSubmit(event: any) {
     event.preventDefault();
@@ -417,39 +423,38 @@ async function handleSubmitCep(event: any) {
       paymentMethod,
       termsAgreed,
     };
-    
-  setIsLoading(true);
 
-  try {
-    const response = await CheckoutService.placeOrder(
-      paymentInfo,
-      shippingInfo,
-      additionalInfo,
-      createAccount,
-      password,
-      confirmPassword,
-      paymentMethod,
-      cartItems
-    );
+    setIsLoading(true);
 
-    setIsLoading(false);
-	console.log(response)
+    try {
+      const response = await CheckoutService.placeOrder(
+        paymentInfo,
+        shippingInfo,
+        additionalInfo,
+        createAccount,
+        password,
+        confirmPassword,
+        paymentMethod,
+        cartItems
+      );
 
-    if (response.link) {
-	  setOrderLink(response.link)
-	  setLinkMeli(response.resultMeli)
-	  cartItems.forEach((item:any)=>{
-		  removeFromCart(item.id)
-	  })
-	  setCupomMain(0)
-      router.push("/sucesso");
+      setIsLoading(false);
+      console.log(response);
+
+      if (response.link) {
+        setOrderLink(response.link);
+        setLinkMeli(response.resultMeli);
+        cartItems.forEach((item: any) => {
+          removeFromCart(item.id);
+        });
+        setCupomMain(0);
+        router.push("/sucesso");
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.error(error);
+      alert("Erro ao finalizar pedido");
     }
-  } catch (error) {
-    setIsLoading(false);
-    console.error(error);
-    alert("Erro ao finalizar pedido");
-  }
-
   }
 
   const sumCartItems = () => {
@@ -579,121 +584,132 @@ async function handleSubmitCep(event: any) {
           </div>
         </div>
         <div className="w-full md:w-1/3">
-          <div className="flex flex-col justify-start  border border-pink-300 rounded-lg p-4 shadow-sm shadow-pink-500 bg-pink-50"><div className="mb-8">
-            <h2 className="font-semibold text-2xl text-center mb-2">
-              Seu Pedido
-            </h2>
-            <div className="card-body">
-              <h5 className="font-semibold mb-4">Produtos</h5>
-              {cartItems.map((product: any) => (
-                <div className="flex justify-between">
-                  <p>{productsData[product.id - 1].name}</p>
-				  <div className="flex gap-2">
-                  <p>{product.quantity}</p>
-                  <p>{formatCurrency(productsData[product.id - 1].price)}</p>
-                  <p className="font-semibold">
-                    {formatCurrency(
-                      product.quantity * productsData[product.id - 1].price
-                    )}
-                  </p></div>
+          <div className="flex flex-col justify-start  border border-pink-300 rounded-lg p-4 shadow-sm shadow-pink-500 bg-pink-50">
+            <div className="mb-8">
+              <h2 className="font-semibold text-2xl text-center mb-2">
+                Seu Pedido
+              </h2>
+              <div className="card-body">
+                <h5 className="font-semibold mb-4">Produtos</h5>
+                {cartItems.map((product: any) => (
+                  <div className="flex justify-between">
+                    <p>{productsData[product.id - 1].name}</p>
+                    <div className="flex gap-2">
+                      <p>{product.quantity}</p>
+                      <p>
+                        {formatCurrency(productsData[product.id - 1].price)}
+                      </p>
+                      <p className="font-semibold">
+                        {formatCurrency(
+                          product.quantity * productsData[product.id - 1].price
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+                <hr className="mt-0" />
+                <div className="flex justify-between mb-3 pt-1">
+                  <h6 className="font-semibold">Subtotal</h6>
+                  <h6 className="font-semibold">
+                    {formatCurrency(sumCartItems())}
+                  </h6>
                 </div>
-              ))}
-              <hr className="mt-0" />
-              <div className="flex justify-between mb-3 pt-1">
-                <h6 className="font-semibold">Subtotal</h6>
-                <h6 className="font-semibold">
-                  {formatCurrency(sumCartItems())}
-                </h6>
+                {!!cupomMain && (
+                  <div className="flex justify-between">
+                    <h6 className="font-semibold">Cupom</h6>
+                    <h6 className="font-semibold">
+                      {formatCurrency(cupomMain)}
+                    </h6>
+                  </div>
+                )}
+                <div className="flex justify-between">
+                  <h6 className="font-semibold">Envio</h6>
+                  <h6 className="font-semibold">
+                    {shipping ? "Grátis" : formatCurrency(10)}
+                  </h6>
+                </div>
               </div>
-              {!!cupomMain && (<div className="flex justify-between">
-                <h6 className="font-semibold">Cupom</h6>
-                <h6 className="font-semibold">
-                  {formatCurrency(cupomMain)}
-                </h6>
-              </div>)}
-              <div className="flex justify-between">
-                <h6 className="font-semibold">Envio</h6>
-                <h6 className="font-semibold">
-                  {shipping ? "Grátis" : formatCurrency(10)}
-                </h6>
-              </div>
-            </div>
-            <div className="card-footer border-secondary bg-transparent">
-              <div className="flex justify-between mt-2">
-                <h5 className="text-pink-500 text-2xl font-bold">Total</h5>
-                <h5 className="text-pink-500 text-2xl font-bold">
-                  {shipping
-                    ? formatCurrency(sumCartItems() - cupomMain)
-                    : formatCurrency(sumCartItems() + 10 - cupomMain)}
-                </h5>
+              <div className="card-footer border-secondary bg-transparent">
+                <div className="flex justify-between mt-2">
+                  <h5 className="text-pink-500 text-2xl font-bold">Total</h5>
+                  <h5 className="text-pink-500 text-2xl font-bold">
+                    {shipping
+                      ? formatCurrency(sumCartItems() - cupomMain)
+                      : formatCurrency(sumCartItems() + 10 - cupomMain)}
+                  </h5>
+                </div>
               </div>
             </div>
+            <div className="payment-method">
+              <div className="radio">
+                <input
+                  type="radio"
+                  id="payment-1"
+                  color="purple"
+                  checked={paymentMethod === "Transferência bancária direta"}
+                  onChange={() =>
+                    setPaymentMethod("Transferência bancária direta")
+                  }
+                />
+                <label htmlFor="payment-1">Transferência bancária direta</label>
+              </div>
+              <div className="radio">
+                <input
+                  type="radio"
+                  id="payment-2"
+                  color="purple"
+                  checked={paymentMethod === "Pagamento por Pix"}
+                  onChange={() => setPaymentMethod("Pagamento por Pix")}
+                />
+                <label htmlFor="payment-2">Pagamento por Pix</label>
+              </div>
+              <div className="radio">
+                <input
+                  type="radio"
+                  id="payment-3"
+                  color="purple"
+                  checked={paymentMethod === "Sistema Paypal"}
+                  onChange={() => setPaymentMethod("Sistema Paypal")}
+                />
+                <label htmlFor="payment-3">Sistema Paypal</label>
+              </div>
+              {errorPaymentInfo.paymentMethod && (
+                <p className="text-red-500">
+                  Selecione um método de pagamento.
+                </p>
+              )}
+            </div>
+            <div className="relative">
+              <div className="checkbox_confirmacao mt-4 flex items-center">
+                <input
+                  id="terms"
+                  color="purple"
+                  type="checkbox"
+                  checked={termsAgreed}
+                  onChange={() => setTermsAgreed(!termsAgreed)}
+                />
+                <label htmlFor="terms">
+                  Eu li e aceito os <a target={"_blank"}>termos e condições</a>
+                </label>
+              </div>
+              {errorPaymentInfo.termsAgreed && (
+                <p className="text-red-500 mt-2">
+                  É preciso aceitar os termos e condições.
+                </p>
+              )}
+            </div>
+            <form
+              onSubmit={(e: any) => handleSubmit(e)}
+              className="mt-4 flex w-full"
+            >
+              <button
+                type="submit"
+                className="w-full bg-green-500 mt-4 flex justify-center hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out"
+              >
+                Finalizar Pedido
+              </button>
+            </form>
           </div>
-          <div className="payment-method">
-            <div className="radio">
-              <input
-                type="radio"
-                id="payment-1"
-                color="purple"
-                checked={paymentMethod === "Transferência bancária direta"}
-                onChange={() =>
-                  setPaymentMethod("Transferência bancária direta")
-                }
-              />
-              <label htmlFor="payment-1">Transferência bancária direta</label>
-            </div>
-            <div className="radio">
-              <input
-                type="radio"
-                id="payment-2"
-                color="purple"
-                checked={paymentMethod === "Pagamento por Pix"}
-                onChange={() => setPaymentMethod("Pagamento por Pix")}
-              />
-              <label htmlFor="payment-2">Pagamento por Pix</label>
-            </div>
-            <div className="radio">
-              <input
-                type="radio"
-                id="payment-3"
-                color="purple"
-                checked={paymentMethod === "Sistema Paypal"}
-                onChange={() => setPaymentMethod("Sistema Paypal")}
-              />
-              <label htmlFor="payment-3">Sistema Paypal</label>
-            </div>
-            {errorPaymentInfo.paymentMethod && (
-              <p className="text-red-500">Selecione um método de pagamento.</p>
-            )}
-          </div>
-          <div className="relative">
-            <div className="checkbox_confirmacao mt-4 flex items-center">
-              <input
-                id="terms"
-                color="purple"
-                type="checkbox"
-                checked={termsAgreed}
-                onChange={() => setTermsAgreed(!termsAgreed)}
-              />
-              <label htmlFor="terms">
-                Eu li e aceito os <a target={"_blank"}>termos e condições</a>
-              </label>
-            </div>
-            {errorPaymentInfo.termsAgreed && (
-              <p className="text-red-500 mt-2">
-                É preciso aceitar os termos e condições.
-              </p>
-            )}
-          </div>
-          <form
-            onSubmit={(e: any) => handleSubmit(e)}
-            className="mt-4 flex w-full"
-          >
-            <button type="submit" className="w-full bg-green-500 mt-4 flex justify-center hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
-              Finalizar Pedido
-            </button>
-          </form>
-		  </div>
         </div>
       </main>
       {isLoading && <Loading></Loading>}

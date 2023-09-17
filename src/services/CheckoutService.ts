@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 
 interface OrderResponse {
   link: string;
-  order: any;
+  resultMeli: any;
 }
 
 export class CheckoutService {
@@ -106,9 +106,11 @@ export class CheckoutService {
     }
   }
 
-  static async applyCoupon(couponCode: string): Promise<{ success: boolean; data?: any; error?: string }> {
+  static async applyCoupon(
+    couponCode: string
+  ): Promise<{ success: boolean; data?: any; error?: string }> {
     try {
-		console.log(this.BASE_URL)
+      console.log(this.BASE_URL);
 
       const response = await axios.post(
         `${this.BASE_URL}/cupom`,

@@ -3,7 +3,6 @@ import React from "react";
 type Props = {};
 
 const Featured = (props: Props) => {
-
   return (
     <section className="container mx-auto px-4 md:px-0 py-16 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
       <div className="group flex justify-center items-center border border-pink-500 hover:bg-pink-500 rounded-md mb-4 p-8 gap-4">
@@ -16,7 +15,9 @@ const Featured = (props: Props) => {
         >
           <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm-1.999 14.413-3.713-3.705L7.7 11.292l2.299 2.295 5.294-5.294 1.414 1.414-6.706 6.706z"></path>
         </svg>
-        <h2 className="font-semibold group-hover:text-white">Produtos de Qualidade</h2>
+        <h2 className="font-semibold group-hover:text-white">
+          Produtos de Qualidade
+        </h2>
       </div>
 
       <div className="group flex justify-center items-center border border-pink-500 hover:bg-pink-500 rounded-md mb-4 p-8 gap-4">
@@ -42,7 +43,9 @@ const Featured = (props: Props) => {
         >
           <path d="M18 6h2v12h-2zm-2 5H7.414l4.293-4.293-1.414-1.414L3.586 12l6.707 6.707 1.414-1.414L7.414 13H16z"></path>
         </svg>
-        <h2 className="font-semibold group-hover:text-white">Devolução em 14 dias</h2>
+        <h2 className="font-semibold group-hover:text-white">
+          Devolução em 14 dias
+        </h2>
       </div>
 
       <div className="group flex justify-center items-center border border-pink-500 hover:bg-pink-500 rounded-md mb-4 p-8 gap-4">

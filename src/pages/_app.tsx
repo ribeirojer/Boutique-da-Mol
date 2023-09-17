@@ -47,7 +47,7 @@ export default function App({ Component, pageProps }: AppProps) {
   };
   const removeUserFromContext = () => {
     setUser(null);
-  }
+  };
 
   const addToCart = (item: any) => {
     const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
@@ -123,12 +123,12 @@ export default function App({ Component, pageProps }: AppProps) {
         compare,
         addToCompare,
         removeFromCompare,
-		cupomMain,
-		setCupomMain,
-		orderLink,
-		setOrderLink,
-		linkMeli,
-		setLinkMeli
+        cupomMain,
+        setCupomMain,
+        orderLink,
+        setOrderLink,
+        linkMeli,
+        setLinkMeli,
       }}
     >
       <Component {...pageProps} />

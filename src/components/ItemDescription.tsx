@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import Stars from "./Stars";
-import RatingBars from "./RatingBars"; 
+import RatingBars from "./RatingBars";
 
 type Props = {
   itemToShow?: any;
@@ -41,7 +41,7 @@ const ItemDescription = ({ itemToShow }: Props) => {
     // Fazer algo com os dados do formulário de avaliação (rating, reviewText, name, email)
   };
 
-const ratings = [
+  const ratings = [
     { stars: 1, count: 3 },
     { stars: 2, count: 5 },
     { stars: 3, count: 10 },
@@ -72,22 +72,27 @@ const ratings = [
       <div className="tab-content">
         {activeTab === "tab-pane-1" && (
           <div className="tab-pane fade show active" id="tab-pane-1">
-            <p className="mb-4 lg:max-w-4xl mx-auto">{itemToShow?.description}</p>
+            <p className="mb-4 lg:max-w-4xl mx-auto">
+              {itemToShow?.description}
+            </p>
             <p>{itemToShow?.additionalInfo}</p>
           </div>
         )}
 
         {activeTab === "tab-pane-3" && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4" id="tab-pane-3">
-
-    <div className="">
-      <h2>Avaliações do Produto</h2>
-      <RatingBars ratings={ratings} />
-    </div>
+          <div
+            className="grid grid-cols-1 md:grid-cols-3 gap-4"
+            id="tab-pane-3"
+          >
+            <div className="">
+              <h2>Avaliações do Produto</h2>
+              <RatingBars ratings={ratings} />
+            </div>
 
             <div className="">
               <h4 className="mb-4">
-                {itemToShow?.reviews.length} Avaliações para "{itemToShow?.name}"
+                {itemToShow?.reviews.length} Avaliações para "{itemToShow?.name}
+                "
               </h4>
               {itemToShow?.reviews.map((review: any) => (
                 <div className="media mb-4" key={review.id}>
@@ -106,7 +111,9 @@ const ratings = [
                     </h6>
                     <div className="text-primary mb-2">
                       {review.rating}
-                      <Stars rating={itemToShow?.review?.rating.toNumber()}></Stars>
+                      <Stars
+                        rating={itemToShow?.review?.rating.toNumber()}
+                      ></Stars>
                     </div>
                     <p>{review.comment}</p>
                   </div>
@@ -116,7 +123,8 @@ const ratings = [
             <div className="">
               <h4 className="mb-4">Deixe um comentário</h4>
               <small>
-                Seu endereço de e-mail não será publicado. Os campos obrigatórios estão marcados *
+                Seu endereço de e-mail não será publicado. Os campos
+                obrigatórios estão marcados *
               </small>
               <div className="flex my-3">
                 <p className="mb-0 mr-2">Sua avaliação *:</p>
@@ -126,7 +134,10 @@ const ratings = [
               </div>
               <form onSubmit={handleSubmitReview}>
                 <div className="mb-4">
-                  <label htmlFor="message" className="block text-gray-700 font-bold mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-gray-700 font-bold mb-2"
+                  >
                     Sua revisão *
                   </label>
                   <textarea
@@ -140,7 +151,10 @@ const ratings = [
                   ></textarea>
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-gray-700 font-bold mb-2"
+                  >
                     Seu nome *
                   </label>
                   <input
@@ -153,7 +167,10 @@ const ratings = [
                   />
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-gray-700 font-bold mb-2"
+                  >
                     Seu email *
                   </label>
                   <input

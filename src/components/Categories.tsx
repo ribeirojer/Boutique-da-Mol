@@ -52,7 +52,10 @@ const Categories = (props: Props) => {
   return (
     <div className="container px-4 md:px-0 mx-auto grid gap-4 grid-cols-2 md:grid-cols-3">
       {data.map((item) => (
-        <div key={item.id} className="flex flex-col gap-2 justify-center items-center bg-white rounded-lg shadow-lg hover:shadow-pink-500 border p-4">
+        <div
+          key={item.id}
+          className="flex flex-col gap-2 justify-center items-center bg-white rounded-lg shadow-lg hover:shadow-pink-500 border p-4"
+        >
           <Link href={item.link} className="relative overflow-hidden">
             <img className="img-fluid" src={item.image} alt="" />
           </Link>

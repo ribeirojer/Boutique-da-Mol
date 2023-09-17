@@ -19,7 +19,8 @@ const Carrinho = (props: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const { cartItems, addToCart, removeFromCart, cupomMain, setCupomMain } = useContext(UserContext);
+  const { cartItems, addToCart, removeFromCart, cupomMain, setCupomMain } =
+    useContext(UserContext);
 
   const sumCartItems = () => {
     let sum = 0;
@@ -36,46 +37,48 @@ const Carrinho = (props: Props) => {
   };
 
   const shipping = sumCartItems() > 100;
-const handleSubmit = async (e: { preventDefault: () => void }) => {
-  e.preventDefault();
-  setErrorMessage("");
-  setSuccessMessage("");
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    setErrorMessage("");
+    setSuccessMessage("");
 
-  if (!validateCupomCode()) {
-    return;
-  }
+    if (!validateCupomCode()) {
+      return;
+    }
 
-  setIsLoading(true);
+    setIsLoading(true);
 
-  const couponResponse = await CheckoutService.applyCoupon(cupomCode);
+    const couponResponse = await CheckoutService.applyCoupon(cupomCode);
 
-  if (couponResponse.success) {
-    // O cupom foi aplicado com sucesso
-    setSuccessMessage("Cupom aplicado!");
-    setCupomMain(couponResponse.data.discount);
-    closeSuccessMessage();
-  } else {
-    // Ocorreu um erro ao aplicar o cupom
-    setErrorMessage(couponResponse.error || "Ocorreu um erro ao processar a requisição.");
-  }
+    if (couponResponse.success) {
+      // O cupom foi aplicado com sucesso
+      setSuccessMessage("Cupom aplicado!");
+      setCupomMain(couponResponse.data.discount);
+      closeSuccessMessage();
+    } else {
+      // Ocorreu um erro ao aplicar o cupom
+      setErrorMessage(
+        couponResponse.error || "Ocorreu um erro ao processar a requisição."
+      );
+    }
 
-  setIsLoading(false);
-  setCupomCode("");
-};
+    setIsLoading(false);
+    setCupomCode("");
+  };
 
-const validateCupomCode = () => {
-  if (cupomCode.length === 0) {
-    setErrorMessage("Informe o código do cupom.");
-    cupomRef.current?.focus();
-    return false;
-  }
-  if (cupomCode.length !== 10) {
-    setErrorMessage("O código do cupom deve ter 10 caracteres.");
-    cupomRef.current?.focus();
-    return false;
-  }
-  return true;
-};
+  const validateCupomCode = () => {
+    if (cupomCode.length === 0) {
+      setErrorMessage("Informe o código do cupom.");
+      cupomRef.current?.focus();
+      return false;
+    }
+    if (cupomCode.length !== 10) {
+      setErrorMessage("O código do cupom deve ter 10 caracteres.");
+      cupomRef.current?.focus();
+      return false;
+    }
+    return true;
+  };
 
   return (
     <>
@@ -148,13 +151,12 @@ const validateCupomCode = () => {
                     </h5>
                   </div>
                 </div>
-                  <Link
-                    href={"/confirmacao"}
-className="w-full bg-green-500 mt-4 flex justify-center hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out"
-
->
-                    Fechar o Carrinho
-                  </Link>
+                <Link
+                  href={"/confirmacao"}
+                  className="w-full bg-green-500 mt-4 flex justify-center hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out"
+                >
+                  Fechar o Carrinho
+                </Link>
               </div>
             </div>
           </>

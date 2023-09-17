@@ -168,7 +168,9 @@ const Footer = (props: Props) => {
               <Link href="/loja">Loja</Link>
               <Link href="/contato">Contato</Link>
               <Link href="/carrinho">Carrinho</Link>
-              {cartItems.length > 0 && <Link href="/confirmacao">Finalizar</Link>}
+              {cartItems.length > 0 && (
+                <Link href="/confirmacao">Finalizar</Link>
+              )}
               {!user && <Link href="/entrar">Entrar</Link>}
             </div>
           </div>

@@ -19,7 +19,8 @@ const CartProductTable = (props: Props) => {
             <th className="px-4 py-2">Produto</th>
             <th className="px-4 py-2">Preço</th>
             <th className="px-4 py-2">Quantidade</th>
-            <th className="px-4 py-2 hidden md:table-cell">Total</th> {/* Mostra apenas em telas médias e maiores */}
+            <th className="px-4 py-2 hidden md:table-cell">Total</th>{" "}
+            {/* Mostra apenas em telas médias e maiores */}
             <th className="px-4 py-2">Excluir</th>
           </tr>
         </thead>
