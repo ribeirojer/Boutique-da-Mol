@@ -13,7 +13,7 @@ const CartProductTable = (props: Props) => {
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full">
+      <table className="w-[150%] md:full">
         <thead>
           <tr>
             <th className="px-4 py-2">Produto</th>
