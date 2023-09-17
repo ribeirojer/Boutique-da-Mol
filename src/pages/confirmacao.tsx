@@ -15,7 +15,7 @@ import axios from 'axios';
 type Props = {};
 
 const Confirmacao = (props: Props) => {
-  const { user, cartItems, removeFromCart, cupomMain, setOrderLink } = useContext(UserContext);
+  const { user, cartItems, removeFromCart, cupomMain, setCupomMain, setOrderLink, setLinkMeli } = useContext(UserContext);
   const [paymentInfo, setPaymentInfo] = useState({
     firstName: "",
     lastName: "",
@@ -433,12 +433,15 @@ async function handleSubmitCep(event: any) {
     );
 
     setIsLoading(false);
+	console.log(response)
 
     if (response.link) {
 	  setOrderLink(response.link)
+	  setLinkMeli(response.resultMeli)
 	  cartItems.forEach((item:any)=>{
 		  removeFromCart(item.id)
 	  })
+	  setCupomMain(0)
       router.push("/sucesso");
     }
   } catch (error) {
@@ -620,8 +623,8 @@ async function handleSubmitCep(event: any) {
                 <h5 className="text-pink-500 text-2xl font-bold">Total</h5>
                 <h5 className="text-pink-500 text-2xl font-bold">
                   {shipping
-                    ? formatCurrency(sumCartItems())
-                    : formatCurrency(sumCartItems() + 10)}
+                    ? formatCurrency(sumCartItems() - cupomMain)
+                    : formatCurrency(sumCartItems() + 10 - cupomMain)}
                 </h5>
               </div>
             </div>

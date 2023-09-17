@@ -81,7 +81,7 @@ const Subscribe = (props: Props) => {
           Te enviaremos as novidades da Boutique da Moh e descontos exclusivos!
         </p>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col md:justify-center md:flex-row gap-4">
             <div className="flex flex-col">
               <Input
                 id="subscribe-name"

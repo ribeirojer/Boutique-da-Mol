@@ -20,6 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const [compare, setCompare] = useState<any[]>([]);
   const [cupomMain, setCupomMain] = useState<number>(0);
   const [orderLink, setOrderLink] = useState<string>("");
+  const [linkMeli, setLinkMeli] = useState<string>("");
 
   useEffect(() => {
     const existingCart = localStorage.getItem("cart");
@@ -125,7 +126,9 @@ export default function App({ Component, pageProps }: AppProps) {
 		cupomMain,
 		setCupomMain,
 		orderLink,
-		setOrderLink
+		setOrderLink,
+		linkMeli,
+		setLinkMeli
       }}
     >
       <Component {...pageProps} />

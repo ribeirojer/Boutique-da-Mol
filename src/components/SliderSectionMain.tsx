@@ -64,7 +64,7 @@ const SliderSectionMain = () => {
             className="w-full"
           />
 		</picture>
-          <div className="absolute inset-0 bg-black opacity-30"></div>
+		  <div className="md:block hidden absolute inset-0 bg-black opacity-30"></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-white text-center px-4 sm:px-8 md:px-16">
               <span className="text-2xl sm:text-3xl md:text-4xl block mb-2">{slide.title}</span>

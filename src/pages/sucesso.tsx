@@ -43,7 +43,7 @@ type OrderDetails = {
 };
 
 const Sucesso = (props: Props) => {
-  const { orderLink } = useContext(UserContext);
+  const { orderLink, linkMeli } = useContext(UserContext);
   const [orderDetails, setOrderDetails] = useState<any>({});
   const router = useRouter();
 
@@ -78,7 +78,8 @@ const Sucesso = (props: Props) => {
           <>
             <h1 className="text-4xl font-bold mb-6">Pedido realizado com sucesso!</h1>
             <p className="text-lg mb-6">Obrigado por sua compra. Enviaremos um e-mail quando o pedido for aprovado.</p>
-            <div className="border-t-2 border-gray-300 py-6">
+            <p className="text-lg mb-6">Link para pagamento pelo Mercado Livre: <a href={linkMeli} target="_black" className="text-blue-500 underline hover:text-pink-500 transition-all">Clique aqui</a></p>
+			<div className="border-t-2 border-gray-300 py-6">
               <h2 className="text-2xl font-bold mb-4">Detalhes da Ordem:</h2>
               <div className="md:flex md:flex-wrap">
                 <div className="mb-2 md:w-1/2">
