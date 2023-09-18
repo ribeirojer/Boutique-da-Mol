@@ -10,8 +10,9 @@ const SliderSectionMain = () => {
       backgroundImage: "/images/slide-01.jpg",
       backgroundImageMobile: "/images/slide-01-mobile.jpg",
       title: "Coleção Feminina 2023",
-      subtitle: "NOVA TEMPORADA",
+      subtitle: "5% OFF no Pix",
       buttonLabel: "Ver produtos",
+	  color: "#D8DEDE"
     },
     {
       backgroundImage: "/images/slide-02.jpg",
@@ -19,6 +20,7 @@ const SliderSectionMain = () => {
       title: "Nova temporada Masculina",
       subtitle: "Jaquetas e casacos",
       buttonLabel: "Ver produtos",
+	  color: "#EAE9E5"
     },
     {
       backgroundImage: "/images/slide-03.jpg",
@@ -26,6 +28,7 @@ const SliderSectionMain = () => {
       title: "Coleção Masculina 2023",
       subtitle: "Pronta entrega",
       buttonLabel: "Ver produtos",
+	  color: "#EAE9E5"
     },
   ];
 
@@ -48,35 +51,36 @@ const SliderSectionMain = () => {
   }, []);
 
   return (
-    <section className="relative h-[90vh] md:h-[70vh] lg:h-[100vh] mx-auto overflow-hidden">
+    <section className="relative h-[90vh] md:h-[70vh] lg:h-[60vh] mx-auto">
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${
+          className={`flex justify-center absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${
             currentSlide === index
               ? "opacity-100"
               : "opacity-0 pointer-events-none"
-          }`}
+          } ${slide.color === "#EAE9E5" && "bg-[#EAE9E5]"}
+		    ${slide.color === "#D8DEDE" && "bg-[#D8DEDE]"}
+		  `}
         >
           <picture>
             <source
               media="(max-width: 600px)"
               srcSet={slide.backgroundImageMobile}
             />
-            <img src={slide.backgroundImage} alt="" className="w-full" />
+            <img src={slide.backgroundImage} alt="" className="h-full" />
           </picture>
-          <div className="md:block hidden absolute inset-0 bg-black opacity-30"></div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-white text-center px-4 sm:px-8 md:px-16">
+		  <div className="absolute left-[10vw] translate-y-2/3 flex items-center justify-center">
+            <div className="text-black text-center px-4 sm:px-8 md:px-16">
               <span className="text-2xl sm:text-3xl md:text-4xl block mb-2">
                 {slide.title}
               </span>
-              <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-6">
+              <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-8">
                 {slide.subtitle}
               </h2>
               <Link
-                href="/loja"
-                className="text-xl sm:text-2xl md:text-3xl py-3 px-6 rounded-lg border hover:bg-white hover:text-black transition duration-300"
+                href={`${slide.color === "#EAE9E5" ? "/loja?category=m" : "/loja?category=f"}`}
+                className="text-lg sm:text-xl md:text-2xl py-3 px-6 rounded-lg border border-black hover:bg-white hover:text-black transition duration-300"
               >
                 {slide.buttonLabel}
               </Link>

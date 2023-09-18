@@ -84,7 +84,6 @@ const Loja = (props: Props) => {
   };
 
   const handleGenderChange = (selectedGender: any) => {
-    // Filtre os produtos pelo gênero com base no gênero selecionado
     const filtered =
       selectedGender === null
         ? products
@@ -115,6 +114,14 @@ const Loja = (props: Props) => {
             maxPrice={100}
             onChange={handleFilterChange}
           />
+		  
+                  <div className="flex flex-col gap-2">
+                    <p>Filtrar por genero:</p>
+                    <GenderFilter
+                      genders={genders}
+                      onChange={handleGenderChange}
+                    />
+                  </div>
         </div>
         <div className="w-full lg:w-3/4">
           <div className="flex w-full md:hidden items-center justify-between gap-4 mb-4">
@@ -202,9 +209,16 @@ const Loja = (props: Props) => {
                   <div className="flex flex-col gap-2">
                     <p>Filtrar por preço:</p>
                     <PriceFilter
-                      minPrice={100}
-                      maxPrice={500}
+                      minPrice={0}
+                      maxPrice={200}
                       onChange={handleFilterChange}
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <p>Filtrar por genero:</p>
+                    <GenderFilter
+                      genders={genders}
+                      onChange={handleGenderChange}
                     />
                   </div>
                   {/*<div className="flex flex-col gap-2">
@@ -214,13 +228,6 @@ const Loja = (props: Props) => {
                   <div className="flex flex-col gap-2">
                     <p>Filtrar por tamanho:</p>
                     <SizeFilter sizes={sizes} onChange={handleSizeChange} />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <p>Filtrar por genero:</p>
-                    <GenderFilter
-                      genders={genders}
-                      onChange={handleGenderChange}
-                    />
                   </div>*/}
                 </div>
               </>

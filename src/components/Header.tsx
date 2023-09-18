@@ -121,8 +121,8 @@ const Header = (props: Props) => {
                 height={100}
               ></Image>
               <div className="text-center md:text-left">
-                <h1 className="text-2xl font-bold">Boutique</h1>
-                <h2 className="logo_text text-3xl font-extrabold text-[#884447]">
+                <h1 className="text-2xl font-base satisfy">Boutique</h1>
+                <h2 className="satisfy text-2xl font-base text-[#884447]">
                   da MOH
                 </h2>
               </div>
