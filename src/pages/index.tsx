@@ -5,6 +5,7 @@ import Products from "@/components/Products";
 import Subscribe from "@/components/Subscribe";
 import BackToTop from "@/components/BackToTop";
 import Footer from "@/components/Footer";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -33,6 +34,20 @@ export default function Home() {
         <Subscribe></Subscribe>
         <Products start={4} title={"Produtos da moda"}></Products>
         <BackToTop></BackToTop>
+        <a
+          target="_blank"
+          rel="external"
+          className="whats"
+          href="https://api.whatsapp.com/send?phone=554797868892&amp;text=Olá,%20tudo%20bem?%20eu%20tenho%20interesse%20em%20um%20produto%20da%20Boutique"
+        >
+          <Image
+            src={"/WhatsApp.png"}
+            className="logo"
+            alt="WhatsApp-logo"
+            width={50}
+            height={50}
+          />
+        </a>
       </main>
       <Footer></Footer>
     </>

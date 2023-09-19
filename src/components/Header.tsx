@@ -112,7 +112,7 @@ const Header = (props: Props) => {
         } bg-pink-200 shadow transition-all`}
       >
         <div className="container mx-auto px-4 md:px-0 flex flex-row items-center justify-between">
-          <div className="w-1/3">
+          <div className="w-1/3 flex justify-start">
             <Link href="/" className="flex items-center">
               <Image
                 src={"/logo-sem-bg.png"}
@@ -305,7 +305,19 @@ const Header = (props: Props) => {
               </nav>
             </div>
             <nav className="menularge justify-between w-full">
-              <form
+			  <ul className="flex items-center gap-2">
+			    <li>
+                  <Link className="!text-gray-700 hover:!text-pink-500" href="/loja?category=feminino">Feminino</Link>
+				</li>
+			    <li>
+                  <Link className="!text-gray-700 hover:!text-pink-500" href="/loja?category=masculino">Masculino</Link>
+				</li>
+			    <li>
+				  <Link className="!text-gray-700 hover:!text-pink-500" href="/loja?category=acessorios">Acessórios</Link>
+				</li>
+			  </ul>
+              <div className="flex gap-2 items-center">
+			  <form
                 onSubmit={handleSubmit}
                 className="hidden md:flex gap-2 items-center"
               >
@@ -328,9 +340,7 @@ const Header = (props: Props) => {
                     <path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path>
                   </svg>
                 </div>
-                <Button type="submit">Pesquisar</Button>
               </form>
-              <div className="flex gap-2 items-center">
                 <Link
                   href="/desejos"
                   className="flex gap-2 items-center py-2 px-3 border border-pink-500 rounded-lg bg-white group hover:bg-pink-500 transition-all"

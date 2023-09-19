@@ -15,31 +15,8 @@ type Props = {};
 
 const Loja = (props: Props) => {
   const router = useRouter();
+  const { category, search } = router.query;
   const [products, setProducts] = useState(productsData);
-  const [priceFilter, setPriceFilter] = useState({
-    priceAll: true,
-    price1: false,
-    price2: false,
-    price3: false,
-    price4: false,
-    price5: false,
-  });
-  const [colorFilter, setColorFilter] = useState({
-    colorAll: true,
-    color1: false,
-    color2: false,
-    color3: false,
-    color4: false,
-    color5: false,
-  });
-  const [sizeFilter, setSizeFilter] = useState({
-    sizeAll: true,
-    size1: false,
-    size2: false,
-    size3: false,
-    size4: false,
-    size5: false,
-  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
@@ -49,12 +26,12 @@ const Loja = (props: Props) => {
   const lastIndex = currentPage * productsPerPage;
   const firstIndex = lastIndex - productsPerPage;
   const currentProducts = products.slice(firstIndex, lastIndex);
-  let filtersQuantidy = priceFilter.priceAll ? 1 : 0;
+  /*let filtersQuantidy = priceFilter.priceAll ? 1 : 0;
   filtersQuantidy = colorFilter.colorAll
     ? filtersQuantidy + 1
     : filtersQuantidy;
   filtersQuantidy = sizeFilter.sizeAll ? filtersQuantidy + 1 : filtersQuantidy;
-  const colors = ["red", "blue", "green", "black", "yellow", "purple"];
+  */const colors = ["red", "blue", "green", "black", "yellow", "purple"];
   const sizes = ["S", "M", "L", "XL", "XXL"];
   const genders = ["Masculino", "Feminino", "Unisex"];
 
@@ -101,7 +78,11 @@ const Loja = (props: Props) => {
     );
   }, [searchQuery]);
 
-  const { category, search } = router.query;
+  useEffect(() => {
+	  if(search) {
+	  setSearchQuery(search)
+	  }
+  }, []);
 
   return (
     <>
@@ -147,7 +128,7 @@ const Loja = (props: Props) => {
               onClick={() => setIsModalOpen(true)}
               className="flex items-center border border-gray-500 p-2 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-700 transition duration-150 ease-in-out"
             >
-              {filtersQuantidy > 0 ? (
+              {/*filtersQuantidy > 0 ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -157,7 +138,7 @@ const Loja = (props: Props) => {
                 >
                   <path d="M21 3H5a1 1 0 0 0-1 1v2.59c0 .523.213 1.037.583 1.407L10 13.414V21a1.001 1.001 0 0 0 1.447.895l4-2c.339-.17.553-.516.553-.895v-5.586l5.417-5.417c.37-.37.583-.884.583-1.407V4a1 1 0 0 0-1-1zm-6.707 9.293A.996.996 0 0 0 14 13v5.382l-2 1V13a.996.996 0 0 0-.293-.707L6 6.59V5h14.001l.002 1.583-5.71 5.71z"></path>
                 </svg>
-              ) : (
+              ) : (*/
                 <>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -168,9 +149,10 @@ const Loja = (props: Props) => {
                   >
                     <path d="M13 20v-4.586L20.414 8c.375-.375.586-.884.586-1.415V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v2.585c0 .531.211 1.04.586 1.415L11 15.414V22l2-2z"></path>
                   </svg>
-                  <span>{filtersQuantidy}</span>
+                  <span>{/*filtersQuantidy*/}</span>
                 </>
-              )}
+              //)
+			  }
             </button>
             {isModalOpen && (
               <>

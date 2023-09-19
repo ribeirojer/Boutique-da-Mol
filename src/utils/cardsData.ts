@@ -128,7 +128,7 @@ export const productsData: any[] = [
     sizes: ["S", "M", "L", "XL"],
     color: ["beige"],
     category: "Casacos",
-    gender: "Unissex",
+    gender: "U",
     inStock: true,
     description:
       "Este casaco clássico bege é uma peça atemporal que adiciona elegância ao seu guarda-roupa. Feito com materiais de alta qualidade, este casaco oferece conforto e estilo. O corte clássico e a cor neutra tornam-no adequado para todas as ocasiões, desde reuniões de negócios até eventos sociais. Este casaco é um investimento duradouro para o seu guarda-roupa de inverno. Cuide dele lavando à máquina em água fria e secando em temperatura baixa. Adquira este casaco clássico e faça uma declaração de estilo duradoura.",
@@ -206,7 +206,7 @@ export const productsData: any[] = [
     oldPrice: 199.99,
     color: ["silver", "gold"],
     category: "Relógios",
-    gender: "Unissex",
+    gender: "U",
     inStock: true,
     description:
       "Este relógio clássico vintage é uma verdadeira joia para os amantes de estilo e elegância atemporais. Com um design vintage inspirado na era dourada da relojoaria, este relógio apresenta uma caixa de metal prateada com detalhes em ouro. O mostrador branco com números romanos adiciona um toque de sofisticação. O movimento mecânico preciso mantém o tempo com precisão. A pulseira de couro genuíno é confortável de usar e envelhece lindamente com o tempo. Este relógio é perfeito para ocasiões especiais ou para quem aprecia a estética clássica. Adquira este relógio vintage e adicione um toque de nostalgia ao seu estilo.",
@@ -281,7 +281,7 @@ export const productsData: any[] = [
     price: 29.99,
     oldPrice: 39.99,
     sizes: ["S", "M", "L"],
-    colors: ["white", "blue", "pink"],
+    color: ["white", "blue", "pink"],
     category: "Camisetas",
     gender: "F",
     inStock: true,
@@ -322,7 +322,7 @@ export const productsData: any[] = [
     sizes: ["US 5", "US 6", "US 7", "US 8", "US 9"],
     color: ["black"],
     category: "Tênis",
-    gender: "Unissex",
+    gender: "U",
     inStock: true,
     description:
       "Os tênis All Star Chuck Taylor da Converse são um ícone da moda urbana. Este modelo clássico em preto é perfeito para qualquer ocasião. Com seu design atemporal e conforto excepcional, esses tênis são ideais para uso diário. A parte superior de lona durável e a sola de borracha proporcionam durabilidade e tração. Os All Star são conhecidos por seu estilo versátil e são facilmente combinados com roupas casuais. Adquira este par de tênis e faça uma declaração de estilo autêntica.",
@@ -436,7 +436,7 @@ export const productsData: any[] = [
     sizes: ["S", "M", "L", "XL"],
     color: ["brown"],
     category: "Cintos",
-    gender: "Unissex",
+    gender: "U",
     inStock: true,
     description:
       "Este cinto de couro marrom é uma adição elegante ao seu guarda-roupa. Feito com couro genuíno de alta qualidade, este cinto oferece durabilidade e estilo atemporal. A fivela metálica polida adiciona um toque de sofisticação. Use este cinto para acentuar sua cintura e dar um toque final ao seu look. Ele combina perfeitamente com calças, jeans ou saias. Cuide dele limpando com um pano úmido e evite a exposição prolongada ao sol. Adquira este cinto de couro marrom e adicione um toque clássico ao seu estilo.",
@@ -512,7 +512,7 @@ export const productsData: any[] = [
     price: 29.99,
     oldPrice: 39.99,
     sizes: ["S", "M", "L", "XL"],
-    colors: ["floral pattern"],
+    color: ["floral pattern"],
     category: "Camisetas",
     gender: "F",
     inStock: true,
@@ -553,7 +553,7 @@ export const productsData: any[] = [
     oldPrice: 99.99,
     color: ["silver"],
     category: "Relógios",
-    gender: "Unissex",
+    gender: "U",
     inStock: true,
     description:
       "Este relógio de malha prateada é uma combinação perfeita de estilo e sofisticação. O design minimalista com uma pulseira de malha prateada e mostrador branco torna este relógio uma escolha elegante. O movimento preciso garante que você esteja sempre no horário. A caixa e a pulseira de aço inoxidável oferecem durabilidade e um toque moderno. Este relógio é adequado para ocasiões formais ou uso diário. Cuide dele mantendo-o limpo com um pano macio. Adquira este relógio de malha prateada e eleve o seu estilo.",
