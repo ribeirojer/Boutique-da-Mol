@@ -50,16 +50,24 @@ const Item = (props: Props) => {
           </div>
           <div className="pb-8 w-full md:w-1/2">
             <h2 className="text-3xl font-bold my-4">{itemToShow?.name}</h2>
-            <div className="flex mb-4">
+            <div className="flex gap-2 mb-4">
               <Stars rating={4}></Stars>
               <p>({itemToShow?.reviews.length} Avaliações)</p>
             </div>
-            <h3 className="text-xl text-pink-500 font-semibold mb-4">
-              {itemToShow?.price.toLocaleString("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-              })}
-            </h3>
+			<div className="flex gap-2">
+				<h3 className="text-xl text-pink-500 font-semibold mb-4">
+				  {itemToShow?.price.toLocaleString("pt-BR", {
+					style: "currency",
+					currency: "BRL",
+				  })}
+			    </h3>
+				<h3 className="text-lg line-through text-gray-400 mb-4">
+				  {itemToShow?.oldPrice.toLocaleString("pt-BR", {
+					style: "currency",
+					currency: "BRL",
+				  })}
+				</h3>			
+			</div>
             {/*<p className="mb-4">{limitarDescricao(itemToShow?.description, limiteDescricao)}</p>*/}
             <p className="mb-4">
               {itemToShow?.description.substring(0, limiteDescricao) + "..."}

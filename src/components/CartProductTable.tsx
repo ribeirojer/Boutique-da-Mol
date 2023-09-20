@@ -13,14 +13,13 @@ const CartProductTable = (props: Props) => {
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-[150%] md:full">
+      <table className="w-[150%] md:w-full">
         <thead>
           <tr>
             <th className="px-4 py-2">Produto</th>
             <th className="px-4 py-2">Preço</th>
             <th className="px-4 py-2">Quantidade</th>
-            <th className="px-4 py-2 hidden md:table-cell">Total</th>{" "}
-            {/* Mostra apenas em telas médias e maiores */}
+            <th className="px-4 py-2 hidden md:table-cell">Total</th>
             <th className="px-4 py-2">Excluir</th>
           </tr>
         </thead>

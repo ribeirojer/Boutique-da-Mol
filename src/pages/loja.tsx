@@ -80,7 +80,7 @@ const Loja = (props: Props) => {
 
   useEffect(() => {
 	  if(search) {
-	  setSearchQuery(search)
+	  setSearchQuery(search as string)
 	  }
   }, []);
 
