@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { CheckoutService } from "@/services/CheckoutService";
 import Loading from "@/components/Loading";
 import Link from "next/link";
+import axios from "axios"
 
 type Props = {};
 
