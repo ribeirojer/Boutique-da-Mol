@@ -151,7 +151,7 @@ const Loja = (props: Props) => {
                   </svg>
                   <span>{ filtersQuantidy }</span>
                 </>
-			  }
+			  )}
             </button>
             {isModalOpen && (
               <>

@@ -98,7 +98,7 @@ const Footer = (props: Props) => {
               href="http://"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex gap-2 items-center hover:text-pink-500 hover:fill-pink-500 hover:font-semibold transition-all"
+              className="flex gap-2 items-center hover:text-pink-500 hover:fill-pink-500 transition-all"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +117,7 @@ const Footer = (props: Props) => {
               href="http://"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex gap-2 items-center hover:text-pink-500 hover:fill-pink-500 hover:font-semibold transition-all"
+              className="flex gap-2 items-center hover:text-pink-500 hover:fill-pink-500 transition-all"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +133,7 @@ const Footer = (props: Props) => {
               href="http://"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex gap-2 items-center hover:text-pink-500 hover:fill-pink-500 hover:font-semibold transition-all"
+              className="flex gap-2 items-center hover:text-pink-500 hover:fill-pink-500 transition-all"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -151,12 +151,12 @@ const Footer = (props: Props) => {
           <div className="md:mb-4 md:ml-4">
             <h5 className="font-bold mb-4">Links Rápidos</h5>
             <div className="flex flex-col justify-start">
-              <Link href="/loja">Roupas</Link>
-              <Link href="/loja?category=calcados">Calçados</Link>
-              <Link href="/loja?category=acessorios">Acessórios</Link>
-              <Link href="/loja?category=masculino">Masculino</Link>
-              <Link href="/loja?category=feminino">Feminino</Link>
-              <Link href="/loja?category=infantil">Infantil</Link>
+              <Link className="hover:fill-pink-500" href="/loja">Roupas</Link>
+              <Link className="hover:fill-pink-500" href="/loja?category=calcados">Calçados</Link>
+              <Link className="hover:fill-pink-500" href="/loja?category=acessorios">Acessórios</Link>
+              <Link className="hover:fill-pink-500" href="/loja?category=masculino">Masculino</Link>
+              <Link className="hover:fill-pink-500" href="/loja?category=feminino">Feminino</Link>
+              <Link className="hover:fill-pink-500" href="/loja?category=infantil">Infantil</Link>
             </div>
           </div>
           <div className="md:mb-4 md:ml-4">
@@ -164,14 +164,14 @@ const Footer = (props: Props) => {
               <span className="hidden md:block">Links Rápidos</span>
             </h5>
             <div className="mt-10 md:mt-0 flex flex-col justify-start">
-              <Link href="/">Início</Link>
-              <Link href="/loja">Loja</Link>
-              <Link href="/contato">Contato</Link>
-              <Link href="/carrinho">Carrinho</Link>
+              <Link className="hover:fill-pink-500" href="/">Início</Link>
+              <Link className="hover:fill-pink-500" href="/loja">Loja</Link>
+              <Link className="hover:fill-pink-500" href="/contato">Contato</Link>
+              <Link className="hover:fill-pink-500" href="/carrinho">Carrinho</Link>
               {cartItems.length > 0 && (
-                <Link href="/confirmacao">Finalizar</Link>
+                <Link className="hover:fill-pink-500" href="/confirmacao">Finalizar</Link>
               )}
-              {!user && <Link href="/entrar">Entrar</Link>}
+              {!user && <Link className="hover:fill-pink-500" href="/entrar">Entrar</Link>}
             </div>
           </div>
         </div>
