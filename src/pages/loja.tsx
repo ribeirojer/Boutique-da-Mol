@@ -47,25 +47,39 @@ const Loja = (props: Props) => {
   };
 
   const handleColorChange = (selectedColors: string | any[]) => {
-    const filtered = products.filter((product) =>
+    const filtered = productsData.filter((product) =>
       selectedColors.includes(product.color)
     );
     setProducts(filtered);
   };
 
   const handleSizeChange = (selectedSizes: string | any[]) => {
-    const filtered = products.filter((product) =>
+    const filtered = productsData.filter((product) =>
       selectedSizes.includes(product.size)
     );
     setProducts(filtered);
   };
-
+  
+  function capitalize(string: string): string {
+	  if(string.length === 1) return string.charAt(0).toUpperCase()
+  
+	  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  }
+  
   const handleGenderChange = (selectedGender: any) => {
-    const filtered =
-      selectedGender === null
-        ? products
-        : products.filter((product) => product.gender === selectedGender);
-    setProducts(filtered);
+	  if(selectedGender === ""){
+		  setProducts(productsData)
+		  return;
+	  }
+	  if(genders.includes(capitalize(selectedGender))){
+		const filtered =
+		  selectedGender 
+			? productsData.filter((product) => product.gender === capitalize(selectedGender))
+			: productsData;
+		setProducts(filtered);
+		return;
+	}
+    setProducts([]);
   };
 
   useEffect(() => {
@@ -82,7 +96,11 @@ const Loja = (props: Props) => {
 	  if(search) {
 	  setSearchQuery(search as string)
 	  }
-  }, []);
+	  if(category) {
+	  handleGenderChange(category as string)
+	  }
+	  
+  }, [search, category]);
 
   return (
     <>
@@ -175,7 +193,7 @@ const Loja = (props: Props) => {
                     </svg>
                   </span>
                   <h2 className="text-xl text-center font-bold">Filtros</h2>
-                  <div className="flex flex-col gap-2">
+                  {/*<div className="flex flex-col gap-2">
                     <p>Ordenar por:</p>
                     <select
                       className="w- flex bg-gray-100 rounded-lg px-4 py-2 focus:ring-2 ring-pink-500"
@@ -186,12 +204,12 @@ const Loja = (props: Props) => {
                       <option value="Popularity">Popularidade</option>
                       <option value="BestRating">Melhor avaliação</option>
                     </select>
-                  </div>
+                  </div>*/}
                   <div className="flex flex-col gap-2">
                     <p>Filtrar por preço:</p>
                     <PriceFilter
                       minPrice={0}
-                      maxPrice={200}
+                      maxPrice={100}
                       onChange={handleFilterChange}
                     />
                   </div>
@@ -202,10 +220,10 @@ const Loja = (props: Props) => {
                       onChange={handleGenderChange}
                     />
                   </div>
-                  <div className="flex flex-col gap-2">
+                  {/*<div className="flex flex-col gap-2">
                     <p>Filtrar por tamanho:</p>
                     <SizeFilter sizes={sizes} onChange={handleSizeChange} />
-                  </div>
+                  </div>*/}
                 </div>
               </>
             )}
@@ -213,9 +231,10 @@ const Loja = (props: Props) => {
           <section>
             {search && <p className="mb-4">Você pesquisou por: {search}</p>}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {currentProducts.map((item) => (
+              {currentProducts.length > 0 ? (
+			  currentProducts.map((item) => (
                 <CardProduct key={item.id} item={item} />
-              ))}
+              ))) : (<p className="text-center">Nenhum produto encontrado...</p>)}
             </div>
             <Pagination
               currentPage={currentPage}

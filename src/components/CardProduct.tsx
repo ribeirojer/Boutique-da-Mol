@@ -74,7 +74,7 @@ const CardProduct = ({ item }: Props) => {
               <HeartEyesIconRegular className="fill-pink-500 group-hover:fill-white" />
             </button>
           )}
-          {isProductInCart ? (
+          {/*isProductInCart ? (
             <button
               onClick={() => router.push("/carrinho")}
               className="group product-cart-link bg-pink-200 hover:bg-pink-500 text-white rounded-lg p-2"
@@ -94,7 +94,7 @@ const CardProduct = ({ item }: Props) => {
               <CartIconPlus className="svg-icon-3 fill-pink-500" />
               <CartIcon className="svg-icon-4 fill-white" />
             </button>
-          )}
+          )*/}
         </div>
       </div>
     </div>

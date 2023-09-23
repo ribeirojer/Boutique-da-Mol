@@ -5,12 +5,13 @@ type BannerItemProps = {
   imgSrc: string;
   title: string;
   info: string;
+  link: string;
 };
 
-const BannerItemV2 = ({ imgSrc, title, info }: BannerItemProps) => {
+const BannerItemV2 = ({ imgSrc, title, info, link }: BannerItemProps) => {
   return (
     <div className="md:w-1/2 xl:w-1/3 p-4">
-      <Link href="/loja">
+      <Link href={"/loja?category="+link}>
         <div className="relative bg-white rounded-lg overflow-hidden shadow-lg shadow-pink-200 transition-transform hover:scale-105">
           <img src={imgSrc} alt="IMG-BANNER" className="w-full" />
           <div className="absolute top-0 translate-y-1/2 p-4">

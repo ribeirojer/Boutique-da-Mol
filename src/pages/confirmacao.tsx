@@ -10,7 +10,7 @@ import Button from "@/components/Button";
 import { useRouter } from "next/router";
 import { CheckoutService } from "@/services/CheckoutService";
 import Loading from "@/components/Loading";
-import axios from "axios";
+import Link from "next/link";
 
 type Props = {};
 
@@ -122,14 +122,14 @@ const Confirmacao = (props: Props) => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        zipCode: user.zipCode,
-        logradouro: user.logradouro,
-        numberAddress: user.numberAddress,
-        complemento: user.complemento,
-        bairro: user.bairro,
-        city: user.city,
-        state: user.state,
-        tel: user.tel,
+        zipCode: user.zipCode || "",
+        logradouro: user.logradouro || "",
+        numberAddress: user.numberAddress || "",
+        complemento: user.complemento || "",
+        bairro: user.bairro || "",
+        city: user.city || "",
+        state: user.state || "",
+        tel: user.tel || "",
       });
     }
   }, []);
@@ -585,7 +585,7 @@ const Confirmacao = (props: Props) => {
         </div>
         <div className="w-full md:w-1/3">
           <div className="flex flex-col justify-start  border border-pink-300 rounded-lg p-4 shadow-sm shadow-pink-500 bg-pink-50">
-            <div className="mb-8">
+            <div className="mb-4">
               <h2 className="font-semibold text-2xl text-center mb-2">
                 Seu Pedido
               </h2>
@@ -640,45 +640,7 @@ const Confirmacao = (props: Props) => {
                 </div>
               </div>
             </div>
-            <div className="payment-method">
-              <div className="radio">
-                <input
-                  type="radio"
-                  id="payment-1"
-                  color="purple"
-                  checked={paymentMethod === "Transferência bancária direta"}
-                  onChange={() =>
-                    setPaymentMethod("Transferência bancária direta")
-                  }
-                />
-                <label htmlFor="payment-1">Transferência bancária direta</label>
-              </div>
-              <div className="radio">
-                <input
-                  type="radio"
-                  id="payment-2"
-                  color="purple"
-                  checked={paymentMethod === "Pagamento por Pix"}
-                  onChange={() => setPaymentMethod("Pagamento por Pix")}
-                />
-                <label htmlFor="payment-2">Pagamento por Pix</label>
-              </div>
-              <div className="radio">
-                <input
-                  type="radio"
-                  id="payment-3"
-                  color="purple"
-                  checked={paymentMethod === "Sistema Paypal"}
-                  onChange={() => setPaymentMethod("Sistema Paypal")}
-                />
-                <label htmlFor="payment-3">Sistema Paypal</label>
-              </div>
-              {errorPaymentInfo.paymentMethod && (
-                <p className="text-red-500">
-                  Selecione um método de pagamento.
-                </p>
-              )}
-            </div>
+            <div className="text-sm">*O pagamento é feito pela plataforma do Mercado Pago.</div>
             <div className="relative">
               <div className="checkbox_confirmacao mt-4 flex items-center">
                 <input
@@ -689,7 +651,7 @@ const Confirmacao = (props: Props) => {
                   onChange={() => setTermsAgreed(!termsAgreed)}
                 />
                 <label htmlFor="terms">
-                  Eu li e aceito os <a target={"_blank"}>termos e condições</a>
+                  Eu li e aceito os <Link href="/termos" className="text-pink-500 hover:text-pink-700 transition-all">termos e condições</Link>
                 </label>
               </div>
               {errorPaymentInfo.termsAgreed && (

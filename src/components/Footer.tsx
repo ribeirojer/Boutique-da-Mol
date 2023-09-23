@@ -86,9 +86,9 @@ const Footer = (props: Props) => {
               width={100}
               height={100}
             ></Image>
-            <div className="text-center md:text-left">
-              <h1 className="text-2xl font-bold">Boutique</h1>
-              <h2 className="logo_text text-3xl font-extrabold text-[#884447]">
+            <div className="satisfy text-center md:text-left">
+              <h1 className="text-2xl ">Boutique</h1>
+              <h2 className="text-2xl text-[#884447]">
                 da MOH
               </h2>
             </div>
@@ -151,12 +151,11 @@ const Footer = (props: Props) => {
           <div className="md:mb-4 md:ml-4">
             <h5 className="font-bold mb-4">Links Rápidos</h5>
             <div className="flex flex-col justify-start">
-              <Link className="hover:fill-pink-500" href="/loja">Roupas</Link>
-              <Link className="hover:fill-pink-500" href="/loja?category=calcados">Calçados</Link>
-              <Link className="hover:fill-pink-500" href="/loja?category=acessorios">Acessórios</Link>
-              <Link className="hover:fill-pink-500" href="/loja?category=masculino">Masculino</Link>
-              <Link className="hover:fill-pink-500" href="/loja?category=feminino">Feminino</Link>
-              <Link className="hover:fill-pink-500" href="/loja?category=infantil">Infantil</Link>
+              <Link className="hover:text-pink-500" href="/loja">Roupas</Link>
+              <Link className="hover:text-pink-500" href="/loja?category=unisex">Calçados</Link>
+              <Link className="hover:text-pink-500" href="/loja?category=unisex">Acessórios</Link>
+              <Link className="hover:text-pink-500" href="/loja?category=m">Masculino</Link>
+              <Link className="hover:text-pink-500" href="/loja?category=f">Feminino</Link>
             </div>
           </div>
           <div className="md:mb-4 md:ml-4">
@@ -164,14 +163,14 @@ const Footer = (props: Props) => {
               <span className="hidden md:block">Links Rápidos</span>
             </h5>
             <div className="mt-10 md:mt-0 flex flex-col justify-start">
-              <Link className="hover:fill-pink-500" href="/">Início</Link>
-              <Link className="hover:fill-pink-500" href="/loja">Loja</Link>
-              <Link className="hover:fill-pink-500" href="/contato">Contato</Link>
-              <Link className="hover:fill-pink-500" href="/carrinho">Carrinho</Link>
+              <Link className="hover:text-pink-500" href="/">Início</Link>
+              <Link className="hover:text-pink-500" href="/loja">Loja</Link>
+              <Link className="hover:text-pink-500" href="/contato">Contato</Link>
+              <Link className="hover:text-pink-500" href="/carrinho">Carrinho</Link>
               {cartItems.length > 0 && (
-                <Link className="hover:fill-pink-500" href="/confirmacao">Finalizar</Link>
+                <Link className="hover:text-pink-500" href="/confirmacao">Finalizar</Link>
               )}
-              {!user && <Link className="hover:fill-pink-500" href="/entrar">Entrar</Link>}
+              {!user && <Link className="hover:text-pink-500" href="/entrar">Entrar</Link>}
             </div>
           </div>
         </div>

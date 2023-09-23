@@ -272,7 +272,8 @@ const Usuario = (props: Props) => {
         console.log(error);
       });
   };
-
+  
+console.log(userData)
   return (
     <>
       <Header></Header>

@@ -70,8 +70,8 @@ const SliderSectionMain = () => {
             />
             <img src={slide.backgroundImage} alt="" className="h-full" />
           </picture>
-		  <div className="absolute left-[10vw] translate-y-2/3 flex items-center justify-center">
-            <div className="text-black text-center px-4 sm:px-8 md:px-16">
+		  <div className="absolute bottom-20 md:bottom-auto md:left-[10vw] md:translate-y-2/3 flex items-center justify-center">
+            <div className={`${slide.color === "#EAE9E5" && "text-white md:text-black"} text-center px-4 sm:px-8 md:px-16`}>
               <span className="text-2xl sm:text-3xl md:text-4xl block mb-2">
                 {slide.title}
               </span>
@@ -80,7 +80,7 @@ const SliderSectionMain = () => {
               </h2>
               <Link
                 href={`${slide.color === "#EAE9E5" ? "/loja?category=m" : "/loja?category=f"}`}
-                className="text-lg sm:text-xl md:text-2xl py-3 px-6 rounded-lg border border-black hover:bg-white hover:text-black transition duration-300"
+                className={`text-lg sm:text-xl md:text-2xl py-3 px-6 rounded-lg border ${slide.color === "#EAE9E5" ? "border-white md:border-black" : "border-black"} hover:bg-white hover:text-black transition duration-300`}
               >
                 {slide.buttonLabel}
               </Link>

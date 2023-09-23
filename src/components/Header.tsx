@@ -193,7 +193,7 @@ const Header = (props: Props) => {
                     >
                       {wishlist.length ? (
                         <span className="text-pink-500">
-                          ({wishlist.length}) Favoritos
+                           Favoritos ({wishlist.length})
                         </span>
                       ) : (
                         <span>Favoritos</span>
@@ -307,13 +307,13 @@ const Header = (props: Props) => {
             <nav className="menularge justify-between w-full">
 			  <ul className="flex items-center gap-2">
 			    <li>
-                  <Link className="!text-gray-700 hover:!text-pink-500" href="/loja?category=feminino">Feminino</Link>
+                  <Link className="!text-gray-700 hover:!text-pink-500" href="/loja?category=f">Feminino</Link>
 				</li>
 			    <li>
-                  <Link className="!text-gray-700 hover:!text-pink-500" href="/loja?category=masculino">Masculino</Link>
+                  <Link className="!text-gray-700 hover:!text-pink-500" href="/loja?category=m">Masculino</Link>
 				</li>
 			    <li>
-				  <Link className="!text-gray-700 hover:!text-pink-500" href="/loja?category=acessorios">Acessórios</Link>
+				  <Link className="!text-gray-700 hover:!text-pink-500" href="/loja?category=unisex">Acessórios</Link>
 				</li>
 			  </ul>
               <div className="flex gap-2 items-center">

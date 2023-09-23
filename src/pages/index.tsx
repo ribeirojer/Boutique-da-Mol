@@ -18,16 +18,19 @@ export default function Home() {
             imgSrc="images/banner-01.jpg"
             title="Roupas Femininas"
             info="Primavera 2023"
+			link="f"
           />
           <BannerItemV2
             imgSrc="images/banner-02.jpg"
             title="Masculino"
             info="Primavera 2023"
+			link="m"
           />
           <BannerItemV2
             imgSrc="images/banner-03.jpg"
-            title="Acessorios"
+            title="Acessórios"
             info="Novos items"
+			link="Unisex"
           />
         </section>
         <Products start={0} title={"Produtos recentes"}></Products>
