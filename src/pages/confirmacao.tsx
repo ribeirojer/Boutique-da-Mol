@@ -89,7 +89,6 @@ const Confirmacao = (props: Props) => {
     city: false,
     state: false,
     tel: false,
-    paymentMethod: false,
     termsAgreed: false,
   });
   const [errorShippingInfo, setErrorShippingInfo] = useState({
@@ -113,12 +112,10 @@ const Confirmacao = (props: Props) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isShippingAddress, setIsShippingAddress] = useState(false);
   const [additionalInfo, setAdditionalInfo] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("");
   const [termsAgreed, setTermsAgreed] = useState(false);
 
   useEffect(() => {
     if (user) {
-      console.log(user);
       setPaymentInfo({
         firstName: user.firstName,
         lastName: user.lastName,
@@ -178,7 +175,6 @@ const Confirmacao = (props: Props) => {
       city: false,
       state: false,
       tel: false,
-      paymentMethod: false,
       termsAgreed: false,
     }));
     setErrorShippingInfo((prev) => ({
@@ -398,13 +394,6 @@ const Confirmacao = (props: Props) => {
         return;
       }
     }
-    if (paymentMethod === "") {
-      setErrorPaymentInfo((prev) => ({
-        ...prev,
-        paymentMethod: true,
-      }));
-      return;
-    }
     if (!termsAgreed) {
       setErrorPaymentInfo((prev) => ({
         ...prev,
@@ -412,18 +401,6 @@ const Confirmacao = (props: Props) => {
       }));
       return;
     }
-
-    const data = {
-      paymentInfo,
-      createAccount,
-      password,
-      confirmPassword,
-      isShippingAddress,
-      shippingInfo,
-      additionalInfo,
-      paymentMethod,
-      termsAgreed,
-    };
 
     setIsLoading(true);
 
@@ -435,7 +412,6 @@ const Confirmacao = (props: Props) => {
         createAccount,
         password,
         confirmPassword,
-        paymentMethod,
         cartItems
       );
 
@@ -593,7 +569,7 @@ const Confirmacao = (props: Props) => {
               <div className="card-body">
                 <h5 className="font-semibold mb-4">Produtos</h5>
                 {cartItems.map((product: any) => (
-                  <div className="flex justify-between">
+                  <div key={productsData[product.id - 1].name} className="flex justify-between">
                     <p>{productsData[product.id - 1].name}</p>
                     <div className="flex gap-2">
                       <p>{product.quantity}</p>

@@ -31,7 +31,6 @@ export class CheckoutService {
     createAccount: boolean,
     password: string,
     confirmPassword: string,
-    paymentMethod: string,
     cartItems: any[]
   ): Promise<OrderResponse> {
     try {
@@ -44,7 +43,6 @@ export class CheckoutService {
           createAccount,
           password,
           confirmPassword,
-          paymentMethod,
           cartItems,
         },
         this.getRequestConfig()
